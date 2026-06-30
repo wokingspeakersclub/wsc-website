@@ -1134,6 +1134,89 @@
 
   /* ─── RESPONSIVE ─────────────────────────────────────*/
 
+  /* ─── STORY CARDS (member testimonials) ─────────────── */
+  .story-grid-wrap {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+  .story-card {
+    background: var(--cream);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .story-card-body { padding: 1.75rem 1.75rem 1rem; }
+  .story-card-header {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+    align-items: center;
+  }
+  .story-card-name { font-weight: 600; font-size: 0.95rem; color: var(--navy); }
+  .story-card-role { font-size: 0.78rem; color: var(--text-hint); }
+  .story-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+  .story-before { background: rgba(200,145,58,0.08); border-radius: 8px; padding: 0.85rem; }
+  .story-after  { background: rgba(26,39,68,0.05); border-radius: 8px; padding: 0.85rem; }
+  .story-tag {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-hint);
+    margin-bottom: 0.4rem;
+  }
+  .story-quote-text { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; margin: 0; }
+  .story-footer {
+    border-top: 1px solid var(--border);
+    padding: 1.25rem 1.75rem;
+    background: var(--warm-white);
+  }
+  .story-footer p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.65;
+    margin: 0;
+    font-style: italic;
+  }
+
+  /* ─── PERSONA CARDS ("Who comes here?") ─────────────── */
+  .persona-panel {
+    background: var(--navy);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem;
+    margin-top: 1rem;
+  }
+  .persona-panel-head { text-align: center; margin-bottom: 2rem; }
+  .persona-panel-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--warm-white);
+    letter-spacing: -0.02em;
+    margin-top: 0.5rem;
+  }
+  .persona-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+  .persona-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+  }
+  .persona-icon { font-size: 1.4rem; margin-bottom: 0.6rem; }
+  .persona-title { font-weight: 600; font-size: 0.9rem; color: var(--warm-white); margin-bottom: 0.35rem; }
+  .persona-desc { font-size: 0.82rem; color: rgba(255,255,255,0.55); line-height: 1.55; margin: 0; }
+
   /* ─── MEMBER PHOTOS (testimonials) ──────────────────────────*/
   .member-avatar {
     position: relative;
