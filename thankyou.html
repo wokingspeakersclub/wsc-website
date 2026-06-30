@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to Woking Speakers Club</title>
+  <meta name="description" content="You're in! Here's everything you need to get started as a new member of Woking Speakers Club.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="wsc-shared.css">
+</head>
+<body class="thankyou-body">
+
+<div class="card card--wide">
+
+  <div class="success-banner">
+    <div class="tick">
+      <svg viewBox="0 0 12 12"><polyline points="1.5,6 4.5,9 10.5,3"/></svg>
+    </div>
+    <p>Payment confirmed — you're all set!</p>
+  </div>
+
+  <div class="club-name club-name--sm">Woking Speakers Club</div>
+  <div class="divider divider--sm"></div>
+
+  <h1>Welcome to the club.</h1>
+  <p class="subtitle">
+    We're delighted to have you. Here's everything you need to get started.
+  </p>
+
+  <!-- Next meeting -->
+  <div class="next-meeting">
+    <div class="next-meeting-label">Your first meeting</div>
+    <div class="next-meeting-date" id="next-meeting-date">Calculating…</div>
+    <div class="next-meeting-detail"><span id="meeting-time">7:15 pm</span> · Woking United Reformed Church, White Rose Lane, Woking GU22 7HA</div>
+    <div id="cal-container"></div>
+  </div>
+
+  <!-- Steps -->
+  <p class="steps-heading">What happens next</p>
+  <div class="steps">
+
+    <div class="step">
+      <div class="step-number">1</div>
+      <div class="step-body">
+        <div class="step-title">Check your email from Toastmasters International</div>
+        <div class="step-desc">
+          You'll receive a welcome email from Toastmasters International shortly. It contains your login
+          details for <strong>toastmasters.org</strong> — keep it handy.
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">2</div>
+      <div class="step-body">
+        <div class="step-title">Log in and choose your Pathways learning path</div>
+        <div class="step-desc">
+          Pathways is the Toastmasters education programme — a self-paced series of projects that build your
+          speaking and leadership skills. Log in at
+          <a href="https://www.toastmasters.org/login" target="_blank" rel="noopener">toastmasters.org/login</a>
+          and pick the path that interests you most. There's no wrong choice.
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">3</div>
+      <div class="step-body">
+        <div class="step-title">Complete your Ice Breaker speech</div>
+        <div class="step-desc">
+          Your first Pathways project is the Ice Breaker — a short speech about yourself. It's a great way
+          to introduce yourself to the club and get your first speech under your belt.
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">4</div>
+      <div class="step-body">
+        <div class="step-title">Come along to your first meeting</div>
+        <div class="step-desc">
+          No preparation needed for your first visit. Just turn up, watch how a meeting runs, and meet
+          the club. We meet on the 2nd and 4th Thursday of the month — see the date above.
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Contact -->
+  <p class="steps-heading">Questions?</p>
+  <div class="contact-box">
+    <img class="contact-avatar-img" src="images/rameez.jpg" alt="Rameez">
+    <div class="contact-info">
+      <strong>Rameez</strong>
+      <p>VP Membership · happy to help with anything</p>
+      <a href="mailto:info@wokingspeakers.org.uk">info@wokingspeakers.org.uk</a>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <a href="/">← Back to home</a>
+</div>
+
+<script src="wsc-config.js"></script>
+<script>
+  const CFG = window.WSC_CONFIG;
+
+  function isCancelled(date) {
+    const yyyy = date.getFullYear();
+    const mm   = String(date.getMonth() + 1).padStart(2, '0');
+    const dd   = String(date.getDate()).padStart(2, '0');
+    return (CFG.cancelledDates || []).includes(`${yyyy}-${mm}-${dd}`);
+  }
+
+  function getNextMeeting() {
+    const now = new Date();
+    now.setHours(0, 0, 0, 0);
+    const meetDay   = CFG.meetingDay   ?? 4;
+    const meetWeeks = CFG.meetingWeeks ?? [2, 4];
+    const d = new Date(now.getFullYear(), now.getMonth(), 1);
+    for (let i = 0; i < 24; i++) {
+      const year  = d.getFullYear();
+      const month = d.getMonth();
+      const first = new Date(year, month, 1);
+      const offset = (meetDay - first.getDay() + 7) % 7;
+      const firstOccurrence = 1 + offset;
+      for (const week of meetWeeks) {
+        const td = new Date(year, month, firstOccurrence + (week - 1) * 7);
+        if (td >= now && !isCancelled(td)) return td;
+      }
+      d.setMonth(d.getMonth() + 1);
+    }
+    return null;
+  }
+
+  function formatDate(d) {
+    const days   = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    const months = ['January','February','March','April','May','June',
+                    'July','August','September','October','November','December'];
+    return `${days[d.getDay()]} ${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
+  }
+
+  const next = getNextMeeting();
+  document.getElementById('next-meeting-date').textContent = next ? formatDate(next) : 'See wokingspeakers.org.uk for dates';
+  const timeEl = document.getElementById('meeting-time');
+  if (timeEl) timeEl.textContent = CFG.meetingTime || '7:15 pm';
+
+  // ── Add to calendar ───────────────────────────────────────
+  if (next) {
+    const raw   = CFG.meetingTime || '7:15 pm';
+    const parts = raw.replace(/ ?[ap]m/i,'').split(':').map(Number);
+    const isPM  = /pm/i.test(raw);
+    const startH = (isPM && parts[0] !== 12) ? parts[0] + 12 : parts[0];
+    function isUKBST(date) {
+      const y = date.getFullYear();
+      const bstStart = new Date(y, 2, 31); bstStart.setDate(31 - bstStart.getDay());
+      const bstEnd   = new Date(y, 9, 31); bstEnd.setDate(31 - bstEnd.getDay());
+      return date >= bstStart && date < bstEnd;
+    }
+    function pad(n){ return String(n).padStart(2,'0'); }
+    function fmtLocal(d){ return d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate())+'T'+pad(d.getHours())+pad(d.getMinutes())+'00'; }
+    const start = new Date(next); start.setHours(startH, parts[1]||0, 0, 0);
+    const end   = new Date(next); end.setHours(21, 45, 0, 0);
+    const fullAddr = 'Woking United Reformed Church, White Rose Lane, Woking, Surrey GU22 7HA';
+    const title = encodeURIComponent('Woking Speakers Club Meeting');
+    const loc   = encodeURIComponent(fullAddr);
+    const desc  = encodeURIComponent('Toastmasters International — Woking Speakers Club, 2nd and 4th Thursday of the month.');
+    // Google Calendar uses UTC dates; apply BST offset for the URL only
+    const utcOffset = isUKBST(next) ? 1 : 0;
+    function fmtUTC(d){ const u = new Date(d.getTime() - utcOffset*3600000); return u.getFullYear()+pad(u.getMonth()+1)+pad(u.getDate())+'T'+pad(u.getHours())+pad(u.getMinutes())+'00Z'; }
+    const google = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text='+title+'&dates='+fmtUTC(start)+'/'+fmtUTC(end)+'&location='+loc+'&details='+desc;
+    const icsContent = 'BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//WSC//EN\r\nBEGIN:VEVENT\r\nDTSTART;TZID=Europe/London:'+fmtLocal(start)+'\r\nDTEND;TZID=Europe/London:'+fmtLocal(end)+'\r\nSUMMARY:Woking Speakers Club Meeting\r\nLOCATION:Woking United Reformed Church\\, White Rose Lane\\, Woking\\, Surrey GU22 7HA\r\nDESCRIPTION:'+decodeURIComponent(desc)+'\r\nEND:VEVENT\r\nEND:VCALENDAR';
+    const ics = 'data:text/calendar;charset=utf8,'+encodeURIComponent(icsContent);
+    const iconSm = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>';
+    const iconLi = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>';
+    document.getElementById('cal-container').innerHTML =
+      '<div class="cal-wrap-light">'
+      +'<button class="cal-btn-light" onclick="document.getElementById(\'cal-ty\').classList.toggle(\'open\')">'+iconSm+' Add to calendar</button>'
+      +'<div class="cal-dropdown-light" id="cal-ty">'
+        +'<a href="'+google+'" target="_blank" rel="noopener">'+iconLi+' Google Calendar</a>'
+        +'<a href="'+ics+'" download="wsc-meeting.ics">'+iconLi+' Apple Calendar</a>'
+        +'<a href="'+ics+'" download="wsc-meeting.ics">'+iconLi+' Outlook / ICS</a>'
+      +'</div>'
+      +'</div>';
+    document.addEventListener('click', function(e){
+      if (!e.target.closest('.cal-wrap-light')) {
+        const dd = document.getElementById('cal-ty');
+        if (dd) dd.classList.remove('open');
+      }
+    });
+  }
+</script>
+
+</body>
+</html>

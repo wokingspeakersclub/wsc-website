@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Join Woking Speakers Club</title>
+  <meta name="description" content="Join Woking Speakers Club — a Toastmasters club meeting on the 2nd and 4th Thursday of the month in Woking, Surrey. Pay your membership fee securely online.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="wsc-shared.css">
+  <script src="wsc-config.js"></script>
+</head>
+<body>
+
+<div class="card">
+  <div class="club-name">Woking Speakers Club</div>
+  <div class="divider"></div>
+
+  <noscript>
+    <p style="text-align:center; padding:1.5rem 0; color:var(--text); font-size:0.95rem; line-height:1.6;">
+      JavaScript is required to show membership pricing.<br>
+      Please <a href="mailto:info@wokingspeakers.org.uk" style="color:var(--navy); font-weight:600;">email us</a> and we'll get you set up.
+    </p>
+  </noscript>
+
+  <!-- Loading -->
+  <div id="state-loading">
+    <h1>Join Us</h1>
+    <p>Finding your membership fee&hellip;</p>
+    <div class="spinner"></div>
+  </div>
+
+  <!-- Ready to pay -->
+  <div id="state-ready">
+    <h1>Join Us</h1>
+    <div class="month-toggle" id="month-toggle">
+      <button class="month-btn active" id="btn-this" onclick="selectMonth(0)">This month</button>
+      <button class="month-btn" id="btn-next" onclick="selectMonth(1)">Next month</button>
+    </div>
+    <div class="fee-pill" id="fee-label"><!-- e.g. £150 to join in June --></div>
+    <div class="fee-breakdown" id="fee-breakdown"><!-- breakdown text --></div>
+    <a id="pay-link" class="btn-pay" href="mailto:info@wokingspeakers.org.uk" aria-label="Pay membership fee via Stripe (opens in new tab)">Pay now &rarr;</a>
+    <p class="no-stripe-note" id="no-stripe-note" style="display:none;">Online payment isn&rsquo;t set up for that month yet — <a href="mailto:info@wokingspeakers.org.uk">get in touch</a> and we&rsquo;ll sort it.</p>
+    <div class="payment-methods">
+      Accepted: <span>Card</span> <span>Apple Pay</span> <span>Google Pay</span>
+    </div>
+    <div class="membership-perks">
+      <p class="perks-heading">Your membership includes</p>
+      <ul>
+        <li>Structured educational pathways to develop your speaking skills at your own pace</li>
+        <li>Regular opportunities to deliver prepared and impromptu speeches at meetings</li>
+        <li>Hands-on leadership and organisational experience through meeting roles</li>
+        <li>A supportive community meeting every 2nd and 4th Thursday in Woking — part of Toastmasters International</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- No Stripe link configured for this month -->
+  <div id="state-contact">
+    <h1>Ready to Join?</h1>
+    <p>
+      Please get in touch and we&rsquo;ll get you set up.<br><br>
+      <a href="mailto:info@wokingspeakers.org.uk">info@wokingspeakers.org.uk</a>
+    </p>
+  </div>
+</div>
+
+<div class="footer">
+  <a href="/">← Back to home</a> &nbsp;&middot;&nbsp;
+  Payments processed securely by Stripe
+</div>
+
+<script>
+  // Stripe links and fee data now live in wsc-config.js — edit there.
+  const CFG = window.WSC_CONFIG;
+  const WSC_STRIPE_LINKS = CFG.stripeLinks;
+  const WSC_FEE_DATA = CFG.feeData;
+
+  const MONTH_NAMES = [
+    '', 'January','February','March','April','May','June',
+    'July','August','September','October','November','December'
+  ];
+  const MONTH_SHORT = [
+    '', 'Jan','Feb','Mar','Apr','May','Jun',
+    'Jul','Aug','Sep','Oct','Nov','Dec'
+  ];
+
+  // Returns a human-readable coverage string like "Jul 2026 – Mar 2027"
+  function getCoverage(joiningMonth, joiningYear) {
+    let endMonth, endYear;
+
+    if (joiningMonth >= 4 && joiningMonth <= 9) {
+      // In the Apr–Sep period; membership runs to end of following Oct–Mar
+      endMonth = 3;
+      endYear  = joiningYear + 1;
+    } else {
+      // In the Oct–Mar period; membership runs to end of following Apr–Sep
+      endMonth = 9;
+      endYear  = joiningMonth >= 10 ? joiningYear + 1 : joiningYear;
+    }
+
+    return `${MONTH_SHORT[joiningMonth]} ${joiningYear} – ${MONTH_SHORT[endMonth]} ${endYear}`;
+  }
+
+  const now = new Date();
+  const thisMonth = now.getMonth() + 1; // 1–12
+  const thisYear  = now.getFullYear();
+
+  function monthOffset(offset) {
+    const m = ((thisMonth - 1 + offset) % 12) + 1;
+    const y = thisYear + Math.floor((thisMonth - 1 + offset) / 12);
+    return { month: m, year: y };
+  }
+
+  function renderMonth(offset) {
+    const { month, year } = monthOffset(offset);
+    const link = WSC_STRIPE_LINKS[month];
+    const fee  = WSC_FEE_DATA[month];
+
+    document.getElementById('btn-this').classList.toggle('active', offset === 0);
+    document.getElementById('btn-next').classList.toggle('active', offset === 1);
+
+    const noStripe = document.getElementById('no-stripe-note');
+    const payLink  = document.getElementById('pay-link');
+
+    const membership = fee.total - 20;
+    const coverage   = getCoverage(month, year);
+
+    document.getElementById('fee-label').textContent =
+      `£${fee.total} to join in ${MONTH_NAMES[month]}`;
+    document.getElementById('fee-breakdown').innerHTML =
+      `<strong>£20</strong> joining fee + <strong>£${membership}</strong> membership = <strong>£${fee.total}</strong>` +
+      `<br><span class="coverage-line">${fee.months} month${fee.months !== 1 ? 's' : ''}: ${coverage}</span>`;
+
+    if (link) {
+      payLink.href = link;
+      payLink.target = '_blank';
+      payLink.rel = 'noopener';
+      payLink.setAttribute('aria-label', 'Pay membership fee via Stripe (opens in new tab)');
+      payLink.style.display = '';
+      noStripe.style.display = 'none';
+    } else {
+      payLink.style.display = 'none';
+      noStripe.style.display = '';
+    }
+  }
+
+  function selectMonth(offset) {
+    renderMonth(offset);
+  }
+
+  function init() {
+    document.getElementById('state-loading').style.display = 'none';
+
+    // If this month has no Stripe link AND next month does, skip straight to
+    // next month — otherwise always start on this month.
+    const thisLink = WSC_STRIPE_LINKS[thisMonth];
+    const nextLink = WSC_STRIPE_LINKS[monthOffset(1).month];
+
+    if (!thisLink && !nextLink) {
+      document.getElementById('state-contact').style.display = 'block';
+      return;
+    }
+
+    document.getElementById('state-ready').style.display = 'block';
+    renderMonth(0);
+  }
+
+  setTimeout(init, 600);
+</script>
+
+</body>
+</html>

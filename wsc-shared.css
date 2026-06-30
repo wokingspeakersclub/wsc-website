@@ -1,0 +1,472 @@
+/* =============================================================
+   WSC SHARED STYLES
+   Used by join.html and thankyou.html
+   index.html has its own full styles.css
+   ============================================================= */
+
+/* ─── Design tokens ─────────────────────────────────── */
+:root {
+  --navy:      #1a2744;
+  --gold:      #c8913a;
+  --gold-light:#f0d49a;
+  --white:     #ffffff;
+  --text:      #1a2744;
+  --muted:     #5a6480;
+  --bg:        #faf8f4;
+  --radius:    10px;
+  --green:     #166534;
+  --green-bg:  #dcfce7;
+}
+
+body.thankyou-body {
+  justify-content: flex-start;
+  padding: 2rem 1.25rem 3rem;
+}
+
+/* ─── Reset & base ──────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem 1.25rem;
+}
+
+/* ─── Card ──────────────────────────────────────────── */
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: 0 2px 24px rgba(27,42,74,0.10);
+  padding: 2.5rem 2.25rem 2rem;
+  max-width: 480px;
+  width: 100%;
+  text-align: center;
+}
+
+.club-name {
+  font-family: 'Fraunces', serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--navy);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+}
+
+.divider {
+  width: 40px;
+  height: 3px;
+  background: var(--gold);
+  border-radius: 2px;
+  margin: 0.75rem auto 1.5rem;
+}
+
+/* ─── Footer ────────────────────────────────────────── */
+.footer {
+  margin-top: 1.75rem;
+  font-size: 0.78rem;
+  color: var(--muted);
+  text-align: center;
+}
+.footer a { color: var(--muted); text-decoration: underline; }
+
+/* ─── Responsive ────────────────────────────────────── */
+@media (max-width: 500px) {
+  .card { padding: 2rem 1.5rem 1.75rem; }
+}
+
+/* ─── Loading state ─────────────────────────────────── */
+#state-loading h1 {
+  font-family: 'Fraunces', serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 0.5rem;
+}
+#state-loading p {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+}
+.spinner {
+  width: 36px; height: 36px;
+  border: 3px solid var(--gold-light);
+  border-top-color: var(--gold);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ─── Join page: ready state ────────────────────────── */
+#state-ready { display: none; }
+#state-ready h1 {
+  font-family: 'Fraunces', serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 0.5rem;
+}
+
+.month-toggle {
+  display: flex;
+  gap: 0;
+  background: #eee;
+  border-radius: 8px;
+  padding: 3px;
+  margin-bottom: 1.25rem;
+}
+.month-btn {
+  flex: 1;
+  padding: 0.65rem 1rem;
+  min-height: 44px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.month-btn:focus-visible {
+  outline: 2px solid var(--navy);
+  outline-offset: 2px;
+}
+.month-btn.active {
+  background: var(--white);
+  color: var(--navy);
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+.no-stripe-note {
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-align: center;
+  margin-top: 0.5rem;
+}
+.no-stripe-note a { color: var(--navy); }
+
+.fee-pill {
+  display: inline-block;
+  background: var(--gold-light);
+  color: var(--navy);
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-radius: 100px;
+  padding: 0.3rem 1rem;
+  margin: 0.75rem 0 1.25rem;
+}
+
+.fee-breakdown {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 1.75rem;
+  line-height: 1.6;
+}
+.fee-breakdown strong { color: var(--text); }
+
+.btn-pay {
+  display: block;
+  width: 100%;
+  background: var(--navy);
+  color: var(--white);
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.9rem 1.5rem;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s, transform 0.1s;
+}
+.btn-pay:hover { background: #2a3f6e; }
+.btn-pay:active { transform: scale(0.98); }
+.btn-pay:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+.payment-methods {
+  margin-top: 0.85rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+.payment-methods span {
+  display: inline-block;
+  background: var(--bg);
+  border: 1px solid #E5E7EB;
+  border-radius: 4px;
+  padding: 0.15rem 0.5rem;
+  font-weight: 500;
+  margin: 0 2px;
+}
+
+.coverage-line {
+  display: block;
+  margin-top: 0.2rem;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+/* ─── Membership perks ──────────────────────────────── */
+.membership-perks {
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid #E5E7EB;
+  text-align: left;
+}
+.perks-heading {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin-bottom: 0.65rem;
+}
+.membership-perks ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.membership-perks li {
+  font-size: 0.85rem;
+  color: var(--text);
+  line-height: 1.5;
+  padding-left: 1.1rem;
+  position: relative;
+}
+.membership-perks li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.45em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--gold);
+}
+
+/* ─── Join page: no-link state ──────────────────────── */
+#state-contact { display: none; }
+#state-contact h1 {
+  font-family: 'Fraunces', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 0.75rem;
+}
+#state-contact p {
+  color: var(--muted);
+  font-size: 0.93rem;
+  line-height: 1.6;
+}
+#state-contact a { color: var(--navy); font-weight: 600; }
+
+/* ─── Thank-you page: success banner ───────────────── */
+.success-banner {
+  background: var(--green-bg);
+  border: 1px solid #BBF7D0;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1.75rem;
+}
+.success-banner .tick {
+  width: 20px; height: 20px;
+  background: var(--green);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.success-banner .tick svg {
+  width: 11px; height: 11px;
+  stroke: white; fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.success-banner p {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--green);
+}
+
+/* ─── Thank-you page: header & card overrides ───────── */
+.card--wide {
+  max-width: 520px;
+}
+.club-name--sm {
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+}
+.divider--sm {
+  width: 36px;
+  margin: 0.6rem 0 1.25rem;
+}
+h1 {
+  font-family: 'Fraunces', serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+.subtitle {
+  font-size: 0.95rem;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+/* ─── Thank-you page: steps ─────────────────────────── */
+.steps-heading {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin-bottom: 1rem;
+}
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 2rem;
+}
+.step {
+  display: flex;
+  gap: 1rem;
+  position: relative;
+}
+.step:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  left: 15px;
+  top: 32px;
+  bottom: -4px;
+  width: 2px;
+  background: #E5E7EB;
+}
+.step-number {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: var(--gold-light);
+  color: var(--navy);
+  font-weight: 700;
+  font-size: 0.8rem;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+.step-body {
+  padding-bottom: 1.5rem;
+  flex: 1;
+}
+.step-title {
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--navy);
+  margin-bottom: 0.25rem;
+  padding-top: 0.35rem;
+}
+.step-desc {
+  font-size: 0.84rem;
+  color: var(--muted);
+  line-height: 1.55;
+}
+.step-desc a { color: var(--navy); font-weight: 600; }
+.step-desc a:hover { text-decoration: underline; }
+
+/* ─── Thank-you page: next meeting pill ─────────────── */
+.next-meeting {
+  background: var(--gold-light);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 2rem;
+}
+.next-meeting-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin-bottom: 0.3rem;
+}
+.next-meeting-date {
+  font-family: 'Fraunces', serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+.next-meeting-detail {
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-top: 0.2rem;
+}
+
+/* ─── Thank-you page: contact box ───────────────────── */
+.contact-box {
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 1.5rem;
+}
+.contact-avatar {
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  background: var(--navy);
+  color: var(--white);
+  font-weight: 700;
+  font-size: 0.85rem;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.contact-avatar-img {
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.contact-info p { font-size: 0.82rem; color: var(--muted); }
+.contact-info strong { font-size: 0.9rem; color: var(--navy); display: block; }
+.contact-info a { color: var(--navy); font-weight: 600; font-size: 0.82rem; }
+
+/* ── Add to Calendar (light theme) ──────────────────────── */
+.cal-wrap-light { position: relative; display: inline-block; margin-top: 0.85rem; }
+.cal-btn-light {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.82rem; font-weight: 600; font-family: 'Inter', sans-serif;
+  background: var(--navy); color: #fff;
+  border: none; border-radius: 7px;
+  padding: 0.45rem 1rem; cursor: pointer; white-space: nowrap;
+  transition: background 0.15s;
+}
+.cal-btn-light:hover { background: #2a3f6e; }
+.cal-dropdown-light {
+  display: none; position: absolute; left: 0; top: calc(100% + 5px);
+  background: #fff; border: 1px solid #E5E7EB;
+  border-radius: 8px; min-width: 175px; z-index: 9999;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.14); overflow: hidden;
+}
+.cal-dropdown-light.open { display: block; }
+.cal-dropdown-light a {
+  display: flex; align-items: center; gap: 9px;
+  padding: 9px 14px; font-size: 0.83rem; font-weight: 500;
+  color: var(--navy); text-decoration: none;
+  transition: background 0.1s; white-space: nowrap;
+}
+.cal-dropdown-light a:hover { background: var(--bg); }
