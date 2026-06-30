@@ -1231,14 +1231,15 @@
   /* ─── MEMBER PHOTOS (testimonials) ──────────────────────────*/
   .member-avatar {
     position: relative;
-    width: 52px;
-    height: 52px;
+    width: 64px;
+    height: 64px;
+    overflow: hidden;
     flex-shrink: 0;
   }
 
   .member-photo {
-    width: 52px;
-    height: 52px;
+    width: 64px;
+    height: 64px;
     border-radius: 50%;
     object-fit: cover;           /* crop to circle neatly */
     object-position: center top; /* favour face over chest */
@@ -1247,15 +1248,15 @@
   }
 
   .member-initials {
-    width: 52px;
-    height: 52px;
+    width: 64px;
+    height: 64px;
     border-radius: 50%;
     background: var(--navy);
     display: flex;               /* shown only when photo missing */
     align-items: center;
     justify-content: center;
     font-family: 'Fraunces', serif;
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     font-weight: 600;
     color: var(--gold-light);
     border: 2px solid var(--border);
@@ -1286,36 +1287,6 @@
     .join-grid { grid-template-columns: 1fr; }
   }
 
-  /* ─── MEMBER PHOTOS ──────────────────────────────────*/
-  .member-avatar {
-    width: 52px;
-    height: 52px;
-    border-radius: 50%;
-    overflow: hidden;
-    flex-shrink: 0;
-  }
-  .member-photo {
-    width: 52px;
-    height: 52px;
-    border-radius: 50%;
-    object-fit: cover;
-    object-position: center top;
-    display: block;
-    border: 2px solid var(--border);
-  }
-  .member-initials {
-    width: 52px;
-    height: 52px;
-    border-radius: 50%;
-    background: var(--navy);
-    align-items: center;
-    justify-content: center;
-    font-family: 'Fraunces', serif;
-    font-size: 1.3rem;
-    color: var(--gold-light);
-    font-weight: 600;
-    border: 2px solid var(--border);
-  }
 
   /* ─── ANIMATIONS ─────────────────────────────────────*/
   @media (prefers-reduced-motion: no-preference) {
