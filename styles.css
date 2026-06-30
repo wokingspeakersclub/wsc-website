@@ -689,6 +689,51 @@
     align-items: start;
   }
 
+  /* ─── First visit guest list ────────────────────────── */
+  .guest-list {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1.5rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .guest-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding: 1.85rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .guest-row-icon {
+    flex-shrink: 0;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: rgba(200,145,58,0.12);
+    border: 1px solid rgba(200,145,58,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+  }
+  .guest-row-icon--time {
+    font-family: 'Fraunces', serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--gold);
+  }
+  .guest-row-text h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--warm-white);
+    margin-bottom: 0.4rem;
+  }
+  .guest-row-text p {
+    font-size: 0.92rem;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.65;
+    max-width: 640px;
+  }
+
   /* ─── FAQ ──────────────────────────────────────────── */
   #faq { background: var(--warm-white); }
 
