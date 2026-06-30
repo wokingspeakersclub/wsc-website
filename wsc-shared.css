@@ -20,12 +20,12 @@
 
 body.thankyou-body {
   justify-content: flex-start;
-  padding: 2rem 1.25rem 3rem;
+  padding: 2rem 1.25rem 4rem;
 }
 
 /* ─── Reset & base ──────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { height: 100%; }
+html { height: 100%; }
 body {
   font-family: 'Inter', sans-serif;
   background: var(--bg);
@@ -70,6 +70,7 @@ body {
 /* ─── Footer ────────────────────────────────────────── */
 .footer {
   margin-top: 1.75rem;
+  margin-bottom: 1rem;
   font-size: 0.78rem;
   color: var(--muted);
   text-align: center;
