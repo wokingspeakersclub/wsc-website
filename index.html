@@ -896,6 +896,19 @@
     return '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>';
   }
 
+  function makeGoogleCalUrl(date) {
+    const { h, min } = parseMeetingTime(CFG.meetingTime);
+    const pad = n => String(n).padStart(2, '0');
+    const startLocal = new Date(date); startLocal.setHours(h, min, 0, 0);
+    const endLocal   = new Date(date); endLocal.setHours(21, 45, 0, 0);
+    const offset = isUKBST(startLocal) ? 1 : 0;
+    const fmtUTC = d => { const u = new Date(d.getTime() - offset * 3600000); return u.getFullYear() + pad(u.getMonth()+1) + pad(u.getDate()) + 'T' + pad(u.getHours()) + pad(u.getMinutes()) + '00Z'; };
+    const title = encodeURIComponent('Woking Speakers Club Meeting');
+    const loc   = encodeURIComponent('Woking United Reformed Church, White Rose Lane, Woking, Surrey GU22 7HA');
+    const desc  = encodeURIComponent('Free for guests - no booking needed. Come along and see what we are about.');
+    return 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=' + title + '&dates=' + fmtUTC(startLocal) + '/' + fmtUTC(endLocal) + '&location=' + loc + '&details=' + desc;
+  }
+
   const meetings = getMeetingDates(6);
 
   // Banner
@@ -914,7 +927,8 @@
   const container = document.getElementById('upcomingMeetings');
   meetings.slice(0, 5).forEach((d, i) => {
     const { str, label } = formatDate(d);
-    const calUrl = 'data:text/calendar;charset=utf8,' + encodeURIComponent(makeICSString(d));
+    const calUrl    = 'data:text/calendar;charset=utf8,' + encodeURIComponent(makeICSString(d));
+    const googleUrl = makeGoogleCalUrl(d);
     const el = document.createElement('div');
     el.style.cssText = 'display:flex; align-items:center; justify-content:space-between; gap:10px; padding:0.6rem 0.85rem; background:rgba(255,255,255,0.06); border-radius:8px; border:1px solid rgba(255,255,255,' + (i===0?'0.2':'0.08') + ');';
     const labelHtml = label ? '<span style="font-size:0.7rem; font-weight:600; background:rgba(200,145,58,0.25); color:#f0d49a; border-radius:4px; padding:2px 7px; white-space:nowrap;">' + label + '</span>' : '';
@@ -922,11 +936,23 @@
       '<span style="font-size:0.875rem; color:' + (i===0?'#fff':'rgba(255,255,255,0.7)') + '; font-weight:' + (i===0?'600':'400') + ';">' + str + '</span>' +
       '<span style="display:flex;align-items:center;gap:6px;flex-shrink:0;">' +
         labelHtml +
-        '<a href="' + calUrl + '" target="_blank" rel="noopener" title="Add to calendar" style="display:inline-flex;align-items:center;gap:3px;font-size:0.68rem;font-weight:600;color:rgba(255,255,255,0.5);text-decoration:none;border:1px solid rgba(255,255,255,0.15);border-radius:4px;padding:2px 6px;white-space:nowrap;transition:color 0.15s,border-color 0.15s;" onmouseover="this.style.color=\'rgba(255,255,255,0.9)\';this.style.borderColor=\'rgba(255,255,255,0.4)\'" onmouseout="this.style.color=\'rgba(255,255,255,0.5)\';this.style.borderColor=\'rgba(255,255,255,0.15)\'">' +
-          calIconSVG() + ' +Cal' +
-        '</a>' +
+        '<div class="cal-wrap">' +
+          '<button type="button" class="cal-btn" title="Add to calendar" onclick="this.nextElementSibling.classList.toggle(\'open\')">' +
+            calIconSVG() + ' +Cal' +
+          '</button>' +
+          '<div class="cal-dropdown">' +
+            '<a href="' + googleUrl + '" target="_blank" rel="noopener">' + calIconSVG() + ' Google Calendar</a>' +
+            '<a href="' + calUrl + '" target="_blank" rel="noopener">' + calIconSVG() + ' Apple / Outlook (.ics)</a>' +
+          '</div>' +
+        '</div>' +
       '</span>';
     container.appendChild(el);
+  });
+
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.cal-wrap')) {
+      document.querySelectorAll('.cal-dropdown.open').forEach(dd => dd.classList.remove('open'));
+    }
   });
 
   // ── Stripe payment buttons (shown only if links configured) ────
