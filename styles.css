@@ -192,6 +192,8 @@
     text-decoration: none;
   }
   .nav-logo img { height: 48px; width: auto; display: block; }
+  .hero-logo-img { height: 80px; width: auto; margin-bottom: 1.5rem; display: block; }
+  .footer-logo-img { height: 28px; width: auto; opacity: 0.5; }
 
   .nav-links {
     display: flex;
@@ -782,6 +784,15 @@
     line-height: 1.65;
     max-width: 640px;
   }
+
+  /* ─── FIRST VISIT ────────────────────────────────────*/
+  #firstvisit { background: var(--navy); }
+  #firstvisit .section-label { color: var(--gold); }
+  #firstvisit .section-title { color: var(--warm-white); }
+  #firstvisit .section-sub { color: rgba(255,255,255,0.6); }
+
+  /* ─── STORIES ────────────────────────────────────────*/
+  #stories { background: var(--warm-white); }
 
   /* ─── FAQ ──────────────────────────────────────────── */
   #faq { background: var(--warm-white); }
