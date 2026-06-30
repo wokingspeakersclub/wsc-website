@@ -689,12 +689,7 @@
   // ── Mobile nav toggle
   const toggle = document.getElementById('navToggle');
   const links = document.getElementById('navLinks');
-  function setNavLinksTop() {
-    const navRect = nav.getBoundingClientRect();
-    links.style.top = navRect.bottom + 'px';
-  }
   toggle.addEventListener('click', () => {
-    setNavLinksTop();
     links.classList.toggle('open');
   });
   links.querySelectorAll('a').forEach(a => {
