@@ -1077,7 +1077,6 @@
     .about-grid,
     .meetings-layout,
     .contact-grid { grid-template-columns: 1fr; }
-    .meetings-aside { order: -1; }
     .faq-grid,
     .join-grid,
     .tips-grid { grid-template-columns: 1fr; }

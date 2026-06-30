@@ -855,15 +855,36 @@
     return date >= bstStart && date < bstEnd;
   }
 
-  function makeICSBlob(date) {
+  const VTIMEZONE_LONDON = [
+    'BEGIN:VTIMEZONE',
+    'TZID:Europe/London',
+    'BEGIN:DAYLIGHT',
+    'TZOFFSETFROM:+0000',
+    'TZOFFSETTO:+0100',
+    'TZNAME:BST',
+    'DTSTART:19700329T010000',
+    'RRULE:FREQ=YEARLY;BYDAY=-1SU;BYMONTH=3',
+    'END:DAYLIGHT',
+    'BEGIN:STANDARD',
+    'TZOFFSETFROM:+0100',
+    'TZOFFSETTO:+0000',
+    'TZNAME:GMT',
+    'DTSTART:19701025T020000',
+    'RRULE:FREQ=YEARLY;BYDAY=-1SU;BYMONTH=10',
+    'END:STANDARD',
+    'END:VTIMEZONE'
+  ].join('\r\n');
+
+  function makeICSString(date) {
     const { h, min } = parseMeetingTime(CFG.meetingTime);
     const pad = n => String(n).padStart(2, '0');
     const fmtLocal = d => d.getFullYear() + pad(d.getMonth()+1) + pad(d.getDate()) + 'T' + pad(d.getHours()) + pad(d.getMinutes()) + '00';
     const startLocal = new Date(date); startLocal.setHours(h, min, 0, 0);
     const endLocal   = new Date(date); endLocal.setHours(21, 45, 0, 0);
     const uid = 'wsc-' + fmtLocal(startLocal) + '@wokingspeakers.club';
-    const ics = [
+    return [
       'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Woking Speakers Club//EN',
+      VTIMEZONE_LONDON,
       'BEGIN:VEVENT',
       'UID:' + uid,
       'DTSTART;TZID=Europe/London:' + fmtLocal(startLocal),
@@ -873,7 +894,6 @@
       'DESCRIPTION:Free for guests - no booking needed. Come along and see what we are about.',
       'END:VEVENT', 'END:VCALENDAR'
     ].join('\r\n');
-    return new Blob([ics], { type: 'text/calendar' });
   }
 
   function calIconSVG() {
@@ -898,7 +918,7 @@
   const container = document.getElementById('upcomingMeetings');
   meetings.slice(0, 5).forEach((d, i) => {
     const { str, label } = formatDate(d);
-    const calUrl = URL.createObjectURL(makeICSBlob(d));
+    const calUrl = 'data:text/calendar;charset=utf8,' + encodeURIComponent(makeICSString(d));
     const el = document.createElement('div');
     el.style.cssText = 'display:flex; align-items:center; justify-content:space-between; gap:10px; padding:0.6rem 0.85rem; background:rgba(255,255,255,0.06); border-radius:8px; border:1px solid rgba(255,255,255,' + (i===0?'0.2':'0.08') + ');';
     const labelHtml = label ? '<span style="font-size:0.7rem; font-weight:600; background:rgba(200,145,58,0.25); color:#f0d49a; border-radius:4px; padding:2px 7px; white-space:nowrap;">' + label + '</span>' : '';
