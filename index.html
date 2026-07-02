@@ -67,7 +67,7 @@
 
     <span class="banner-countdown" id="bannerCountdown"></span>
     <span class="next-banner-dot"></span>
-    <a href="#meetings">Come along — it's free →</a>
+    <a href="#contact" data-visit-cta><span class="cta-full">Come along — it's free →</span><span class="cta-short">Visit free →</span></a>
   </div>
   <div class="banner-end">
     <button class="banner-dismiss" id="bannerDismiss" aria-label="Close banner">
@@ -107,12 +107,12 @@
       Speak up.<br>We'll help you<br><em>sound brilliant</em>.
     </h1>
     <p class="hero-sub">
-      Most people who walk through our door are terrified of public speaking. Most of them stay for years. We meet on the 2nd and 4th Thursday of the month in Woking — come along for free and see what all the fuss is about.
+      Almost everyone walks in terrified of public speaking — and almost everyone stays for years. Visit for free on the 2nd or 4th Thursday of the month in Woking and see why.
     </p>
     <div class="hero-actions">
-      <a href="#contact" class="btn-primary">
+      <a href="#contact" class="btn-primary" data-visit-cta>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        Come to a meeting — it's free
+        Plan your first visit — it's free
       </a>
       <a href="#meetings" class="btn-ghost">See what happens</a>
     </div>
@@ -259,7 +259,7 @@
 
       <div class="meetings-aside fade-up">
         <h3>Come and see</h3>
-        <p>We meet on the 2nd and 4th Thursday every month at 7:15 pm. No booking needed, no charge. Just turn up.</p>
+        <p>We meet on the 2nd and 4th Thursday every month, from <span data-cfg="meetingTime">7:15 pm</span> to <span data-cfg="meetingEndTime">9:45 pm</span>. No booking needed, no charge. Just turn up.</p>
 
         <div style="margin: 1.25rem 0 0;">
           <div style="font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 0.75rem;">Upcoming meetings</div>
@@ -268,22 +268,26 @@
         <div class="venue-info">
           <div class="venue-line">
             <svg class="venue-icon" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            <span>Woking United Reformed Church<br>White Rose Lane, Woking<br>Surrey GU22 7HA</span>
+            <span><span data-cfg="venueName">Woking United Reformed Church</span><br><span data-cfg="venueAddress">White Rose Lane, Woking, Surrey GU22 7HA</span></span>
           </div>
           <div class="venue-line">
             <svg class="venue-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            <span>2nd &amp; 4th Thursday · 7:15 pm</span>
+            <span>2nd &amp; 4th Thursday · <span data-cfg="meetingTime">7:15 pm</span>–<span data-cfg="meetingEndTime">9:45 pm</span></span>
           </div>
           <div class="venue-line">
             <svg class="venue-icon" viewBox="0 0 24 24"><polyline points="3 22 3 12 12 3 21 12 21 22"/><rect x="9" y="14" width="6" height="8"/></svg>
-            <span>5 min walk from Woking station</span>
+            <span data-cfg="venueNote">5 min walk from Woking station</span>
+          </div>
+          <div class="venue-line">
+            <svg class="venue-icon" viewBox="0 0 24 24"><path d="M14 16H9m10 0h3v-3.15a1 1 0 0 0-.84-.99L16 11l-2.7-3.6a1 1 0 0 0-.8-.4H5.24a2 2 0 0 0-1.8 1.1l-.8 1.63A6 6 0 0 0 2 12.42V16h2"/><circle cx="6.5" cy="16.5" r="2.5"/><circle cx="16.5" cy="16.5" r="2.5"/></svg>
+            <span data-cfg="parkingNote">Town-centre car parks are a few minutes’ walk away</span>
           </div>
         </div>
         <a href="https://maps.google.com/maps?q=Woking+United+Reformed+Church,White+Rose+Lane,Woking,GU22+7HA" target="_blank" rel="noopener" class="btn-venue">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
           Open in Google Maps
         </a>
-        <a href="#contact" class="btn-venue" style="background:var(--gold);color:var(--navy);font-weight:600;margin-top:0.5rem;">
+        <a href="#contact" class="btn-venue" style="background:var(--gold);color:var(--navy);font-weight:600;margin-top:0.5rem;" data-visit-cta>
           Tell us you're coming (optional) →
         </a>
         <p style="font-size:0.8rem; color:rgba(255,255,255,0.55); margin:0.6rem 0 0; line-height:1.5;">Booking isn't required — but if you let us know, someone will be looking out for you by name.</p>
@@ -305,7 +309,7 @@
         <div class="guest-row-icon guest-row-icon--time">7:15</div>
         <div class="guest-row-text">
           <h3>Finding your way in</h3>
-          <p>Doors open at 7:15 pm at Woking United Reformed Church, a 5-minute walk from the station. A member will be watching for you at the entrance — you won't have to find your own way to a room full of strangers.</p>
+          <p>We run from 7:15 to 9:45 pm at Woking United Reformed Church, a 5-minute walk from the station, with town-centre car parks nearby. A member will be watching for you at the entrance — you won't have to find your own way to a room full of strangers.</p>
         </div>
       </div>
 
@@ -340,7 +344,7 @@
         <p style="font-size: 1rem; font-weight: 600; color: var(--gold-light); margin-bottom: 0.25rem;">Still nervous? Good. You're in exactly the right place.</p>
         <p style="font-size: 0.9rem; color: rgba(255,255,255,0.6); line-height: 1.6;">Every member who's ever walked through that door felt exactly how you feel right now. The club was built for this moment. Come and see.</p>
       </div>
-      <a href="#contact" class="btn-primary" style="flex-shrink: 0;">Get in touch →</a>
+      <a href="#contact" class="btn-primary" style="flex-shrink: 0;" data-visit-cta>Plan your first visit →</a>
     </div>
   </div>
 </section>
@@ -563,13 +567,13 @@
     <div class="price-box fade-up">
       <div class="price-item">
         <div class="price-item-label">Joining fee</div>
-        <div class="price-item-value">£20</div>
+        <div class="price-item-value" data-cfg="joiningFee">£20</div>
         <div class="price-item-sub">one-time fee, paid when you join</div>
       </div>
       <div class="price-item">
         <div class="price-item-label">Monthly subscription</div>
-        <div class="price-item-value">£13<span style="font-size:1rem; font-weight:400;">/mo</span></div>
-        <div class="price-item-sub">billed every six months (£78)</div>
+        <div class="price-item-value"><span data-cfg="monthlyFee">£13</span><span style="font-size:1rem; font-weight:400;">/mo</span></div>
+        <div class="price-item-sub">billed every six months (<span data-cfg="sixMonthFee">£78</span>)</div>
       </div>
       <div class="price-item">
         <div class="price-item-label">Guest visits</div>
@@ -606,7 +610,7 @@
       </div>
       <div class="faq-item fade-up">
         <p class="faq-q">What does membership cost?</p>
-        <p class="faq-a">Guest visits are always free. Membership is a £20 one-off joining fee, then £13 a month (billed in six-month blocks of £78). For what you get — structured development, mentoring, and a community — most members consider it exceptional value. Full breakdown in the <a href="#join">Join section</a>.</p>
+        <p class="faq-a">Guest visits are always free. Membership is a <span data-cfg="joiningFee">£20</span> one-off joining fee, then <span data-cfg="monthlyFee">£13</span> a month (billed in six-month blocks of <span data-cfg="sixMonthFee">£78</span>). For what you get — structured development, mentoring, and a community — most members consider it exceptional value. Full breakdown in the <a href="#join">Join section</a>.</p>
       </div>
       <div class="faq-item fade-up">
         <p class="faq-q">How do I join?</p>
@@ -738,6 +742,14 @@
   //    date picker, and the calendar (.ics / Google Calendar) links.
   // ═══════════════════════════════════════════════════════════════
   const CFG = window.WSC_CONFIG;
+
+  // Populate any element marked <span data-cfg="key"> with the matching
+  // value from wsc-config.js, so prices, venue and times only ever need
+  // editing in one place. The HTML keeps a sensible fallback for no-JS.
+  document.querySelectorAll('[data-cfg]').forEach(el => {
+    const val = CFG[el.getAttribute('data-cfg')];
+    if (val != null && val !== '') el.textContent = val;
+  });
 
   const DAYS_LONG    = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
   const MONTHS_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -964,10 +976,20 @@
   const dateGroupEl  = document.getElementById('meeting-date-group');
   const dateSelectEl = document.getElementById('preferred-date');
 
-  subjectEl.addEventListener('change', () => {
+  function syncGuestDatePicker() {
     const isGuest = subjectEl.value === 'Attend a meeting as a guest';
     dateGroupEl.style.display = isGuest ? '' : 'none';
     dateSelectEl.disabled = !isGuest;
+  }
+  subjectEl.addEventListener('change', syncGuestDatePicker);
+
+  // Arriving at the contact form via a "visit" CTA pre-selects the guest
+  // option so the meeting-date picker is already showing when they land.
+  document.querySelectorAll('[data-visit-cta]').forEach(cta => {
+    cta.addEventListener('click', () => {
+      subjectEl.value = 'Attend a meeting as a guest';
+      syncGuestDatePicker();
+    });
   });
 
   getMeetingDates(3).forEach(d => {

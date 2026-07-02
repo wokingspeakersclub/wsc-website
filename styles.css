@@ -130,6 +130,7 @@
     font-weight: 700;
     white-space: nowrap;
   }
+  .next-banner a .cta-short { display: none; }
   .next-banner-dot {
     width: 6px; height: 6px;
     border-radius: 50%;
@@ -140,8 +141,10 @@
   }
   @media (max-width: 500px) {
     .next-banner-dot { display: none; }
-    .next-banner a { display: none; }
     .banner-content { gap: 5px; }
+    /* Keep the CTA on mobile, but swap to a shorter label so it fits */
+    .next-banner a .cta-full { display: none; }
+    .next-banner a .cta-short { display: inline; }
   }
   .banner-countdown {
     background: rgba(0,0,0,0.12);
@@ -1227,6 +1230,96 @@
   .persona-icon { font-size: 1.4rem; margin-bottom: 0.6rem; }
   .persona-title { font-weight: 600; font-size: 0.9rem; color: var(--warm-white); margin-bottom: 0.35rem; }
   .persona-desc { font-size: 0.82rem; color: rgba(255,255,255,0.55); line-height: 1.55; margin: 0; }
+
+  /* ─── CLUB GALLERY ("Club in action") ───────────────── */
+  .gallery-panel {
+    background: var(--cream);
+    border: 1px solid rgba(26,39,68,0.08);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem;
+    margin-top: 1rem;
+    text-align: center;
+  }
+  .gallery-panel-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--navy);
+    letter-spacing: -0.02em;
+    margin-top: 0.5rem;
+  }
+  .gallery-panel-sub {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin: 0.5rem 0 2rem;
+  }
+
+  /* Carousel shell: track scrolls horizontally, arrows sit on top of it */
+  .gallery-carousel { position: relative; }
+  .gallery-track {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding: 0.25rem 0.25rem 1rem;
+    margin: 0 -0.25rem;
+    /* Hide the scrollbar — the arrow buttons and touch/trackpad swipe drive scrolling */
+    scrollbar-width: none;
+  }
+  .gallery-track::-webkit-scrollbar { display: none; }
+  .gallery-item {
+    position: relative;
+    flex: 0 0 auto;
+    width: 260px;
+    aspect-ratio: 4 / 3;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 8px 20px -10px rgba(26,39,68,0.25);
+    scroll-snap-align: start;
+  }
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .gallery-date {
+    position: absolute;
+    left: 0.6rem;
+    bottom: 0.6rem;
+    background: rgba(26,39,68,0.72);
+    color: var(--warm-white);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    padding: 0.25rem 0.55rem;
+    border-radius: 999px;
+  }
+  .gallery-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--warm-white);
+    border: 1px solid rgba(26,39,68,0.12);
+    box-shadow: 0 6px 16px -6px rgba(26,39,68,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--navy);
+    z-index: 2;
+  }
+  .gallery-nav-btn:hover { background: var(--gold-pale); }
+  .gallery-nav-btn.is-hidden { display: none; } /* nothing to scroll to in that direction */
+  .gallery-nav-btn.prev { left: -18px; }
+  .gallery-nav-btn.next { right: -18px; }
+  @media (max-width: 700px) {
+    .gallery-nav-btn { display: none; } /* touch/trackpad swipe covers mobile */
+  }
 
   /* ─── MEMBER PHOTOS (testimonials) ──────────────────────────*/
   .member-avatar {
