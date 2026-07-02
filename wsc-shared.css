@@ -114,6 +114,13 @@ body {
   color: var(--navy);
   margin-bottom: 0.5rem;
 }
+.join-intro {
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+}
+.join-intro a { color: var(--navy); font-weight: 600; }
 
 .month-toggle {
   display: flex;

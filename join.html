@@ -36,7 +36,8 @@
 
   <!-- Ready to pay -->
   <div id="state-ready">
-    <h1>Join Us</h1>
+    <h1>Welcome aboard — let's make it official.</h1>
+    <p class="join-intro">Not visited us yet? <a href="/#meetings">Come to a meeting free first</a> — there's no need to pay anything today.</p>
     <div class="month-toggle" id="month-toggle">
       <button class="month-btn active" id="btn-this" onclick="selectMonth(0)">This month</button>
       <button class="month-btn" id="btn-next" onclick="selectMonth(1)">Next month</button>
@@ -51,10 +52,10 @@
     <div class="membership-perks">
       <p class="perks-heading">Your membership includes</p>
       <ul>
-        <li>Structured educational pathways to develop your speaking skills at your own pace</li>
-        <li>Regular opportunities to deliver prepared and impromptu speeches at meetings</li>
-        <li>Hands-on leadership and organisational experience through meeting roles</li>
-        <li>A supportive community meeting every 2nd and 4th Thursday in Woking — part of Toastmasters International</li>
+        <li>A speech slot within your first few meetings — your Ice Breaker, whenever you're ready</li>
+        <li>Two meetings a month with real speaking practice, prepared and off-the-cuff</li>
+        <li>Warm, honest feedback from people who remember their own first speech</li>
+        <li>The Toastmasters Pathways programme — a self-paced curriculum used by 300,000 members worldwide</li>
       </ul>
     </div>
   </div>
@@ -134,8 +135,8 @@
     document.getElementById('fee-label').textContent =
       `£${fee.total} to join in ${MONTH_NAMES[month]}`;
     document.getElementById('fee-breakdown').innerHTML =
-      `<strong>£20</strong> joining fee + <strong>£${membership}</strong> membership = <strong>£${fee.total}</strong>` +
-      `<br><span class="coverage-line">${fee.months} month${fee.months !== 1 ? 's' : ''}: ${coverage}</span>`;
+      `<strong>£20</strong> one-off joining fee + <strong>£${membership}</strong> membership = <strong>£${fee.total}</strong>` +
+      `<br><span class="coverage-line">${fee.months} month${fee.months !== 1 ? 's' : ''}: ${coverage} — that's £13 a month</span>`;
 
     if (link) {
       payLink.href = link;
