@@ -1,2 +1,5 @@
 .DS_Store
 .claude/
+
+# Local working documents (not web assets)
+*.pptx
