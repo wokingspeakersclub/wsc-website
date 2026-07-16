@@ -52,6 +52,7 @@
     <div class="membership-perks">
       <p class="perks-heading">Your membership includes</p>
       <ul>
+        <li>Tailored support to help you meet your specific goals</li>
         <li>A speech slot within your first few meetings — your Ice Breaker, whenever you're ready</li>
         <li>Two meetings a month with real speaking practice, prepared and off-the-cuff</li>
         <li>Warm, honest feedback from people who remember their own first speech</li>
@@ -129,14 +130,17 @@
     const noStripe = document.getElementById('no-stripe-note');
     const payLink  = document.getElementById('pay-link');
 
-    const membership = fee.total - 20;
+    // Derived from the two fee numbers in the config, so this page can never
+    // disagree with the prices shown on the homepage.
+    const membership = CFG.monthlyFee * fee.months;
+    const total      = CFG.joiningFee + membership;
     const coverage   = getCoverage(month, year);
 
     document.getElementById('fee-label').textContent =
-      `£${fee.total} to join in ${MONTH_NAMES[month]}`;
+      `£${total} to join in ${MONTH_NAMES[month]}`;
     document.getElementById('fee-breakdown').innerHTML =
-      `<strong>£20</strong> one-off joining fee + <strong>£${membership}</strong> membership = <strong>£${fee.total}</strong>` +
-      `<br><span class="coverage-line">${fee.months} month${fee.months !== 1 ? 's' : ''}: ${coverage} — that's £13 a month</span>`;
+      `<strong>£${CFG.joiningFee}</strong> one-off joining fee + <strong>£${membership}</strong> membership = <strong>£${total}</strong>` +
+      `<br><span class="coverage-line">${fee.months} month${fee.months !== 1 ? 's' : ''}: ${coverage} — that's £${CFG.monthlyFee} a month</span>`;
 
     if (link) {
       payLink.href = link;
@@ -172,7 +176,7 @@
     renderMonth(0);
   }
 
-  setTimeout(init, 600);
+  init();
 </script>
 
 </body>

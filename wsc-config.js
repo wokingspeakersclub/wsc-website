@@ -25,11 +25,11 @@ window.WSC_CONFIG = {
 
   // ----- CANCELLED MEETINGS ----------------------------------
   // Add dates here to skip them. Format: 'YYYY-MM-DD'
-  // Example: '2025-08-14',  // Summer break
+  // Example: '2026-08-13',  // Summer break
   // To reinstate, delete the line or add // in front of it.
   cancelledDates: [
-    // '2026-07-09',   // Summer break
-    // '2025-12-25',   // Christmas
+    // '2026-08-13',   // Summer break
+    // '2026-12-24',   // Christmas
   ],
 
   // ----- VENUE -----------------------------------------------
@@ -40,10 +40,11 @@ window.WSC_CONFIG = {
   venueMapUrl:  'https://maps.google.com/maps?q=Woking+United+Reformed+Church,White+Rose+Lane,Woking,GU22+7HA',
 
   // ----- MEMBERSHIP PRICES -----------------------------------
-  joiningFee:   '£20',
-  monthlyFee:   '£13',
-  sixMonthFee:  '£78',
-  guestPolicy:  'Free, unlimited visits — no booking needed',
+  // Fees are plain numbers, in £. This is the ONLY place fees are set:
+  // the six-month total, each month's joining cost and the join-page
+  // breakdown are all worked out from these two numbers automatically.
+  joiningFee:   20,       // £, one-off when you join
+  monthlyFee:   13,       // £, per month
 
   // ----- STRIPE PAYMENT LINKS --------------------------------
   // Replace null with your Stripe URL (in quotes) when ready.
@@ -64,25 +65,27 @@ window.WSC_CONFIG = {
   },
 
   // ----- SOCIAL & CONTACT ------------------------------------
-  facebookUrl:     'https://www.facebook.com/WokingSpeakers/',
-  youtubeUrl:      'https://www.youtube.com/channel/UCBvb0g6JxrGvTahFcjjiP0g',
-  toastmastersUrl: 'https://www.toastmasters.org/',
+  facebookUrl: 'https://www.facebook.com/WokingSpeakers/',
+  linkedinUrl: 'https://www.linkedin.com/company/woking-speakers-club/',
 
   // ----- MEMBERSHIP FEE DATA --------------------------------
-  // Total cost by joining month. No need to edit unless pricing changes.
+  // How many months of membership you get for joining in each month.
+  // Toastmasters runs two six-month renewal periods a year, so joining
+  // early in a period buys more months. The £ total a new member pays is
+  // worked out automatically as: joiningFee + monthlyFee × months.
   feeData: {
-     1: { total: 137, months: 9  },
-     2: { total: 124, months: 8  },
-     3: { total: 111, months: 7  },
-     4: { total: 176, months: 12 },
-     5: { total: 163, months: 11 },
-     6: { total: 150, months: 10 },
-     7: { total: 137, months: 9  },
-     8: { total: 124, months: 8  },
-     9: { total: 111, months: 7  },
-    10: { total: 176, months: 12 },
-    11: { total: 163, months: 11 },
-    12: { total: 150, months: 10 },
+     1: { months: 9  },
+     2: { months: 8  },
+     3: { months: 7  },
+     4: { months: 12 },
+     5: { months: 11 },
+     6: { months: 10 },
+     7: { months: 9  },
+     8: { months: 8  },
+     9: { months: 7  },
+    10: { months: 12 },
+    11: { months: 11 },
+    12: { months: 10 },
   },
 
   // ----- NEXT MEETING BANNER ---------------------------------
@@ -97,19 +100,24 @@ window.WSC_CONFIG = {
   //      (landscape). Other sizes/ratios still work — the photo is
   //      auto-cropped to fit — but 4:3 keeps the crop predictable.
   //   2. Copy one of the lines below, paste it as a new line, and edit
-  //      its filename, date (YYYY-MM-DD), and description
+  //      its filename, date (YYYY-MM-DD), and description. The description
+  //      shows as the caption on the photo (and is what screen readers
+  //      read out), so keep it short — a line or two at most.
+  //      The "date" and "desc" are both OPTIONAL: drop either one (or both)
+  //      and it simply isn't shown. A photo with neither has no caption at
+  //      all — e.g.  { file: 'gallery-7.jpg' },
   //   3. Commit — the carousel updates automatically, no other changes needed
   // To remove a photo, just delete its line. Order below = display order
   // (it isn't re-sorted by date), so put newer photos wherever you like.
   // Any file that doesn't exist yet is simply skipped, so it's fine to
   // add an entry before uploading the matching photo.
   galleryPhotos: [
-    { file: 'gallery-1.jpg', date: '2026-06-11', desc: 'Club members at a Thursday meeting' },
-    { file: 'gallery-2.jpg', date: '2026-05-14', desc: 'Social evening after the meeting' },
-    { file: 'gallery-3.jpg', date: '2026-04-23', desc: 'Area speech contest' },
-    { file: 'gallery-4.jpg', date: '2026-04-02', desc: 'A favourite quote from a member' },
-    { file: 'gallery-5.jpg', date: '2026-03-19', desc: 'Club members at a Thursday meeting' },
-    { file: 'gallery-6.jpg', date: '2026-02-26', desc: 'Club social' },
+    { file: 'gallery-1.jpg', date: '2026-06-30', desc: 'WSC wins Smedley Award!' },
+    { file: 'gallery-2.jpg', date: '2026-05-14', desc: 'Celebrating 20 years' },
+    { file: 'gallery-3.jpg', date: '2026-04-23', desc: 'Speaker Winners at Club Meeting' },
+    { file: 'gallery-4.jpg', date: '', desc: 'On filler words' },
+    { file: 'gallery-5.jpg', date: '', desc: 'Club members at a Thursday meeting' },
+    { file: 'gallery-6.jpg', date: '2026-01-26', desc: 'Club social' },
   ],
 
 };

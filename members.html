@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Members page is private: keep it out of search engines. -->
+<meta name="robots" content="noindex, nofollow">
+
+<title>Members Area — Woking Speakers Club</title>
+<meta name="description" content="Members-only resources for Woking Speakers Club.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="styles.css">
+
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+</head>
+<body class="members-page">
+
+<a href="#members-main" class="skip-link">Skip to main content</a>
+
+<!--
+=================================================================
+  WOKING SPEAKERS CLUB — MEMBERS PAGE
+  ---------------------------------------------------------------
+  This page shows the files inside a shared Google Drive folder.
+  To add or remove a resource, the VP of Mentoring simply adds or
+  removes a file in that Drive folder — this page updates itself.
+  Each SUBFOLDER in Drive becomes a titled section on this page.
+
+  Everything you might need to change lives in the MEMBERS_CONFIG
+  block just below (prices-style: one clearly labelled place).
+=================================================================
+
+  ONE-TIME SETUP  (about 15 minutes, only needs doing once)
+  ---------------------------------------------------------------
+  You need two things from Google: an "API key" and the Drive
+  "folder ID". Here is how to get them, in plain steps.
+
+  1. CREATE A FREE GOOGLE CLOUD PROJECT
+     - Go to https://console.cloud.google.com/
+     - Sign in with the club's Google account.
+     - At the top, click the project dropdown, then "New Project".
+       Call it "Woking Speakers Website" and click Create.
+
+  2. TURN ON THE DRIVE API
+     - With that project selected, go to
+       https://console.cloud.google.com/apis/library/drive.googleapis.com
+     - Click "Enable".
+
+  3. CREATE AN API KEY (and lock it down so it is safe to publish)
+     - Go to "APIs and Services" > "Credentials".
+     - Click "Create Credentials" > "API key". Copy the key.
+     - Click the new key to edit it, then set BOTH restrictions:
+         a) Application restrictions > "Websites" (HTTP referrers).
+            Add these two entries:
+              https://www.wokingspeakers.org.uk/*
+              https://*.netlify.app/*
+         b) API restrictions > "Restrict key" > tick only
+            "Google Drive API".
+     - Save. (These restrictions are why it is safe for the key to
+       sit in this file — see the note at the very bottom.)
+
+  4. SHARE THE DRIVE FOLDER
+     - Open the shared Drive folder in Google Drive.
+     - Click Share > "General access" > "Anyone with the link",
+       role "Viewer". (Read-only. No one can edit via the link.)
+
+  5. FIND THE FOLDER ID
+     - Still on the folder in Drive, look at the browser address.
+       It looks like:
+         https://drive.google.com/drive/folders/1AbCdEfGhIjKlMnOp
+     - The FOLDER ID is the part after "/folders/"
+       (here: 1AbCdEfGhIjKlMnOp).
+
+  6. PASTE THE TWO VALUES
+     - In MEMBERS_CONFIG below, replace PASTE_API_KEY_HERE with the
+       key from step 3, and PASTE_FOLDER_ID_HERE with the ID from
+       step 5. Commit the change — the page goes live in ~30s.
+
+  7. TURN ON THE PASSWORD (keeps non-members out)
+     - This page has NO password of its own on purpose. Protection
+       is handled by Netlify: in the Netlify dashboard go to
+       Site settings > Access control > Visitor access / Password
+       protection, and set a password to share with members.
+=================================================================
+-->
+
+<script>
+window.MEMBERS_CONFIG = {
+
+  // ----- GOOGLE DRIVE CONNECTION -------------------------------
+  // See the SETUP INSTRUCTIONS comment block above for how to get
+  // these two values.
+  apiKey: 'AIzaSyAffENGm7p5QqM6gXMBhlYOUnogCywGJ7I',           // Google Cloud API key (restricted to this site)
+  rootFolderId: '1YKxBokBlrRoq9FWS7kwl0pbzieO-I9PA',   // The shared Drive folder's ID (from its URL)
+
+  // ----- PAGE CONTENT ------------------------------------------
+  pageTitle: 'Members Area',
+  welcomeMessage: 'Resources for mentors and members. Maintained by the VP of Mentoring — add a file to the Drive folder and it appears here automatically.',
+
+  // ----- CONTACT -----------------------------------------------
+  vpMentoringName:  'VP of Mentoring',          // replace with the real name
+  vpMentoringEmail: 'mentoring@example.com',    // replace with the real email
+
+  // ----- DISPLAY OPTIONS ---------------------------------------
+  showFileDates:  true,           // show "Updated 3 days ago" on cards
+  showFileSizes:  false,          // show file size on cards
+  sectionsFromSubfolders: true,   // each Drive subfolder = one titled section
+
+};
+</script>
+
+<!-- ── NAV ──────────────────────────────────────────── -->
+<nav>
+  <a href="/" class="nav-logo">
+    <img src="images/logo-nav.png" alt="Woking Speakers Club">
+  </a>
+  <a href="/" class="members-back">← Back to main site</a>
+</nav>
+
+<!-- ── PAGE HEADER ──────────────────────────────────── -->
+<header class="members-header" id="members-header">
+  <div class="members-header-inner">
+    <div class="section-label">Members</div>
+    <h1 class="members-title" id="members-title">Members Area</h1>
+    <p class="members-welcome" id="members-welcome"></p>
+  </div>
+</header>
+
+<!-- ── RESOURCES ────────────────────────────────────── -->
+<main class="members-main" id="members-main">
+  <div id="members-content"></div>
+</main>
+
+<!-- ── HOW THIS PAGE WORKS + CONTACT ────────────────── -->
+<div class="members-footer-note">
+  <p><strong>How this page works:</strong> everything above is pulled live from the club's shared Google Drive folder. When the VP of Mentoring adds or updates a file in Drive, it appears here automatically — there is nothing to publish and no website to edit.</p>
+  <p id="members-contact"></p>
+</div>
+
+<!-- ── FOOTER ───────────────────────────────────────── -->
+<footer>
+  <div style="display:flex; align-items:center; gap:1rem; flex-wrap:wrap;">
+    <img src="images/logo.png" alt="" aria-hidden="true" class="footer-logo-img">
+    <p class="footer-copy">© 2026 Woking Speakers Club · Part of Toastmasters International</p>
+  </div>
+  <ul class="footer-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/#join">Join</a></li>
+    <li><a href="privacy.html">Privacy</a></li>
+    <li><a href="https://www.toastmasters.org/" target="_blank" rel="noopener" aria-label="Toastmasters International (opens in new tab)">Toastmasters ↗</a></li>
+  </ul>
+</footer>
+
+<!-- ── BACK TO TOP ───────────────────────────────────── -->
+<button type="button" class="back-to-top" id="backToTop" aria-label="Back to top">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+</button>
+
+<script>
+  // ═══════════════════════════════════════════════════════════════
+  //  MEMBERS PAGE — live Google Drive listing
+  //  Reads the folder in MEMBERS_CONFIG.rootFolderId via the Drive
+  //  API v3 and renders one section per subfolder. All HTML is built
+  //  with template literals; every dynamic value is passed through
+  //  escapeHtml() so a stray < or " in a file name can't break markup.
+  // ═══════════════════════════════════════════════════════════════
+  (function () {
+    const CFG = window.MEMBERS_CONFIG || {};
+    const FOLDER_MIME = 'application/vnd.google-apps.folder';
+    const API = 'https://www.googleapis.com/drive/v3/files';
+    const FIELDS = 'files(id,name,mimeType,modifiedTime,size,webViewLink,iconLink)';
+
+    const navEl     = document.querySelector('nav');
+    const headerEl  = document.getElementById('members-header');
+    const titleEl   = document.getElementById('members-title');
+    const welcomeEl = document.getElementById('members-welcome');
+    const contentEl = document.getElementById('members-content');
+    const contactEl = document.getElementById('members-contact');
+
+    // ── Small helpers ────────────────────────────────────────────
+    function escapeHtml(s) {
+      return String(s == null ? '' : s)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+
+    function contactLine() {
+      const name  = escapeHtml(CFG.vpMentoringName || 'the committee');
+      const email = CFG.vpMentoringEmail;
+      return email
+        ? `${name} at <a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a>`
+        : name;
+    }
+
+    function iconFor(mime) {
+      mime = mime || '';
+      if (mime === 'application/pdf') return '📄';
+      if (mime.indexOf('google-apps.document') > -1) return '📝';
+      if (mime.indexOf('google-apps.spreadsheet') > -1) return '📊';
+      if (mime.indexOf('google-apps.presentation') > -1) return '📽️';
+      if (mime.indexOf('google-apps.form') > -1) return '🗒️';
+      if (mime.indexOf('wordprocessingml') > -1 || mime === 'application/msword') return '📝';
+      if (mime.indexOf('spreadsheetml') > -1 || mime === 'application/vnd.ms-excel') return '📊';
+      if (mime.indexOf('presentationml') > -1 || mime === 'application/vnd.ms-powerpoint') return '📽️';
+      if (mime.indexOf('zip') > -1 || mime.indexOf('compressed') > -1) return '🗜️';
+      if (mime.indexOf('image/') === 0) return '🖼️';
+      if (mime.indexOf('video/') === 0) return '🎬';
+      if (mime.indexOf('audio/') === 0) return '🎧';
+      if (mime.indexOf('text/') === 0) return '📃';
+      return '📎';
+    }
+
+    function relativeTime(iso) {
+      const then = new Date(iso).getTime();
+      if (isNaN(then)) return '';
+      const sec = Math.round((Date.now() - then) / 1000);
+      const min = Math.round(sec / 60);
+      const hr  = Math.round(min / 60);
+      const day = Math.round(hr / 24);
+      if (sec < 60) return 'just now';
+      if (min < 60) return min + (min === 1 ? ' minute ago' : ' minutes ago');
+      if (hr  < 24) return hr  + (hr  === 1 ? ' hour ago'   : ' hours ago');
+      if (day < 30) return day + (day === 1 ? ' day ago'    : ' days ago');
+      const mon = Math.round(day / 30);
+      if (mon < 12) return mon + (mon === 1 ? ' month ago'  : ' months ago');
+      const yr = Math.round(mon / 12);
+      return yr + (yr === 1 ? ' year ago' : ' years ago');
+    }
+
+    function formatSize(bytes) {
+      const n = Number(bytes);
+      if (!n || isNaN(n)) return '';
+      if (n < 1024) return n + ' B';
+      if (n < 1048576) return Math.round(n / 1024) + ' KB';
+      return (n / 1048576).toFixed(1) + ' MB';
+    }
+
+    // ── Header text (from config) ────────────────────────────────
+    document.title = (CFG.pageTitle || 'Members Area') + ' — Woking Speakers Club';
+    if (titleEl)   titleEl.textContent = CFG.pageTitle || 'Members Area';
+    if (welcomeEl) welcomeEl.textContent = CFG.welcomeMessage || '';
+    if (contactEl) contactEl.innerHTML = 'Questions about these resources? Contact ' + contactLine() + '.';
+
+    // Clear the fixed nav: measure its height rather than hardcode it.
+    function applyNavOffset() {
+      if (!headerEl || !navEl) return;
+      const navH = navEl.getBoundingClientRect().height;
+      headerEl.style.paddingTop = (navH + 56) + 'px';
+    }
+    applyNavOffset();
+    window.addEventListener('resize', applyNavOffset);
+
+    // ── Back-to-top button (fades in after ~a screen of scrolling) ──
+    // Wired up here, before the Drive boot logic below can early-return,
+    // so it works whether or not the folder is configured.
+    const backToTop = document.getElementById('backToTop');
+    if (backToTop) {
+      const toggleBackToTop = () => backToTop.classList.toggle('visible', window.scrollY > 600);
+      toggleBackToTop();
+      window.addEventListener('scroll', toggleBackToTop, { passive: true });
+      backToTop.addEventListener('click', () => {
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+      });
+    }
+
+    // ── Renderers ────────────────────────────────────────────────
+    function fileCard(file) {
+      const href = file.webViewLink || '#';
+      const meta = [];
+      if (CFG.showFileDates && file.modifiedTime) meta.push('Updated ' + relativeTime(file.modifiedTime));
+      if (CFG.showFileSizes && file.size)         meta.push(formatSize(file.size));
+      const metaHtml = meta.length
+        ? `<span class="file-card-meta">${escapeHtml(meta.join(' · '))}</span>`
+        : '';
+      return `
+        <a class="file-card" href="${escapeHtml(href)}" target="_blank" rel="noopener">
+          <span class="file-card-icon" aria-hidden="true">${iconFor(file.mimeType)}</span>
+          <span class="file-card-text">
+            <span class="file-card-name">${escapeHtml(file.name)}</span>
+            ${metaHtml}
+          </span>
+          <span class="file-card-arrow" aria-hidden="true">↗</span>
+        </a>`;
+    }
+
+    function renderSections(sections) {
+      const nonEmpty = sections.filter(s => s.files && s.files.length);
+      if (!nonEmpty.length) { contentEl.innerHTML = renderEmpty(); return; }
+      contentEl.innerHTML = nonEmpty.map(section => `
+        <section class="members-section">
+          <h2 class="members-section-title">${escapeHtml(section.title)}</h2>
+          <div class="file-grid">
+            ${section.files.map(fileCard).join('')}
+          </div>
+        </section>`).join('');
+    }
+
+    function renderEmpty() {
+      return `
+        <div class="members-callout">
+          <div class="members-callout-icon" aria-hidden="true">📂</div>
+          <div>
+            <h2 class="members-callout-title">No resources here yet</h2>
+            <p>Once files are added to the Drive folder they'll appear here automatically. Check back soon.</p>
+          </div>
+        </div>`;
+    }
+
+    function renderNotice() {
+      return `
+        <div class="members-callout members-callout--notice">
+          <div class="members-callout-icon" aria-hidden="true">🛠️</div>
+          <div>
+            <h2 class="members-callout-title">This page isn't connected yet</h2>
+            <p>The members area needs a one-time setup to link it to the club's Google Drive folder. Step-by-step instructions are in the comments at the top of <code>members.html</code>.</p>
+            <p>In the meantime, please contact ${contactLine()} for resources.</p>
+          </div>
+        </div>`;
+    }
+
+    function renderError() {
+      contentEl.innerHTML = `
+        <div class="members-callout members-callout--error">
+          <div class="members-callout-icon" aria-hidden="true">⚠️</div>
+          <div>
+            <h2 class="members-callout-title">We couldn't load the resources</h2>
+            <p>Something went wrong reaching the club's Google Drive folder. This can happen if the folder sharing or the connection settings need attention.</p>
+            <p>Please try again shortly, or contact ${contactLine()} and we'll help.</p>
+          </div>
+        </div>`;
+    }
+
+    function showSkeleton() {
+      const cards = new Array(6).fill(0).map(() => `
+        <div class="file-card file-card--skeleton" aria-hidden="true">
+          <span class="skeleton-icon"></span>
+          <span class="file-card-text">
+            <span class="skeleton-line skeleton-line--name"></span>
+            <span class="skeleton-line skeleton-line--meta"></span>
+          </span>
+        </div>`).join('');
+      contentEl.innerHTML = `<section class="members-section"><div class="file-grid">${cards}</div></section>`;
+    }
+
+    // ── Drive API ────────────────────────────────────────────────
+    function listFolder(folderId) {
+      const q = "'" + folderId + "' in parents and trashed = false";
+      const url = API
+        + '?q=' + encodeURIComponent(q)
+        + '&key=' + encodeURIComponent(CFG.apiKey)
+        + '&fields=' + encodeURIComponent(FIELDS)
+        + '&orderBy=folder,name&pageSize=1000';
+      return fetch(url).then(res => {
+        if (!res.ok) throw new Error('Drive API returned ' + res.status);
+        return res.json();
+      }).then(data => data.files || []);
+    }
+
+    // ── Boot ─────────────────────────────────────────────────────
+    const notConfigured =
+      !CFG.apiKey || !CFG.rootFolderId ||
+      /PASTE/.test(CFG.apiKey) || /PASTE/.test(CFG.rootFolderId);
+
+    if (notConfigured) {
+      contentEl.innerHTML = renderNotice();
+      return;
+    }
+
+    showSkeleton();
+
+    listFolder(CFG.rootFolderId).then(items => {
+      const folders = items.filter(f => f.mimeType === FOLDER_MIME);
+      const files   = items.filter(f => f.mimeType !== FOLDER_MIME);
+
+      // Subfolders disabled, or none present: one flat "General" list.
+      if (!CFG.sectionsFromSubfolders || folders.length === 0) {
+        const sections = [];
+        if (files.length) sections.push({ title: 'General', files: files });
+        renderSections(sections);
+        return;
+      }
+
+      // Root files -> "General"; each subfolder -> its own section.
+      const subSectionPromises = folders.map(folder =>
+        listFolder(folder.id).then(subItems => ({
+          title: folder.name,
+          files: subItems.filter(f => f.mimeType !== FOLDER_MIME)
+        }))
+      );
+
+      Promise.all(subSectionPromises).then(subSections => {
+        const sections = [];
+        if (files.length) sections.push({ title: 'General', files: files });
+        subSections.forEach(s => sections.push(s));
+        renderSections(sections);
+      });
+    }).catch(err => {
+      console.error('[members] Drive load failed:', err);
+      renderError();
+    });
+  })();
+</script>
+
+</body>
+</html>

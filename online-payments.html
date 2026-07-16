@@ -91,7 +91,6 @@
     color: rgba(255,255,255,0.65);
     font-size: 1.05rem;
   }
-  .hero-actions { display: flex; gap: 0.9rem; justify-content: center; flex-wrap: wrap; }
   .btn-primary, .btn-ghost {
     display: inline-flex;
     align-items: center;
@@ -240,6 +239,13 @@
   }
   .problem-bridge { font-weight: 600; color: var(--text-main); margin: 0 0 1.25rem; }
 
+  /* ── Demo grid ("What it looks like") ────────────── */
+  #demo { background: var(--warm-white); }
+  .demo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem; align-items: start; }
+  @media (max-width: 700px) { .demo-grid { grid-template-columns: 1fr; } }
+  .demo-caption { font-size: 0.85rem; color: var(--text-muted); font-weight: 600; margin-bottom: 0.75rem; text-align: center; }
+  .demo-item img { width: 100%; height: auto; display: block; margin: 0 auto; }
+
   /* ── Benefits grid ────────────────────────────── */
   #benefits { background: var(--warm-white); }
   .benefit-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
@@ -346,9 +352,29 @@
     text-align: center;
   }
   .closing .section-label { color: var(--gold-light); }
+
+  .recap-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    max-width: 900px;
+    margin: 1.75rem auto 2rem;
+    text-align: left;
+  }
+  @media (max-width: 700px) { .recap-grid { grid-template-columns: 1fr; } }
+  .recap-item {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem 1.4rem;
+  }
+  .recap-icon { font-size: 1.5rem; margin-bottom: 0.6rem; }
+  .recap-item p { font-size: 0.9rem; color: rgba(255,255,255,0.75); margin: 0; line-height: 1.5; }
+  .recap-item strong { color: #fff; }
+
   .recommend-box {
     max-width: 640px;
-    margin: 0 auto 2.25rem;
+    margin: 0 auto 2rem;
     background: rgba(200,145,58,0.1);
     border: 1px solid rgba(200,145,58,0.3);
     border-radius: var(--radius-lg);
@@ -358,6 +384,22 @@
   }
   .recommend-box strong { color: var(--warm-white); }
 
+  .next-steps {
+    max-width: 640px;
+    margin: 0 auto;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255,255,255,0.15);
+  }
+  .next-steps-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 0.4rem;
+  }
+  .next-steps-text { font-size: 1.05rem; font-weight: 600; color: #fff; }
+
   footer {
     text-align: center;
     padding: 2.5rem 1.5rem 3rem;
@@ -366,28 +408,54 @@
   }
   footer a { color: var(--text-muted); text-decoration: underline; }
 
+  /* Duplicate of the footer text, print-only, living inside the last
+     section so it doesn't spill onto an orphan page of its own. */
+  .demo-footer-note { display: none; }
+
   /* ── Print / PDF pagination ───────────────────── */
-  @page { size: Letter; margin: 0.45in; }
+  @page { size: Letter; margin: 0; }
 
   @media print {
     .topstrip { display: none; }
+    footer { display: none; }
+    .demo-footer-note {
+      display: block;
+      margin-top: 1.5rem;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.4);
+      text-align: center;
+    }
 
     body { font-size: 0.92em; line-height: 1.4; }
     .journey-text, .journey-risk, .journey-fix,
     .step-content p, .status-fact-text, .benefit-card p { line-height: 1.35; }
 
+    /* Every section is exactly one full page, so backgrounds bleed
+       edge-to-edge — @page margin is 0, so padding lives on the
+       section itself instead (same effective content box as before). */
+    #status { background: var(--cream); }
     section {
-      padding: 0.5rem 0;
+      width: 8.5in;
+      min-height: 11in;
+      margin: 0;
+      padding: 0.45in;
+      box-sizing: border-box;
       break-before: page;
       page-break-before: always;
+    }
+    .hero, .closing {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0 1in;
     }
     .hero {
       break-before: avoid;
       page-break-before: avoid;
-      padding: 1rem 0 1.5rem;
     }
-    .hero-logo { width: 40px; margin-bottom: 0.75rem; }
-    .hero .sub { margin-bottom: 1.25rem; }
+    .hero-logo { width: 44px; margin-bottom: 1rem; }
+    .hero .sub { margin-bottom: 1.5rem; }
 
     .section-title { font-size: 1.3rem; margin-bottom: 0.5rem; }
     .section-sub { font-size: 0.85rem; margin-bottom: 0.75rem; }
@@ -441,7 +509,6 @@
     .no-fee-banner,
     .annual-estimate,
     .recommend-box,
-    .hero-actions,
     img {
       break-inside: avoid;
       page-break-inside: avoid;
@@ -469,19 +536,6 @@
     <div class="hero-eyebrow">A proposal for the committee</div>
     <h1>Make online payments <em>official</em>.</h1>
     <p class="sub">A proposal to accept new-member payments online via Stripe — what it would feel like for joiners, and what it would actually cost the club.</p>
-    <div class="hero-actions">
-      <a href="https://stripe.com/gb/pricing" target="_blank" rel="noopener" class="btn-ghost">Stripe's official pricing ↗</a>
-    </div>
-  </div>
-</section>
-
-<!-- ── WHAT IT LOOKS LIKE ─────────────────────────── -->
-<section id="demo">
-  <div class="wrap center">
-    <div class="section-label">What it looks like</div>
-    <h2 class="section-title">The joining screen, on a phone.</h2>
-    <p class="section-sub">This is the actual page a new joiner would see — the fee for their month calculated automatically, with a toggle to start next month instead if that suits them better.</p>
-    <img src="images/join-compare.png" alt="The join page on a phone, side by side: This month showing £137 to join in July, and Next month showing £124 to join in August after tapping the toggle" style="max-width: 640px; width: 100%; margin: 0 auto; display: block;">
   </div>
 </section>
 
@@ -617,7 +671,7 @@
       <strong>Illustrative annual estimate for this proposal:</strong> the ask here is new-joiner payments only, across all twelve months — with every new joiner expected to pay this way from launch. With somewhere around 6–8 new members a year, total fees would come to roughly <strong>£15–£20 a year</strong>. That's the entire financial cost of the rollout described above. (Extending the same option to six-monthly renewals later would be a separate decision, and a separate, larger number — worth its own proposal if it comes up.)
     </div>
 
-    <p class="fees-source">Rates and no-monthly-fee policy from <a href="https://stripe.com/gb/pricing" target="_blank" rel="noopener">stripe.com/gb/pricing</a> — worth checking directly before approving, as pricing can change.</p>
+    <p class="fees-source">Rates and no-monthly-fee policy from Stripe's standard published UK pricing — worth double-checking before approving, as pricing can change.</p>
   </div>
 </section>
 
@@ -674,24 +728,61 @@
 </section>
 
 <!-- ── CLOSING ──────────────────────────────────── -->
+<!-- ── WHAT IT LOOKS LIKE ─────────────────────────── -->
+<section id="demo">
+  <div class="wrap center">
+    <div class="section-label">What it looks like</div>
+    <h2 class="section-title">How it actually works.</h2>
+    <p class="section-sub">The join page, and the real Stripe checkout a joiner lands on after tapping "Pay now" — this month's fee, calculated automatically.</p>
+    <div class="demo-grid">
+      <div class="demo-item">
+        <p class="demo-caption">The join page — with a toggle for this month or next</p>
+        <img src="images/join-compare.png" alt="The join page on a phone, side by side: This month showing £137 to join in July, and Next month showing £124 to join in August after tapping the toggle">
+      </div>
+      <div class="demo-item">
+        <p class="demo-caption">The actual Stripe checkout for July — already tested and working</p>
+        <img src="images/stripe-checkout-demo.png" alt="The real Stripe checkout page for Woking Speakers Club, showing £137.00 and payment options including Card, Apple Pay, Google Pay, Revolut Pay and Klarna">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CLOSING ──────────────────────────────────── -->
 <section class="closing">
   <div class="wrap center">
     <div class="section-label">The case in short</div>
     <h2 class="section-title" style="color:#fff;">Proven to work. Ready to start.</h2>
-    <p class="section-sub" style="color:rgba(255,255,255,0.6);">A three-month test has already shown the mechanism works end-to-end — nothing left to prove. Starting it for real, for new joiners, costs the club 1.5% + 20p per payment — likely £15–£20 a year in total — in exchange for faster sign-ups, less cash handling, and one less thing for a volunteer Treasurer to chase.</p>
+
+    <div class="recap-grid">
+      <div class="recap-item">
+        <div class="recap-icon">✅</div>
+        <p><strong>Already tested.</strong> Three sample months, wired up end-to-end — nothing left to prove.</p>
+      </div>
+      <div class="recap-item">
+        <div class="recap-icon">💷</div>
+        <p><strong>Costs almost nothing.</strong> 1.5% + 20p per payment — roughly £2.35 per new member.</p>
+      </div>
+      <div class="recap-item">
+        <div class="recap-icon">⏱️</div>
+        <p><strong>Saves real time.</strong> Faster sign-ups, less cash handling, one less thing for the Treasurer to chase.</p>
+      </div>
+    </div>
 
     <div class="recommend-box">
       Recommendation: <strong>approve starting online payment for new joiners.</strong>
     </div>
 
-    <div class="hero-actions">
-      <a href="https://stripe.com/gb/pricing" target="_blank" rel="noopener" class="btn-ghost">Stripe's official pricing ↗</a>
+    <div class="next-steps">
+      <p class="next-steps-label">Next steps</p>
+      <p class="next-steps-text">To be discussed and voted on at the next committee meeting.</p>
     </div>
+
+    <p class="demo-footer-note">Prepared for the Woking Speakers Club committee.</p>
   </div>
 </section>
 
 <footer>
-  Prepared for the Woking Speakers Club committee. Not linked from the live site — feel free to forward this URL directly to whoever needs to see it.
+  Prepared for the Woking Speakers Club committee.
 </footer>
 
 </body>
