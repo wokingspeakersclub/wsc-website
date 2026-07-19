@@ -1,0 +1,15 @@
+# =============================================================
+#  Netlify security headers — applied to every page automatically.
+#  You should not need to edit this file. Docs:
+#  https://docs.netlify.com/routing/headers/
+# =============================================================
+
+/*
+  # Stop other sites embedding this site in an <iframe> (clickjacking)
+  X-Frame-Options: DENY
+  # Browsers must respect declared file types (blocks MIME-sniffing tricks)
+  X-Content-Type-Options: nosniff
+  # When visitors follow an external link, send only our domain, not the full URL
+  Referrer-Policy: strict-origin-when-cross-origin
+  # This site never needs camera/microphone/location access
+  Permissions-Policy: camera=(), microphone=(), geolocation=()

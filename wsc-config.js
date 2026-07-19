@@ -95,10 +95,11 @@ window.WSC_CONFIG = {
   // ----- CLUB ACTIVITY GALLERY --------------------------------
   // Shown as a scrolling carousel on the homepage ("Club in action").
   // To add a photo:
-  //   1. Upload the image file to the "images" folder in GitHub
-  //      Ideal photo size: about 800x600px, in a 4:3 aspect ratio
-  //      (landscape). Other sizes/ratios still work — the photo is
-  //      auto-cropped to fit — but 4:3 keeps the crop predictable.
+  //   1. Upload the image file to the "images" folder in GitHub.
+  //      Any size is fine — oversized photos are automatically resized
+  //      and compressed for the web a minute or so after you upload
+  //      (jpg, png and webp all work). Landscape 4:3 photos crop most
+  //      predictably in the carousel.
   //   2. Copy one of the lines below, paste it as a new line, and edit
   //      its filename, date (YYYY-MM-DD), and description. The description
   //      shows as the caption on the photo (and is what screen readers
@@ -112,12 +113,12 @@ window.WSC_CONFIG = {
   // Any file that doesn't exist yet is simply skipped, so it's fine to
   // add an entry before uploading the matching photo.
   galleryPhotos: [
-    { file: 'gallery-1.jpg', date: '2026-06-30', desc: 'WSC wins Smedley Award!' },
-    { file: 'gallery-2.jpg', date: '2026-05-14', desc: 'Celebrating 20 years' },
-    { file: 'gallery-3.jpg', date: '2026-04-23', desc: 'Speaker Winners at Club Meeting' },
-    { file: 'gallery-4.jpg', date: '', desc: 'On filler words' },
-    { file: 'gallery-5.jpg', date: '', desc: 'Club members at a Thursday meeting' },
-    { file: 'gallery-6.jpg', date: '2026-01-26', desc: 'Club social' },
+    { file: 'gallery-1.webp', date: '2026-06-30', desc: 'WSC wins Smedley Award!' },
+    { file: 'gallery-2.webp', date: '2026-05-14', desc: 'Celebrating 20 years' },
+    { file: 'gallery-3.webp', date: '2026-04-23', desc: 'Speaker Winners at Club Meeting' },
+    { file: 'gallery-4.webp', date: '', desc: 'On filler words' },
+    { file: 'gallery-5.webp', date: '', desc: 'Club members at a Thursday meeting' },
+    { file: 'gallery-6.webp', date: '2026-01-26', desc: 'Club social' },
   ],
 
 };

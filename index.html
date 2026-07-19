@@ -17,9 +17,7 @@
 <meta name="twitter:description" content="A Toastmasters-affiliated club meeting on the 2nd and 4th Thursday of the month in Woking, Surrey. Come as a guest, find your voice, make friends.">
 <meta name="twitter:image" content="https://wscwebsite.netlify.app/images/og-image.png">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="fonts.css">
 
 <link rel="stylesheet" href="styles.css">
 
@@ -90,7 +88,7 @@
     <li><a href="#meetings">Meetings</a></li>
     <li><a href="#firstvisit">First visit</a></li>
     <li><a href="#stories">Stories</a></li>
-    <li><a href="#join">Join</a></li>
+    <li><a href="#join">Membership</a></li>
     <li><a href="#faq">FAQs</a></li>
     <li><a href="#contact" class="nav-cta">Visit Us</a></li>
   </ul>
@@ -251,7 +249,7 @@
             <div class="timeline-body">A topic is announced and you've got thirty seconds to think before you speak for up to two minutes. This is the one part of the evening guests can join in too — but only if you've told us you'd like to, so you're never put on the spot. Most find themselves quietly desperate to have a go within a visit or two anyway.</div>
           </div>
           <div class="timeline-item">
-            <div class="timeline-dot">🍺</div>
+            <div class="timeline-dot"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div>
             <div class="timeline-title">Drinks afterwards</div>
             <div class="timeline-body">After the meeting most people head to a nearby pub — soft drinks and coffee very much included. It's optional, but this is consistently where first-time visitors decide they're coming back.</div>
           </div>
@@ -259,7 +257,7 @@
       </div>
 
       <div class="meetings-aside fade-up">
-        <h3>Come and see</h3>
+        <h3>Join a meeting</h3>
         <p>We meet on the 2nd and 4th Thursday every month, from <span data-cfg="meetingTime">7:15 pm</span> to <span data-cfg="meetingEndTime">9:45 pm</span>. No booking needed, no charge. Just turn up.</p>
 
         <div style="margin: 1.25rem 0 0;">
@@ -315,7 +313,7 @@
       </div>
 
       <div class="guest-row fade-up">
-        <div class="guest-row-icon">👋</div>
+        <div class="guest-row-icon"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><polyline points="17 11 19 13 23 9"/></svg></div>
         <div class="guest-row-text">
           <h3>You'll have someone with you</h3>
           <p>The member who greets you sits with you for the evening. You're briefly introduced to the room — no speech, no spotlight — and they're your go-to for any questions, including during the break.</p>
@@ -323,7 +321,7 @@
       </div>
 
       <div class="guest-row fade-up">
-        <div class="guest-row-icon">🙅</div>
+        <div class="guest-row-icon"><svg viewBox="0 0 24 24"><line x1="1" y1="1" x2="23" y2="23"/><path d="M9 9v3a3 3 0 0 0 5.12 2.12M15 9.34V4a3 3 0 0 0-5.94-.6"/><path d="M17 16.95A7 7 0 0 1 5 12v-2m14 0v2a7 7 0 0 1-.11 1.23"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg></div>
         <div class="guest-row-text">
           <h3>There's no pressure to speak</h3>
           <p>Guests are never put on the spot. If you're asked anything and don't fancy it, "pass" is a complete answer. Most first-timers just watch — that's exactly what the seat is for.</p>
@@ -331,7 +329,7 @@
       </div>
 
       <div class="guest-row fade-up">
-        <div class="guest-row-icon">🍺</div>
+        <div class="guest-row-icon"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div>
         <div class="guest-row-text">
           <h3>Stay as long as you like</h3>
           <p>Slip away after the meeting, or join the group for a drink nearby afterwards — entirely your call, no expectations either way. And come back as many times as you need before deciding anything.</p>
@@ -368,7 +366,7 @@
             <!-- Member photo — to change it, upload a new image and update the src below -->
             <div class="member-avatar" style="flex-shrink:0;">
               <img
-                src="images/swarna.jpg"
+                src="images/swarna.webp"
                 alt="Swarna K."
                 class="member-photo"
                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
@@ -404,7 +402,7 @@
             <!-- Member photo — to change it, upload a new image and update the src below -->
             <div class="member-avatar" style="flex-shrink:0;">
               <img
-                src="images/ernie.jpg"
+                src="images/ernie.webp"
                 alt="Ernie H."
                 class="member-photo"
                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
@@ -440,7 +438,7 @@
             <!-- Member photo — to change it, upload a new image and update the src below -->
             <div class="member-avatar" style="flex-shrink:0;">
               <img
-                src="images/rameez.jpg"
+                src="images/rameez.webp"
                 alt="Rameez H."
                 class="member-photo"
                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
@@ -505,37 +503,37 @@
       </div>
       <div class="persona-grid">
         <div class="persona-card">
-          <div class="persona-icon">💼</div>
+          <div class="persona-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
           <div class="persona-title">The ambitious professional</div>
           <p class="persona-desc">Good at the job, overlooked in the room. Wants to change that.</p>
         </div>
         <div class="persona-card">
-          <div class="persona-icon">💍</div>
+          <div class="persona-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
           <div class="persona-title">The reluctant best man</div>
           <p class="persona-desc">Six months to prepare. Starting from zero. Quietly panicking.</p>
         </div>
         <div class="persona-card">
-          <div class="persona-icon">🎓</div>
+          <div class="persona-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg></div>
           <div class="persona-title">The new graduate</div>
           <p class="persona-desc">Entering the workforce. Knows that how you communicate matters as much as what you know.</p>
         </div>
         <div class="persona-card">
-          <div class="persona-icon">🔄</div>
+          <div class="persona-icon"><svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></div>
           <div class="persona-title">The career changer</div>
           <p class="persona-desc">Starting over in a new field. Needs to establish credibility fast and convince people to take them seriously.</p>
         </div>
         <div class="persona-card">
-          <div class="persona-icon">🏠</div>
+          <div class="persona-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
           <div class="persona-title">The returning parent</div>
           <p class="persona-desc">Back after time away. Confidence shaken. Wants their voice back — and a reason to get out on a Thursday evening.</p>
         </div>
         <div class="persona-card">
-          <div class="persona-icon">✨</div>
+          <div class="persona-icon"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
           <div class="persona-title">The person who just fancies it</div>
           <p class="persona-desc">No particular reason. Just always wanted to try it. Often ends up staying the longest.</p>
         </div>
         <div class="persona-card">
-          <div class="persona-icon">🫂</div>
+          <div class="persona-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
           <div class="persona-title">The community seeker</div>
           <p class="persona-desc">New to the area, or just keen to meet people nearby. Comes for the speaking and finds a ready-made local community.</p>
         </div>
@@ -604,7 +602,7 @@
 <section id="faq">
   <div class="section-inner">
     <div class="section-label">FAQs</div>
-    <h2 class="section-title">The questions everyone Googles first.</h2>
+    <h2 class="section-title">The questions most people ask.</h2>
     <p class="section-sub">Honest answers to the things people want to know before they feel brave enough to ask.</p>
 
     <div class="faq-grid">
@@ -746,11 +744,9 @@
   <ul class="footer-links">
     <li><a href="#about">About</a></li>
     <li><a href="#meetings">Meetings</a></li>
-    <li><a href="join.html">Join</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="members.html">Members area</a></li>
     <li><a href="privacy.html">Privacy</a></li>
-    <li><a href="https://www.linkedin.com/company/woking-speakers-club/" data-cfg-href="linkedinUrl" target="_blank" rel="noopener" aria-label="Woking Speakers Club on LinkedIn (opens in new tab)">LinkedIn ↗</a></li>
+    <li><a href="join.html">Become a member</a></li>
   </ul>
 </footer>
 
@@ -759,482 +755,6 @@
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
 </button>
 
-<script>
-  // ═══════════════════════════════════════════════════════════════
-  // 1. CONFIG & SHARED DATE HELPERS
-  //    Everything below reads from wsc-config.js (loaded at the top of
-  //    this file) and provides date/time utilities used by the sections
-  //    further down — the banner, the upcoming meetings list, the guest
-  //    date picker, and the calendar (.ics / Google Calendar) links.
-  // ═══════════════════════════════════════════════════════════════
-  const CFG = window.WSC_CONFIG;
-
-  // Fees are plain numbers in the config; the six-month total is derived
-  // here so it can never drift out of step with the monthly fee.
-  CFG.sixMonthFee = CFG.monthlyFee * 6;
-
-  // Populate any element marked <span data-cfg="key"> with the matching
-  // value from wsc-config.js, so prices, venue and times only ever need
-  // editing in one place. Fee values are numbers, so prefix them with £.
-  // The HTML keeps a sensible fallback for no-JS.
-  const CURRENCY_KEYS = new Set(['joiningFee', 'monthlyFee', 'sixMonthFee']);
-  document.querySelectorAll('[data-cfg]').forEach(el => {
-    const key = el.getAttribute('data-cfg');
-    let val = CFG[key];
-    if (val == null || val === '') return;
-    if (CURRENCY_KEYS.has(key)) val = '£' + val;
-    el.textContent = val;
-  });
-
-  // Same idea, but for link destinations: <a data-cfg-href="key" href="...">
-  // The href in the HTML is the no-JS fallback; config overrides it when
-  // present, so the Maps/Facebook/LinkedIn URLs only need editing in one place.
-  document.querySelectorAll('[data-cfg-href]').forEach(el => {
-    const val = CFG[el.getAttribute('data-cfg-href')];
-    if (val) el.href = val;
-  });
-
-  const DAYS_LONG    = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-  const MONTHS_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  const MONTHS_LONG  = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-
-  // ── Shared date & calendar helpers (wsc-dates.js) ─────────────
-  // The meeting-schedule maths, UK BST handling and .ics / Google Calendar
-  // builders live in wsc-dates.js, shared with the thank-you page. These thin
-  // wrappers bake in the homepage's guest-facing calendar description so the
-  // call sites below can stay tidy.
-  const D = window.WSC_DATES;
-  const MEETING_CAL_DESC = 'Free for guests - no booking needed. Come along and see what we are about.';
-  const getMeetingDates  = (count) => D.getMeetingDates(count);
-  const makeICSString    = (date)  => D.makeICSString(date, MEETING_CAL_DESC);
-  const makeGoogleCalUrl = (date)  => D.makeGoogleCalUrl(date, MEETING_CAL_DESC);
-
-  // Formats a meeting date as "Thursday 9 Jul 2026", plus a relative label
-  // ("Today" / "Next week" / "In N days") when it's coming up soon.
-  function formatDate(d) {
-    const today = new Date();
-    today.setHours(0,0,0,0);
-    const target = new Date(d); target.setHours(0,0,0,0);
-    const diff = Math.round((target - today) / 86400000);
-    const label = diff === 0 ? 'Today' : diff === 7 ? 'Next week' : diff <= 14 ? 'In ' + diff + ' days' : null;
-    const str = DAYS_LONG[d.getDay()] + ' ' + d.getDate() + ' ' + MONTHS_SHORT[d.getMonth()] + ' ' + d.getFullYear();
-    return { str, label, diff };
-  }
-
-  function formatGalleryDate(iso) {
-    if (!iso) return '';                       // date is optional — no date, no label
-    const [y, m] = iso.split('-').map(Number);
-    if (!y || !m) return '';                   // ignore a malformed date rather than showing "undefined"
-    return `${MONTHS_SHORT[m - 1]} ${y}`;
-  }
-
-  function calIconSVG() {
-    return '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>';
-  }
-
-  const meetings = getMeetingDates(6);
-
-  // ═══════════════════════════════════════════════════════════════
-  // 2. NEXT-MEETING BANNER
-  //    Content (date/countdown) and the show/hide/dismiss behaviour
-  //    that repositions the nav bar and hero underneath it.
-  // ═══════════════════════════════════════════════════════════════
-  if (!CFG.showBanner) {
-    document.getElementById('nextBanner').style.display = 'none';
-  }
-
-  const { str: nextStr, diff } = formatDate(meetings[0]);
-  document.getElementById('nextMeetingDate').textContent = nextStr;
-  const meetingTimeEl = document.getElementById('meetingTime');
-  if (meetingTimeEl) meetingTimeEl.textContent = CFG.meetingTime || '7:15 pm';
-  const countdown = diff === 0 ? 'Tonight!' : diff === 1 ? 'Tomorrow' : 'In ' + diff + ' days';
-  document.getElementById('bannerCountdown').textContent = countdown;
-
-  const banner = document.getElementById('nextBanner');
-  const bannerDismissBtn = document.getElementById('bannerDismiss');
-  const siteNav = document.querySelector('nav');
-  const hero = document.getElementById('home');
-  const NAV_H = 64;
-
-  function getBannerHeight() {
-    return banner.classList.contains('dismissed') ? 0 : banner.offsetHeight;
-  }
-
-  function applyLayout(animate) {
-    const bh = getBannerHeight();
-    if (!animate) siteNav.style.transition = 'none';
-    siteNav.style.top = bh + 'px';
-    hero.style.paddingTop = (bh + NAV_H + 40) + 'px';
-    // Update CSS var so mobile nav dropdown sits in the right place
-    document.documentElement.style.setProperty('--nav-bottom', (bh + NAV_H) + 'px');
-    if (!animate) requestAnimationFrame(() => { siteNav.style.transition = ''; });
-  }
-
-  function dismissBanner() {
-    banner.classList.add('dismissed');
-    applyLayout(true);
-    sessionStorage.setItem('bannerDismissed', '1');
-  }
-
-  // On load: restore dismissed state, then measure & position (no animation)
-  if (sessionStorage.getItem('bannerDismissed') === '1') {
-    banner.classList.add('dismissed');
-  }
-  applyLayout(false);
-  window.addEventListener('resize', () => applyLayout(false)); // banner may reflow on mobile
-  bannerDismissBtn.addEventListener('click', dismissBanner);
-
-  // ═══════════════════════════════════════════════════════════════
-  // 3. UPCOMING MEETINGS LIST (in the Meetings section aside)
-  // ═══════════════════════════════════════════════════════════════
-  const upcomingContainer = document.getElementById('upcomingMeetings');
-  meetings.slice(0, 5).forEach((d, i) => {
-    const isNext = i === 0;
-    const { str, label } = formatDate(d);
-    const calUrl    = 'data:text/calendar;charset=utf8,' + encodeURIComponent(makeICSString(d));
-    const googleUrl = makeGoogleCalUrl(d);
-    const labelHtml = label
-      ? `<span style="font-size:0.7rem; font-weight:600; background:rgba(200,145,58,0.25); color:#f0d49a; border-radius:4px; padding:2px 7px; white-space:nowrap;">${label}</span>`
-      : '';
-
-    const el = document.createElement('div');
-    el.style.cssText = `display:flex; align-items:center; justify-content:space-between; gap:10px; padding:0.6rem 0.85rem; background:rgba(255,255,255,0.06); border-radius:8px; border:1px solid rgba(255,255,255,${isNext ? '0.2' : '0.08'});`;
-    el.innerHTML = `
-      <span style="font-size:0.875rem; color:${isNext ? '#fff' : 'rgba(255,255,255,0.7)'}; font-weight:${isNext ? '600' : '400'};">${str}</span>
-      <span style="display:flex;align-items:center;gap:6px;flex-shrink:0;">
-        ${labelHtml}
-        <div class="cal-wrap">
-          <button type="button" class="cal-btn" title="Add to calendar" onclick="this.nextElementSibling.classList.toggle('open')">${calIconSVG()} +Cal</button>
-          <div class="cal-dropdown">
-            <a href="${googleUrl}" target="_blank" rel="noopener">${calIconSVG()} Google Calendar</a>
-            <a href="${calUrl}" target="_blank" rel="noopener">${calIconSVG()} Apple / Outlook (.ics)</a>
-          </div>
-        </div>
-      </span>`;
-    upcomingContainer.appendChild(el);
-  });
-
-  document.addEventListener('click', e => {
-    if (!e.target.closest('.cal-wrap')) {
-      document.querySelectorAll('.cal-dropdown.open').forEach(dd => dd.classList.remove('open'));
-    }
-  });
-
-  // ═══════════════════════════════════════════════════════════════
-  // 4. GUEST DATE PICKER (contact form)
-  //    Shown only when "Attend a meeting as a guest" is selected.
-  // ═══════════════════════════════════════════════════════════════
-  const subjectEl    = document.getElementById('subject');
-  const dateGroupEl  = document.getElementById('meeting-date-group');
-  const dateSelectEl = document.getElementById('preferred-date');
-
-  function syncGuestDatePicker() {
-    const isGuest = subjectEl.value === 'Attend a meeting as a guest';
-    dateGroupEl.style.display = isGuest ? '' : 'none';
-    dateSelectEl.disabled = !isGuest;
-  }
-  subjectEl.addEventListener('change', syncGuestDatePicker);
-
-  // Arriving at the contact form via a "visit" CTA pre-selects the guest
-  // option so the meeting-date picker is already showing when they land.
-  document.querySelectorAll('[data-visit-cta]').forEach(cta => {
-    cta.addEventListener('click', () => {
-      subjectEl.value = 'Attend a meeting as a guest';
-      syncGuestDatePicker();
-    });
-  });
-
-  getMeetingDates(3).forEach(d => {
-    const opt = document.createElement('option');
-    opt.value = `${DAYS_LONG[d.getDay()]} ${d.getDate()} ${MONTHS_LONG[d.getMonth()]} ${d.getFullYear()}`;
-    opt.textContent = opt.value;
-    dateSelectEl.appendChild(opt);
-  });
-
-  // ═══════════════════════════════════════════════════════════════
-  // 5. "CLUB IN ACTION" PHOTO CAROUSEL
-  //    Photo content (filenames/dates/descriptions) lives in
-  //    wsc-config.js as CFG.galleryPhotos — see that file to add,
-  //    update, or remove a photo. This section just renders it.
-  // ═══════════════════════════════════════════════════════════════
-  const galleryTrack = document.getElementById('galleryTrack');
-  if (galleryTrack) {
-    const galleryPrevBtn = document.getElementById('galleryPrev');
-    const galleryNextBtn = document.getElementById('galleryNext');
-
-    // Hide an arrow once scrolling that direction would do nothing —
-    // called on load, on scroll, and on resize (which can change whether
-    // the photos overflow the track at all).
-    function updateGalleryNav() {
-      const EPSILON = 10; // allows for the track's own padding/margin, not a real scroll position
-      const maxScroll = galleryTrack.scrollWidth - galleryTrack.clientWidth;
-      const atStart = galleryTrack.scrollLeft <= EPSILON;
-      const atEnd = galleryTrack.scrollLeft >= maxScroll - EPSILON;
-      if (galleryPrevBtn) galleryPrevBtn.classList.toggle('is-hidden', atStart);
-      if (galleryNextBtn) galleryNextBtn.classList.toggle('is-hidden', atEnd);
-    }
-
-    // Referenced from the onerror= attribute below — hides a slide whose
-    // image file is missing, then re-checks whether the arrows are still needed.
-    function galleryImageError(img) {
-      img.parentElement.style.display = 'none';
-      updateGalleryNav();
-    }
-
-    // ── Lightbox: click (or keyboard-activate) a photo to enlarge it ──
-    // One overlay is created and reused for every photo.
-    const lightbox = document.createElement('div');
-    lightbox.className = 'lightbox';
-    lightbox.setAttribute('role', 'dialog');
-    lightbox.setAttribute('aria-modal', 'true');
-    lightbox.setAttribute('aria-label', 'Enlarged photo');
-    lightbox.innerHTML =
-      '<button class="lightbox-close" type="button" aria-label="Close">' +
-        '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>' +
-      '</button>' +
-      '<figure class="lightbox-figure">' +
-        '<img class="lightbox-img" alt="">' +
-        '<figcaption class="lightbox-caption"></figcaption>' +
-      '</figure>';
-    document.body.appendChild(lightbox);
-    const lbImg     = lightbox.querySelector('.lightbox-img');
-    const lbCaption = lightbox.querySelector('.lightbox-caption');
-    const lbClose   = lightbox.querySelector('.lightbox-close');
-    let lbLastFocus = null;
-
-    function openLightbox(src, descText, dateText) {
-      lbImg.src = src;
-      lbImg.alt = descText || 'Woking Speakers Club';
-      lbCaption.textContent = '';                 // rebuild caption from scratch
-      if (descText) {
-        const d = document.createElement('span');
-        d.className = 'lightbox-caption-text';
-        d.textContent = descText;                 // textContent keeps < and " safe
-        lbCaption.appendChild(d);
-      }
-      if (dateText) {
-        const dt = document.createElement('span');
-        dt.className = 'lightbox-caption-date';
-        dt.textContent = dateText;
-        lbCaption.appendChild(dt);
-      }
-      lbCaption.style.display = (descText || dateText) ? '' : 'none';
-      lbLastFocus = document.activeElement;
-      lightbox.classList.add('open');
-      document.body.style.overflow = 'hidden';    // stop the page scrolling behind
-      // Defer focus to after the click fully resolves — otherwise the browser
-      // re-focuses the just-clicked image and steals it back.
-      setTimeout(() => lbClose.focus(), 0);
-    }
-
-    function closeLightbox() {
-      lightbox.classList.remove('open');
-      document.body.style.overflow = '';
-      lbImg.removeAttribute('src');               // release the large image
-      if (lbLastFocus && lbLastFocus.focus) lbLastFocus.focus();
-    }
-
-    lbClose.addEventListener('click', closeLightbox);
-    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
-    document.addEventListener('keydown', e => {
-      if (!lightbox.classList.contains('open')) return;
-      if (e.key === 'Escape') closeLightbox();
-      else if (e.key === 'Tab') { e.preventDefault(); lbClose.focus(); } // trap focus in the dialog
-    });
-
-    (CFG.galleryPhotos || []).forEach(photo => {
-      const item = document.createElement('div');
-      item.className = 'gallery-item';
-
-      // If the image file doesn't exist yet, hide this slide rather than
-      // showing a broken image — lets you add list entries ahead of the upload.
-      const img = document.createElement('img');
-      img.loading = 'lazy';
-      img.onerror = () => galleryImageError(img);
-      img.src = `images/${photo.file}`;
-
-      // Caption strip along the bottom of the photo — the description and date
-      // are BOTH optional. Leave "desc" and/or "date" out of the config entry
-      // (or blank) and that line is skipped; leave out both and no caption strip
-      // is added at all, so the photo shows clean with no gradient overlay.
-      const descText = (photo.desc || '').trim();
-      const dateText = formatGalleryDate(photo.date);
-
-      // With no caption to describe it, give the image a sensible alt rather
-      // than leaving it unlabelled for screen readers.
-      img.alt = descText ? '' : 'Woking Speakers Club';
-
-      if (descText || dateText) {
-        const caption = document.createElement('div');
-        caption.className = 'gallery-caption';
-        if (descText) {
-          const desc = document.createElement('span');
-          desc.className = 'gallery-caption-text';
-          desc.textContent = descText;   // textContent keeps < and " safe
-          caption.appendChild(desc);
-        }
-        if (dateText) {
-          const date = document.createElement('span');
-          date.className = 'gallery-caption-date';
-          date.textContent = dateText;
-          caption.appendChild(date);
-        }
-        item.append(img, caption);
-      } else {
-        item.append(img);              // clean photo, no overlay
-      }
-
-      // Make the photo open the lightbox (mouse + keyboard).
-      img.setAttribute('role', 'button');
-      img.setAttribute('tabindex', '0');
-      img.setAttribute('aria-label', (descText ? descText + ' — ' : '') + 'view larger');
-      const openThis = () => openLightbox(img.currentSrc || img.src, descText, dateText);
-      img.addEventListener('click', openThis);
-      img.addEventListener('keydown', e => {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openThis(); }
-      });
-
-      galleryTrack.appendChild(item);
-    });
-
-    function scrollGallery(direction) {
-      const firstItem = galleryTrack.querySelector('.gallery-item');
-      const step = firstItem ? firstItem.getBoundingClientRect().width + 16 : 276;
-      galleryTrack.scrollBy({ left: direction * step, behavior: 'smooth' });
-    }
-    galleryPrevBtn.addEventListener('click', () => scrollGallery(-1));
-    galleryNextBtn.addEventListener('click', () => scrollGallery(1));
-    galleryTrack.addEventListener('scroll', updateGalleryNav);
-    window.addEventListener('resize', updateGalleryNav);
-    updateGalleryNav();
-  }
-
-  // ═══════════════════════════════════════════════════════════════
-  // 5b. JOIN-COST BY MONTH (price-box month picker)
-  //    Shows the up-front cost for any joining month, using exactly the
-  //    same numbers as the join page — all derived from wsc-config.js.
-  // ═══════════════════════════════════════════════════════════════
-  const joinMonthSelect = document.getElementById('joinMonthSelect');
-  if (joinMonthSelect) {
-    const joinMonthResult = document.getElementById('joinMonthResult');
-    const nowMonth = new Date().getMonth(); // 0–11
-
-    // 12 options, ordered from the current month so the most likely choice
-    // is first and selected by default.
-    for (let i = 0; i < 12; i++) {
-      const m = (nowMonth + i) % 12;         // 0–11
-      const opt = document.createElement('option');
-      opt.value = String(m + 1);             // 1–12 to match feeData keys
-      opt.textContent = MONTHS_LONG[m];
-      joinMonthSelect.appendChild(opt);
-    }
-
-    function updateJoinCost() {
-      const m = parseInt(joinMonthSelect.value, 10);   // 1–12
-      const info = (CFG.feeData || {})[m];
-      if (!info) { joinMonthResult.textContent = ''; return; }
-      const months     = info.months;
-      const membership = CFG.monthlyFee * months;
-      const total      = CFG.joiningFee + membership;
-      joinMonthResult.innerHTML =
-        `<strong>£${total}</strong> to join in ${MONTHS_LONG[m - 1]} — ` +
-        `£${CFG.joiningFee} joining fee + ${months} months' membership (£${membership}).`;
-    }
-    joinMonthSelect.addEventListener('change', updateJoinCost);
-    updateJoinCost();
-  }
-
-  // ═══════════════════════════════════════════════════════════════
-  // 6. MOBILE NAV TOGGLE
-  // ═══════════════════════════════════════════════════════════════
-  const navToggleBtn = document.getElementById('navToggle');
-  const navLinks = document.getElementById('navLinks');
-  navToggleBtn.addEventListener('click', () => navLinks.classList.toggle('open'));
-  navLinks.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => navLinks.classList.remove('open'));
-  });
-
-  // ═══════════════════════════════════════════════════════════════
-  // 6b. BACK-TO-TOP BUTTON
-  //    Fades in once the visitor has scrolled roughly a screen down;
-  //    scrolls smoothly back to the top (respecting reduced-motion).
-  // ═══════════════════════════════════════════════════════════════
-  const backToTop = document.getElementById('backToTop');
-  if (backToTop) {
-    const toggleBackToTop = () => {
-      backToTop.classList.toggle('visible', window.scrollY > 600);
-    };
-    toggleBackToTop();
-    window.addEventListener('scroll', toggleBackToTop, { passive: true });
-    backToTop.addEventListener('click', () => {
-      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
-    });
-  }
-
-  // ═══════════════════════════════════════════════════════════════
-  // 7. SCROLL-IN ANIMATIONS (.fade-up elements)
-  // ═══════════════════════════════════════════════════════════════
-  const fadeObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        fadeObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-  document.querySelectorAll('.fade-up').forEach(el => fadeObserver.observe(el));
-
-  // ═══════════════════════════════════════════════════════════════
-  // 8. CONTACT FORM (Netlify Forms submission + validation)
-  // ═══════════════════════════════════════════════════════════════
-  const contactForm = document.getElementById('contactForm');
-  const formSuccessEl = document.getElementById('formSuccess');
-  const formSubmitBtn = contactForm.querySelector('.btn-submit');
-
-  contactForm.addEventListener('submit', async e => {
-    e.preventDefault();
-    const requiredFields = contactForm.querySelectorAll('[required]');
-    let valid = true;
-    requiredFields.forEach(field => {
-      if (!field.value.trim()) {
-        field.setAttribute('aria-invalid', 'true');
-        valid = false;
-      } else {
-        field.removeAttribute('aria-invalid');
-      }
-    });
-    if (!valid) return;
-
-    formSubmitBtn.disabled = true;
-    formSubmitBtn.textContent = 'Sending…';
-
-    try {
-      const res = await fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(new FormData(contactForm)).toString()
-      });
-      if (res.ok) {
-        contactForm.style.display = 'none';
-        formSuccessEl.style.display = 'block';
-      } else {
-        throw new Error('Network response was not ok');
-      }
-    } catch {
-      formSubmitBtn.disabled = false;
-      formSubmitBtn.textContent = 'Send →';
-      // Clear any error from a previous failed attempt so they don't stack up.
-      contactForm.querySelectorAll('.form-send-error').forEach(el => el.remove());
-      formSubmitBtn.insertAdjacentHTML('afterend', '<p class="form-send-error" role="alert">Something went wrong — please try again or email <a href="mailto:info@wokingspeakers.org.uk">info@wokingspeakers.org.uk</a> directly.</p>');
-    }
-  });
-
-  contactForm.querySelectorAll('[required]').forEach(field => {
-    field.addEventListener('input', () => {
-      if (field.value.trim()) field.removeAttribute('aria-invalid');
-    });
-  });
-</script>
+<script src="wsc-site.js"></script>
 </body>
 </html>
