@@ -271,10 +271,10 @@
       : '');
 
     const el = document.createElement('div');
-    el.style.cssText = `display:flex; align-items:center; justify-content:space-between; gap:10px; padding:0.6rem 0.85rem; background:rgba(255,255,255,0.06); border-radius:8px; border:1px solid rgba(255,255,255,${isNext ? '0.2' : '0.08'});`;
+    el.style.cssText = `display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; row-gap:6px; gap:10px; padding:0.6rem 0.85rem; background:rgba(255,255,255,0.06); border-radius:8px; border:1px solid rgba(255,255,255,${isNext ? '0.2' : '0.08'});`;
     el.innerHTML = `
-      <span style="font-size:0.875rem; color:${isNext ? '#fff' : 'rgba(255,255,255,0.7)'}; font-weight:${isNext ? '600' : '400'};">${str}</span>
-      <span style="display:flex;align-items:center;gap:6px;flex-shrink:0;">
+      <span style="font-size:0.875rem; color:${isNext ? '#fff' : 'rgba(255,255,255,0.7)'}; font-weight:${isNext ? '600' : '400'}; flex:1 1 auto; min-width:150px;">${str}</span>
+      <span style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:flex-end;">
         ${labelHtml}
         <div class="cal-wrap">
           <button type="button" class="cal-btn" title="Add to calendar" onclick="this.nextElementSibling.classList.toggle('open')">${calIconSVG()} +Cal</button>
