@@ -1,0 +1,86 @@
+# =============================================================
+#  AUTO IMAGE OPTIMIZER
+#  -------------------------------------------------------------
+#  Whenever anyone uploads a photo to the images/ folder, this
+#  workflow automatically resizes anything wider than 1200px and
+#  recompresses it for the web, then commits the smaller file
+#  back. Committee members can upload photos straight from a
+#  phone or camera without worrying about file size.
+#
+#  You should not need to edit or run this file — it runs itself
+#  on GitHub's servers after every upload. Small files (under
+#  80KB) and logos/icons are left untouched.
+# =============================================================
+name: Optimize images
+
+on:
+  push:
+    branches: [main]
+    paths: ['images/**']
+
+permissions:
+  contents: write
+
+jobs:
+  optimize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Pillow
+        run: pip install --quiet Pillow
+
+      - name: Resize and recompress oversized images
+        run: |
+          python3 - <<'PY'
+          from PIL import Image, ImageOps
+          import os
+
+          MAX_WIDTH  = 1200      # px — plenty for how the site displays photos
+          MIN_BYTES  = 80_000    # skip files already under 80KB (logos, icons)
+          MIN_SAVING = 0.10      # only rewrite if we save at least 10%
+
+          for name in sorted(os.listdir('images')):
+              path = os.path.join('images', name)
+              ext = name.lower().rsplit('.', 1)[-1] if '.' in name else ''
+              if ext not in ('jpg', 'jpeg', 'png', 'webp'):
+                  continue
+              before = os.path.getsize(path)
+              if before < MIN_BYTES:
+                  continue
+
+              im = ImageOps.exif_transpose(Image.open(path))
+              resized = im.width > MAX_WIDTH
+              if resized:
+                  im = im.resize((MAX_WIDTH, round(im.height * MAX_WIDTH / im.width)),
+                                 Image.LANCZOS)
+
+              tmp = path + '.tmp'
+              if ext in ('jpg', 'jpeg'):
+                  im.convert('RGB').save(tmp, 'JPEG', quality=82,
+                                         optimize=True, progressive=True)
+              elif ext == 'webp':
+                  im.save(tmp, 'WEBP', quality=82, method=6)
+              else:  # png — keep lossless (may contain text/screenshots)
+                  im.save(tmp, 'PNG', optimize=True)
+
+              after = os.path.getsize(tmp)
+              # keep the rewrite if we resized, or if it saves enough space
+              if resized or after < before * (1 - MIN_SAVING):
+                  os.replace(tmp, path)
+                  print(f"optimized {name}: {before//1024}KB -> {after//1024}KB")
+              else:
+                  os.remove(tmp)
+          PY
+
+      - name: Commit optimized images (if any changed)
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add images/
+          git diff --cached --quiet || git commit -m "Auto-optimize uploaded images"
+          git push

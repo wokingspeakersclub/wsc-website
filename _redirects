@@ -1,0 +1,39 @@
+# =============================================================
+#  REDIRECTS  (Netlify reads this file automatically)
+#  -------------------------------------------------------------
+#  The old website was built as separate .aspx pages. The new one
+#  is a single page with sections, so every old address is pointed
+#  at the matching section here.
+#
+#  WHY THIS MATTERS: those old addresses are the ones Google has
+#  indexed and that people have bookmarked. Without these lines
+#  they would show "page not found" after the switchover and we
+#  would lose our search ranking. With them, visitors and Google
+#  are passed straight to the right place.
+#
+#  The "301" means "moved permanently", which is what tells Google
+#  to transfer the old page's ranking to the new one.
+# =============================================================
+
+# ── Old .aspx pages → matching section of the new single page ──
+/Default.aspx              /               301
+/default.aspx              /               301
+/about.aspx                /#about         301
+/About.aspx                /#about         301
+/venue.aspx                /#meetings      301
+/a-typical-meeting.aspx    /#meetings      301
+/calendar.aspx             /#meetings      301
+/faqs.aspx                 /#faq           301
+/FAQs.aspx                 /#faq           301
+/contact-us.aspx           /#contact       301
+/how-do-i-join.aspx        /#join          301
+/links.aspx                /#contact       301
+
+# Toastmaster Tips has no equivalent on the new site yet. Sending it
+# to the meetings section for now; if that content gets recreated,
+# point this line at its new home instead.
+/toastmaster-tips.aspx     /#meetings      301
+
+# Note: every page that existed on the old site is listed above. If any
+# other old address turns up later, add a line for it here in the same
+# format. Anything unlisted shows the friendly 404 page, which links home.

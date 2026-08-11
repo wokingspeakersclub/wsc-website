@@ -7,12 +7,10 @@
 <!-- Members page is private: keep it out of search engines. -->
 <meta name="robots" content="noindex, nofollow">
 
-<title>Members Area — Woking Speakers Club</title>
+<title>Members Area · Woking Speakers Club</title>
 <meta name="description" content="Members-only resources for Woking Speakers Club.">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="fonts.css">
 
 <link rel="stylesheet" href="styles.css">
 
@@ -103,11 +101,11 @@ window.MEMBERS_CONFIG = {
 
   // ----- PAGE CONTENT ------------------------------------------
   pageTitle: 'Members Area',
-  welcomeMessage: 'Resources for mentors and members. Maintained by the VP of Mentoring — add a file to the Drive folder and it appears here automatically.',
+  welcomeMessage: 'Resources for mentors and members. Maintained by the VP of Mentoring; add a file to the Drive folder and it appears here automatically.',
 
   // ----- CONTACT -----------------------------------------------
-  vpMentoringName:  'VP of Mentoring',          // replace with the real name
-  vpMentoringEmail: 'mentoring@example.com',    // replace with the real email
+  vpMentoringName:  'Ernie Hayter',             // VP of Mentoring
+  vpMentoringEmail: 'hayter.ernie@gmail.com',
 
   // ----- DISPLAY OPTIONS ---------------------------------------
   showFileDates:  true,           // show "Updated 3 days ago" on cards
@@ -141,7 +139,7 @@ window.MEMBERS_CONFIG = {
 
 <!-- ── HOW THIS PAGE WORKS + CONTACT ────────────────── -->
 <div class="members-footer-note">
-  <p><strong>How this page works:</strong> everything above is pulled live from the club's shared Google Drive folder. When the VP of Mentoring adds or updates a file in Drive, it appears here automatically — there is nothing to publish and no website to edit.</p>
+  <p><strong>How this page works:</strong> everything above is pulled live from the club's shared Google Drive folder. When the VP of Mentoring adds or updates a file in Drive, it appears here automatically; there is nothing to publish and no website to edit.</p>
   <p id="members-contact"></p>
 </div>
 
@@ -149,7 +147,7 @@ window.MEMBERS_CONFIG = {
 <footer>
   <div style="display:flex; align-items:center; gap:1rem; flex-wrap:wrap;">
     <img src="images/logo.png" alt="" aria-hidden="true" class="footer-logo-img">
-    <p class="footer-copy">© 2026 Woking Speakers Club · Part of Toastmasters International</p>
+    <p class="footer-copy">© <span class="js-year">2026</span> Woking Speakers Club · Part of Toastmasters International</p>
   </div>
   <ul class="footer-links">
     <li><a href="/">Home</a></li>
@@ -244,7 +242,7 @@ window.MEMBERS_CONFIG = {
     }
 
     // ── Header text (from config) ────────────────────────────────
-    document.title = (CFG.pageTitle || 'Members Area') + ' — Woking Speakers Club';
+    document.title = (CFG.pageTitle || 'Members Area') + ' · Woking Speakers Club';
     if (titleEl)   titleEl.textContent = CFG.pageTitle || 'Members Area';
     if (welcomeEl) welcomeEl.textContent = CFG.welcomeMessage || '';
     if (contactEl) contactEl.innerHTML = 'Questions about these resources? Contact ' + contactLine() + '.';
@@ -408,7 +406,26 @@ window.MEMBERS_CONFIG = {
       renderError();
     });
   })();
+
+  // Footer copyright year, so it rolls over on its own each January. The
+  // HTML keeps a hard-coded year as the no-JS fallback.
+  (function () {
+    const currentYear = String(new Date().getFullYear());
+    document.querySelectorAll('.js-year').forEach(el => { el.textContent = currentYear; });
+  })();
 </script>
+
+<!-- Default Statcounter code for Woking Speakers Club
+http://www.wokingspeakers.org.uk/ -->
+<script type="text/javascript">
+var sc_project=12837333;
+var sc_invisible=1;
+var sc_security="3ab256ce";
+</script>
+<script type="text/javascript"
+src="https://www.statcounter.com/counter/counter.js"
+async></script>
+<!-- End of Statcounter Code -->
 
 </body>
 </html>

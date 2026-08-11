@@ -3,23 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Woking Speakers Club — Where Your Voice Matters</title>
+<title>Woking Speakers Club · Where Your Voice Matters</title>
 <meta name="description" content="Woking Speakers Club is a Toastmasters-affiliated club meeting on the 2nd and 4th Thursday of the month in Woking, Surrey. Come as a guest, find your voice, make friends.">
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="Woking Speakers Club — Where Your Voice Matters">
+<meta property="og:title" content="Woking Speakers Club · Where Your Voice Matters">
 <meta property="og:description" content="A Toastmasters-affiliated club meeting on the 2nd and 4th Thursday of the month in Woking, Surrey. Come as a guest, find your voice, make friends.">
-<meta property="og:image" content="https://wscwebsite.netlify.app/images/og-image.png">
-<meta property="og:url" content="https://wscwebsite.netlify.app/">
+<meta property="og:image" content="https://www.wokingspeakers.org.uk/images/og-image.png">
+<meta property="og:url" content="https://www.wokingspeakers.org.uk/">
 <meta property="og:site_name" content="Woking Speakers Club">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Woking Speakers Club — Where Your Voice Matters">
+<meta name="twitter:title" content="Woking Speakers Club · Where Your Voice Matters">
 <meta name="twitter:description" content="A Toastmasters-affiliated club meeting on the 2nd and 4th Thursday of the month in Woking, Surrey. Come as a guest, find your voice, make friends.">
-<meta name="twitter:image" content="https://wscwebsite.netlify.app/images/og-image.png">
+<meta name="twitter:image" content="https://www.wokingspeakers.org.uk/images/og-image.png">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- Tells Google this is the one true address for this page, so the
+     www / non-www versions aren't treated as duplicate content. -->
+<link rel="canonical" href="https://www.wokingspeakers.org.uk/">
+
+<link rel="stylesheet" href="fonts.css">
 
 <link rel="stylesheet" href="styles.css">
 
@@ -27,6 +29,50 @@
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+<!-- Structured data: helps Google understand who we are, where we meet and
+     that we're part of Toastmasters International. The upcoming meeting
+     dates are added separately by wsc-site.js so they never go stale. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://www.wokingspeakers.org.uk/#organization",
+  "name": "Woking Speakers Club",
+  "alternateName": "Woking Speakers",
+  "url": "https://www.wokingspeakers.org.uk/",
+  "logo": "https://www.wokingspeakers.org.uk/images/logo.png",
+  "image": "https://www.wokingspeakers.org.uk/images/og-image.png",
+  "description": "A Toastmasters-affiliated public speaking club meeting on the 2nd and 4th Thursday of the month in Woking, Surrey. Guests are welcome to visit free of charge.",
+  "foundingDate": "2006",
+  "email": "info@wokingspeakers.org.uk",
+  "parentOrganization": {
+    "@type": "Organization",
+    "name": "Toastmasters International",
+    "url": "https://www.toastmasters.org/"
+  },
+  "location": {
+    "@type": "Place",
+    "name": "Woking United Reformed Church",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "White Rose Lane",
+      "addressLocality": "Woking",
+      "addressRegion": "Surrey",
+      "postalCode": "GU22 7HA",
+      "addressCountry": "GB"
+    }
+  },
+  "areaServed": {
+    "@type": "Place",
+    "name": "Woking, Surrey"
+  },
+  "sameAs": [
+    "https://www.facebook.com/WokingSpeakers/",
+    "https://www.linkedin.com/company/woking-speakers-club/"
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -62,13 +108,23 @@
 <!-- ── BANNER ─────────────────────────────────────────── -->
 <div class="next-banner" id="nextBanner">
   <div class="banner-spacer"></div>
-  <div class="banner-content">
+  <!-- Usual "next meeting" content -->
+  <div class="banner-content" id="bannerMeeting">
     <span class="next-banner-dot"></span>
     <span>Next meeting: <strong id="nextMeetingDate">loading…</strong> at <span id="meetingTime">7:15 pm</span></span>
 
     <span class="banner-countdown" id="bannerCountdown"></span>
     <span class="next-banner-dot"></span>
-    <a href="#contact" data-visit-cta><span class="cta-full">Come along — it's free →</span><span class="cta-short">Visit free →</span></a>
+    <a href="#contact" data-visit-cta><span class="cta-full">Come along, it's free →</span><span class="cta-short">Visit free →</span></a>
+  </div>
+
+  <!-- Swapped in when a specialEvent is set in wsc-config.js -->
+  <div class="banner-content" id="bannerEvent" hidden>
+    <span class="next-banner-dot"></span>
+    <span><strong id="bannerEventTitle"></strong> · <span id="bannerEventDate"></span></span>
+    <span class="banner-countdown" id="bannerEventCountdown"></span>
+    <span class="next-banner-dot"></span>
+    <a href="#event" id="bannerEventCta"></a>
   </div>
   <div class="banner-end">
     <button class="banner-dismiss" id="bannerDismiss" aria-label="Close banner">
@@ -90,7 +146,7 @@
     <li><a href="#meetings">Meetings</a></li>
     <li><a href="#firstvisit">First visit</a></li>
     <li><a href="#stories">Stories</a></li>
-    <li><a href="#join">Join</a></li>
+    <li><a href="#join">Membership</a></li>
     <li><a href="#faq">FAQs</a></li>
     <li><a href="#contact" class="nav-cta">Visit Us</a></li>
   </ul>
@@ -102,18 +158,17 @@
   <div class="hero-dots"></div>
 
   <div class="hero-inner">
-    <img src="images/logo.png" alt="Woking Speakers Club" class="hero-logo-img">
     <div class="hero-badge">Toastmasters International · Woking, Surrey</div>
     <h1 class="hero-headline">
-      Speak up.<br>We'll help you<br><em>sound brilliant</em>.
+      Would you like to speak more<br><em>confidently and convincingly</em><br>in public?
     </h1>
     <p class="hero-sub">
-      Almost everyone walks in terrified of public speaking — and almost everyone stays for years. Visit for free on the 2nd or 4th Thursday of the month in Woking and see why.
+      Many of us at Woking Speakers Club were nervous about speaking in public when we first walked in. Most of us now enjoy it. Visit for free on the 2nd or 4th Thursday of the month in Woking and see why.
     </p>
     <div class="hero-actions">
       <a href="#contact" class="btn-primary" data-visit-cta>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        Plan your first visit — it's free
+        Plan your first visit: it's free
       </a>
       <a href="#meetings" class="btn-ghost">See what happens</a>
     </div>
@@ -141,25 +196,94 @@
   </svg>
 </section>
 
+<!-- ── AT-A-GLANCE STRIP ──────────────────────────────────
+     The practical facts (when / where / how to reach us) sit
+     directly under the hero so nobody has to scroll or click
+     to find them. Values come from wsc-config.js. -->
+<section class="facts-strip" aria-label="When and where we meet">
+  <div class="facts-inner">
+
+    <div class="fact">
+      <div class="fact-icon">
+        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      </div>
+      <div class="fact-text">
+        <div class="fact-label">When we meet</div>
+        <p class="fact-main">2nd &amp; 4th Thursday of the month</p>
+        <p class="fact-sub"><span data-cfg="meetingTime">7:15 pm</span> – <span data-cfg="meetingEndTime">9:45 pm</span> · Next: <strong id="factsNextDate">loading…</strong></p>
+      </div>
+    </div>
+
+    <div class="fact">
+      <div class="fact-icon">
+        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      </div>
+      <div class="fact-text">
+        <div class="fact-label">Where to find us</div>
+        <p class="fact-main" data-cfg="venueName">Woking United Reformed Church</p>
+        <p class="fact-sub"><span data-cfg="venueAddress">White Rose Lane, Woking, Surrey GU22 7HA</span> ·
+          <a href="https://maps.google.com/maps?q=Woking+United+Reformed+Church,White+Rose+Lane,Woking,GU22+7HA" data-cfg-href="venueMapUrl" target="_blank" rel="noopener">Map</a></p>
+      </div>
+    </div>
+
+    <div class="fact">
+      <div class="fact-icon">
+        <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </div>
+      <div class="fact-text">
+        <div class="fact-label">Get in touch</div>
+        <p class="fact-main"><a href="mailto:info@wokingspeakers.org.uk?subject=WSC%20Website%20Query">info@wokingspeakers.org.uk</a></p>
+        <p class="fact-sub">
+          <a href="#contact" data-visit-cta>Send a message</a> ·
+          <a href="https://www.facebook.com/WokingSpeakers/" data-cfg-href="facebookUrl" target="_blank" rel="noopener">Facebook</a> ·
+          <a href="https://www.linkedin.com/company/woking-speakers-club/" data-cfg-href="linkedinUrl" target="_blank" rel="noopener">LinkedIn</a>
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── SPECIAL EVENT ─────────────────────────────────────
+     Hidden unless a specialEvent with a date is set in wsc-config.js.
+     Disappears on its own the day after the event. -->
+<section id="event" class="event-band" hidden>
+  <div class="event-inner">
+    <div class="event-text">
+      <div class="event-label">
+        <span class="event-pulse"></span>
+        <span id="eventLabelText">Special event</span>
+      </div>
+      <h2 class="event-title" id="eventTitle"></h2>
+      <p class="event-when" id="eventWhen"></p>
+      <p class="event-blurb" id="eventBlurb"></p>
+    </div>
+    <div class="event-actions">
+      <a class="btn-primary" id="eventCta" data-visit-cta></a>
+      <div class="event-cal" id="eventCal"></div>
+    </div>
+  </div>
+</section>
+
 <!-- ── ABOUT ─────────────────────────────────────────── -->
 <section id="about">
   <div class="section-inner">
     <div class="section-label">About us</div>
-    <h2 class="section-title">Everyone starts nervous.</h2>
+    <h2 class="section-title">Everyone starts somewhere.</h2>
     <p class="section-sub">Our members come looking for confidence and leave with something much more useful: the ability to speak clearly, think on their feet, and hold a room.</p>
 
     <div class="about-grid">
       <div class="about-text fade-up">
-        <p>Woking Speakers Club has been running since 2006, part of <strong>Toastmasters International</strong> — the world's leading organisation for public speaking, with over 300,000 members across 122 countries. We meet at Woking United Reformed Church, two minutes from the town centre.</p>
+        <p>Woking Speakers Club has been running since 2006, part of <strong>Toastmasters International</strong>, the world's leading organisation for public speaking, with over 300,000 members across 122 countries. We meet at Woking United Reformed Church, two minutes from the town centre.</p>
 
-        <p>Our members are teachers, engineers, managers, students and retirees. Some come because they've got a wedding speech looming. Some because a job promotion depends on it. Some just because they're tired of sitting quietly in meetings when they have something to say. All of them find more than they expected.</p>
+        <p>Our members come from a variety of backgrounds. Some come because they've got a wedding speech looming. Some because a job promotion depends on it. Some just because they're tired of sitting quietly in meetings when they have something to say. All of them find more than they expected.</p>
 
         <div class="quote-block">
           <p>"I joined dreading every work presentation. Two years later, I volunteer for them."</p>
-          <cite>— Club member since 2019</cite>
+          <cite>Club member since 2019</cite>
         </div>
 
-        <p>Visiting as a guest is free — come as many times as you like before you decide to join. You won't be asked to speak until you're ready, and you'll leave knowing exactly what the club can do for you.</p>
+        <p>Visiting as a guest is free, so you can see the club for yourself before you decide to join. You won't be asked to speak until you're ready, and you'll leave knowing exactly what the club can do for you.</p>
       </div>
 
       <div class="stats-column fade-up">
@@ -170,7 +294,7 @@
           </div>
           <div class="stat-card">
             <div class="stat-card-num">1924</div>
-            <div class="stat-card-label">Toastmasters founded — the world's longest-running speaking club</div>
+            <div class="stat-card-label">Toastmasters founded: the world's longest-running speaking club</div>
           </div>
         </div>
         <ul class="benefits-list">
@@ -178,13 +302,13 @@
             <div class="benefit-icon">
               <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
             </div>
-            Genuine confidence — not just in speeches, but in meetings, interviews and everyday conversation
+            Genuine confidence: not just in speeches, but in meetings, interviews, and everyday conversation
           </li>
           <li>
             <div class="benefit-icon">
               <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
             </div>
-            Sharper leadership: learn to run meetings, chair discussions, and give feedback people actually want to receive
+            Leadership skills: learn to run meetings, chair discussions, and give constructive feedback
           </li>
           <li>
             <div class="benefit-icon">
@@ -196,13 +320,13 @@
             <div class="benefit-icon">
               <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
             </div>
-            Instant access to the global Toastmasters network — useful for jobs, travel and finding a club wherever you are
+            Access to the global Toastmasters network, useful for jobs, travel, and finding a club wherever you are
           </li>
           <li>
             <div class="benefit-icon">
               <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
             </div>
-            Option to have a mentor — a more experienced member who's been exactly where you are now
+            Option to have a mentor: a more experienced member who's been exactly where you are now
           </li>
         </ul>
       </div>
@@ -224,43 +348,43 @@
             <div class="timeline-dot">1</div>
             <div class="timeline-tag">Warm up · 15 min</div>
             <div class="timeline-title">The warm-up</div>
-            <div class="timeline-body">Everyone gets 15 seconds on a shared topic. Guests can simply say "pass" — no one will mind, and no one will notice.</div>
+            <div class="timeline-body">Everyone gets 15 seconds on a shared topic. Guests can simply say "pass"; no one will mind, and no one will notice.</div>
           </div>
           <div class="timeline-item">
             <div class="timeline-dot">2</div>
             <div class="timeline-tag">Prepared speeches · 30–45 min</div>
             <div class="timeline-title">Prepared speeches</div>
-            <div class="timeline-body">Three or four members deliver talks they've been working on — anything from a first nervous two-minute speech to a polished, funny, moving ten-minute performance. The range is part of what makes it so compelling to watch.</div>
+            <div class="timeline-body">Three or four members deliver talks they've been working on, anything from a first nervous four-minute speech to a polished, funny, moving twenty-minute keynote. The range is part of what makes it so compelling to watch.</div>
           </div>
           <div class="timeline-item">
             <div class="timeline-dot">3</div>
             <div class="timeline-tag">Break · 15 min</div>
             <div class="timeline-title">The break</div>
-            <div class="timeline-body">15 minutes to grab a drink, meet other members, and decompress. For first-time visitors, this is the best time to ask questions — everyone is approachable and happy to chat.</div>
+            <div class="timeline-body">15 minutes to grab a drink and network with other members. For first-time visitors, this is the best time to ask questions; everyone is approachable and happy to chat.</div>
           </div>
           <div class="timeline-item">
             <div class="timeline-dot">4</div>
             <div class="timeline-tag">Evaluations · 20 min</div>
             <div class="timeline-title">Evaluations</div>
-            <div class="timeline-body">Each speaker receives a structured evaluation from a designated member — two minutes of thoughtful, kind, and genuinely useful feedback. It's one of the things members say they value most.</div>
+            <div class="timeline-body">Each speaker receives a structured evaluation from a designated member: two minutes of thoughtful, kind, and genuinely useful feedback. It's one of the things members say they value most.</div>
           </div>
           <div class="timeline-item">
             <div class="timeline-dot">5</div>
             <div class="timeline-tag">Table topics · 20 min</div>
-            <div class="timeline-title">Table Topics — speaking off the cuff</div>
-            <div class="timeline-body">A topic is announced and you've got thirty seconds to think before you speak for up to two minutes. This is the one part of the evening guests can join in too — but only if you've told us you'd like to, so you're never put on the spot. Most find themselves quietly desperate to have a go within a visit or two anyway.</div>
+            <div class="timeline-title">Table Topics: speaking off the cuff</div>
+            <div class="timeline-body">A topic is announced and you've got thirty seconds to think before you speak for up to two minutes. This is the one part of the evening guests can join in too, but only if you've told us you'd like to, so you're never put on the spot. Most find themselves quietly eager to have a go within a visit or two anyway.</div>
           </div>
           <div class="timeline-item">
-            <div class="timeline-dot">🍺</div>
+            <div class="timeline-dot"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div>
             <div class="timeline-title">Drinks afterwards</div>
-            <div class="timeline-body">After the meeting most people head to a nearby pub — soft drinks and coffee very much included. It's optional, but this is consistently where first-time visitors decide they're coming back.</div>
+            <div class="timeline-body">After the meeting most people head to a nearby pub, soft drinks and coffee very much included. It's optional, but this is often where first-time visitors decide they're coming back.</div>
           </div>
         </div>
       </div>
 
       <div class="meetings-aside fade-up">
-        <h3>Come and see</h3>
-        <p>We meet on the 2nd and 4th Thursday every month, from <span data-cfg="meetingTime">7:15 pm</span> to <span data-cfg="meetingEndTime">9:45 pm</span>. No booking needed, no charge. Just turn up.</p>
+        <h3>Join a meeting</h3>
+        <p>We meet on the 2nd and 4th Thursday every month, from <span data-cfg="meetingTime">7:15 pm</span> to <span data-cfg="meetingEndTime">9:45 pm</span><span id="asideEventNote"></span>. No booking needed, no charge. Just turn up.</p>
 
         <div style="margin: 1.25rem 0 0;">
           <div style="font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 0.75rem;">Upcoming meetings</div>
@@ -281,7 +405,7 @@
           </div>
           <div class="venue-line">
             <svg class="venue-icon" viewBox="0 0 24 24"><path d="M14 16H9m10 0h3v-3.15a1 1 0 0 0-.84-.99L16 11l-2.7-3.6a1 1 0 0 0-.8-.4H5.24a2 2 0 0 0-1.8 1.1l-.8 1.63A6 6 0 0 0 2 12.42V16h2"/><circle cx="6.5" cy="16.5" r="2.5"/><circle cx="16.5" cy="16.5" r="2.5"/></svg>
-            <span data-cfg="parkingNote">Town-centre car parks are a few minutes’ walk away</span>
+            <span data-cfg="parkingNote">Town-centre car parks are a few minutes’ walk away. Limited parking is available at the venue for early birds.</span>
           </div>
         </div>
         <a href="https://maps.google.com/maps?q=Woking+United+Reformed+Church,White+Rose+Lane,Woking,GU22+7HA" data-cfg-href="venueMapUrl" target="_blank" rel="noopener" class="btn-venue">
@@ -291,7 +415,7 @@
         <a href="#contact" class="btn-venue" style="background:var(--gold);color:var(--navy);font-weight:600;margin-top:0.5rem;" data-visit-cta>
           Tell us you're coming (optional) →
         </a>
-        <p style="font-size:0.8rem; color:rgba(255,255,255,0.55); margin:0.6rem 0 0; line-height:1.5;">Booking isn't required — but if you let us know, someone will be looking out for you by name.</p>
+        <p style="font-size:0.8rem; color:rgba(255,255,255,0.55); margin:0.6rem 0 0; line-height:1.5;">Booking isn't required, but if you let us know, someone will be looking out for you by name.</p>
       </div>
     </div>
   </div>
@@ -302,7 +426,7 @@
   <div class="section-inner">
     <div class="section-label">Your first visit</div>
     <h2 class="section-title">We're here to help.</h2>
-    <p class="section-sub">You already know the agenda. Here's what it actually feels like to walk in as a guest.</p>
+    <p class="section-sub">Here's what it feels like to walk in as a guest.</p>
 
     <div class="guest-list">
 
@@ -310,31 +434,31 @@
         <div class="guest-row-icon guest-row-icon--time">7:15</div>
         <div class="guest-row-text">
           <h3>Finding your way in</h3>
-          <p>We run from 7:15 to 9:45 pm at Woking United Reformed Church, a 5-minute walk from the station, with town-centre car parks nearby. A member will be watching for you at the entrance — you won't have to find your own way to a room full of strangers.</p>
+          <p>We run from 7:15 to 9:45 pm at Woking United Reformed Church, a 5-minute walk from the station, with town-centre car parks nearby. A member will be watching for you at the entrance; you won't have to find your own way to a room full of strangers.</p>
         </div>
       </div>
 
       <div class="guest-row fade-up">
-        <div class="guest-row-icon">👋</div>
+        <div class="guest-row-icon"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><polyline points="17 11 19 13 23 9"/></svg></div>
         <div class="guest-row-text">
           <h3>You'll have someone with you</h3>
-          <p>The member who greets you sits with you for the evening. You're briefly introduced to the room — no speech, no spotlight — and they're your go-to for any questions, including during the break.</p>
+          <p>The member who greets you will often sit with you for the evening. You're briefly introduced to the room (no speech, no spotlight) and they're your go-to for any questions, including during the break.</p>
         </div>
       </div>
 
       <div class="guest-row fade-up">
-        <div class="guest-row-icon">🙅</div>
+        <div class="guest-row-icon"><svg viewBox="0 0 24 24"><line x1="1" y1="1" x2="23" y2="23"/><path d="M9 9v3a3 3 0 0 0 5.12 2.12M15 9.34V4a3 3 0 0 0-5.94-.6"/><path d="M17 16.95A7 7 0 0 1 5 12v-2m14 0v2a7 7 0 0 1-.11 1.23"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg></div>
         <div class="guest-row-text">
           <h3>There's no pressure to speak</h3>
-          <p>Guests are never put on the spot. If you're asked anything and don't fancy it, "pass" is a complete answer. Most first-timers just watch — that's exactly what the seat is for.</p>
+          <p>Guests are never put on the spot. If you're asked anything and don't want to, "pass" is a complete answer. Most first-timers just watch: that's exactly what the seat is for.</p>
         </div>
       </div>
 
       <div class="guest-row fade-up">
-        <div class="guest-row-icon">🍺</div>
+        <div class="guest-row-icon"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div>
         <div class="guest-row-text">
           <h3>Stay as long as you like</h3>
-          <p>Slip away after the meeting, or join the group for a drink nearby afterwards — entirely your call, no expectations either way. And come back as many times as you need before deciding anything.</p>
+          <p>Slip away after the meeting, or stay for a relaxed social chat nearby afterwards (entirely your call, no expectations either way). And come back as many times as you need before deciding anything.</p>
         </div>
       </div>
 
@@ -354,8 +478,8 @@
 <section id="stories">
   <div class="section-inner">
     <div class="section-label">Member stories</div>
-    <h2 class="section-title">What actually changes.</h2>
-    <p class="section-sub">Not "I feel more confident." Here's what that actually looked like for some of our members.</p>
+    <h2 class="section-title">What changes.</h2>
+    <p class="section-sub">Here's what that looked like for some of our members.</p>
 
     <!-- Before / After cards -->
     <div class="story-grid-wrap">
@@ -368,7 +492,7 @@
             <!-- Member photo — to change it, upload a new image and update the src below -->
             <div class="member-avatar" style="flex-shrink:0;">
               <img
-                src="images/swarna.jpg"
+                src="images/swarna.webp"
                 alt="Swarna K."
                 class="member-photo"
                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
@@ -392,7 +516,7 @@
           </div>
         </div>
         <div class="story-footer">
-          <p>"Toastmasters reintroduced me to my own voice — and taught me it's the vehicle that carries the message."</p>
+          <p>"Toastmasters reintroduced me to my own voice, and taught me it's the vehicle that carries the message."</p>
         </div>
       </div>
 
@@ -404,7 +528,7 @@
             <!-- Member photo — to change it, upload a new image and update the src below -->
             <div class="member-avatar" style="flex-shrink:0;">
               <img
-                src="images/ernie.jpg"
+                src="images/ernie.webp"
                 alt="Ernie H."
                 class="member-photo"
                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
@@ -428,7 +552,7 @@
           </div>
         </div>
         <div class="story-footer">
-          <p>"You might think you are joining to improve your public speaking skills, but the benefits of joining the club reach further than the tangible — the friendships, the support, and the community."</p>
+          <p>"You might think you are joining to improve your public speaking skills, but the benefits of joining the club reach further than the tangible: the friendships, the support, and the community."</p>
         </div>
       </div>
 
@@ -440,7 +564,7 @@
             <!-- Member photo — to change it, upload a new image and update the src below -->
             <div class="member-avatar" style="flex-shrink:0;">
               <img
-                src="images/rameez.jpg"
+                src="images/rameez.webp"
                 alt="Rameez H."
                 class="member-photo"
                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
@@ -485,7 +609,7 @@
     <div class="gallery-panel fade-up">
       <div class="section-label" style="justify-content: center;">Club in action</div>
       <h3 class="gallery-panel-title">Life at the club.</h3>
-      <p class="gallery-panel-sub">Meetings, socials, competitions, and a few of our favourite quotes — updated regularly.</p>
+      <p class="gallery-panel-sub">Meetings, socials, competitions, and a few of our favourite quotes, updated regularly.</p>
       <div class="gallery-carousel">
         <button type="button" class="gallery-nav-btn prev" id="galleryPrev" aria-label="Previous photos">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
@@ -505,37 +629,32 @@
       </div>
       <div class="persona-grid">
         <div class="persona-card">
-          <div class="persona-icon">💼</div>
+          <div class="persona-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
           <div class="persona-title">The ambitious professional</div>
           <p class="persona-desc">Good at the job, overlooked in the room. Wants to change that.</p>
         </div>
         <div class="persona-card">
-          <div class="persona-icon">💍</div>
+          <div class="persona-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
           <div class="persona-title">The reluctant best man</div>
           <p class="persona-desc">Six months to prepare. Starting from zero. Quietly panicking.</p>
         </div>
         <div class="persona-card">
-          <div class="persona-icon">🎓</div>
+          <div class="persona-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg></div>
           <div class="persona-title">The new graduate</div>
           <p class="persona-desc">Entering the workforce. Knows that how you communicate matters as much as what you know.</p>
         </div>
         <div class="persona-card">
-          <div class="persona-icon">🔄</div>
+          <div class="persona-icon"><svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></div>
           <div class="persona-title">The career changer</div>
           <p class="persona-desc">Starting over in a new field. Needs to establish credibility fast and convince people to take them seriously.</p>
         </div>
         <div class="persona-card">
-          <div class="persona-icon">🏠</div>
+          <div class="persona-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
           <div class="persona-title">The returning parent</div>
-          <p class="persona-desc">Back after time away. Confidence shaken. Wants their voice back — and a reason to get out on a Thursday evening.</p>
+          <p class="persona-desc">Back after time away. Confidence shaken. Wants their voice back, and a reason to get out on a Thursday evening.</p>
         </div>
         <div class="persona-card">
-          <div class="persona-icon">✨</div>
-          <div class="persona-title">The person who just fancies it</div>
-          <p class="persona-desc">No particular reason. Just always wanted to try it. Often ends up staying the longest.</p>
-        </div>
-        <div class="persona-card">
-          <div class="persona-icon">🫂</div>
+          <div class="persona-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
           <div class="persona-title">The community seeker</div>
           <p class="persona-desc">New to the area, or just keen to meet people nearby. Comes for the speaking and finds a ready-made local community.</p>
         </div>
@@ -550,18 +669,18 @@
   <div class="section-inner">
     <div class="section-label">Membership</div>
     <h2 class="section-title">When you're ready, joining is easy.</h2>
-    <p class="section-sub">Let us know, complete a short online application and pay the new member fees.</p>
+    <p class="section-sub">Let us know, complete a short online application, and pay the new member fees.</p>
 
     <div class="join-grid">
       <div class="join-step fade-up">
         <div class="join-step-num">1</div>
         <h3>Come as a guest</h3>
-        <p>Turn up to any meeting — no booking, no charge, no obligation. Watch, listen, stay for the pub if you fancy it. Repeat until you're sure.</p>
+        <p>Turn up to any meeting: no booking, no charge, no obligation. Watch, listen, stay for a social chat afterwards if you like. Repeat until you're sure.</p>
       </div>
       <div class="join-step fade-up">
         <div class="join-step-num">2</div>
         <h3>Join and pay online</h3>
-        <p>When you're ready, head to our <a href="join.html">join page</a>, pick the month you're starting, and enter your details as you pay — securely by card, Apple Pay or Google Pay. It takes just a few minutes. A member of the committee will contact you with onboarding information.</p>
+        <p>When you're ready, head to our <a href="join.html">join page</a>, pick the month you're starting, and enter your details as you pay, securely by card, Apple Pay or Google Pay. It takes just a few minutes. A member of the committee will contact you with onboarding information.</p>
       </div>
     </div>
 
@@ -569,7 +688,7 @@
       <div class="price-item">
         <div class="price-item-label">Guest visits</div>
         <div class="price-item-value">Free</div>
-        <div class="price-item-sub">as many times as you like, no booking needed</div>
+        <div class="price-item-sub">no booking needed, just turn up</div>
       </div>
       <div class="price-item">
         <div class="price-item-label">Joining fee</div>
@@ -578,10 +697,10 @@
       </div>
       <div class="price-item">
         <div class="price-item-label">Membership fee</div>
-        <div class="price-item-value"><span data-cfg="monthlyFee">£13</span><span style="font-size:1rem; font-weight:400;">/mo</span></div>
-        <div class="price-item-sub">billed every six months (<span data-cfg="sixMonthFee">£78</span>)</div>
+        <div class="price-item-value"><span data-cfg="monthlyFee">£15</span><span style="font-size:1rem; font-weight:400;">/mo</span></div>
+        <div class="price-item-sub">billed every six months (<span data-cfg="sixMonthFee">£90</span>)</div>
       </div>
-      <div class="price-note" id="priceNote">When you first join, you pay for 7 to 12 months up front, depending on the month you join, to line up with our renewal dates in March and September. That's still just £13 a month.</div>
+      <div class="price-note" id="priceNote">When you first join, you pay for 7 to 12 months up front, depending on the month you join, to line up with our renewal dates in March and September. That's still just <span data-cfg="monthlyFee">£15</span> a month.</div>
       <div class="fee-picker" id="feePicker">
         <label class="fee-picker-label" for="joinMonthSelect">See the cost for the month you join</label>
         <div class="fee-picker-controls">
@@ -591,7 +710,7 @@
       </div>
       <div style="margin-top:0.5rem; padding-top:1.5rem; border-top:1px solid rgba(255,255,255,0.1); grid-column: 1 / -1;">
         <a href="join.html" class="btn-primary" style="display:inline-flex; align-items:center; gap:0.45rem; font-size:0.95rem; padding:0.65rem 1.4rem;">
-          I'm ready — become a member
+          I'm ready to become a member
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
         <p style="margin-top:0.6rem; font-size:0.8rem; color:rgba(255,255,255,0.55);">Takes just a few minutes, online.</p>
@@ -604,7 +723,7 @@
 <section id="faq">
   <div class="section-inner">
     <div class="section-label">FAQs</div>
-    <h2 class="section-title">The questions everyone Googles first.</h2>
+    <h2 class="section-title">The questions most people ask.</h2>
     <p class="section-sub">Honest answers to the things people want to know before they feel brave enough to ask.</p>
 
     <div class="faq-grid">
@@ -618,19 +737,19 @@
       </div>
       <div class="faq-item fade-up">
         <p class="faq-q">What does membership cost?</p>
-        <p class="faq-a">Guest visits are always free. Membership is a <span data-cfg="joiningFee">£20</span> one-off joining fee, then <span data-cfg="monthlyFee">£13</span> a month (billed in six-month blocks of <span data-cfg="sixMonthFee">£78</span>). For what you get — structured development, mentoring, and a community — most members consider it exceptional value. Full breakdown in the <a href="#join">Join section</a>.</p>
+        <p class="faq-a">Guest visits are always free. Membership is a <span data-cfg="joiningFee">£20</span> one-off joining fee, then <span data-cfg="monthlyFee">£15</span> a month (billed in six-month blocks of <span data-cfg="sixMonthFee">£90</span>). For what you get (structured development, mentoring, and a community), most members consider it exceptional value. Full breakdown in the <a href="#join">Join section</a>.</p>
       </div>
       <div class="faq-item fade-up">
         <p class="faq-q">How do I join?</p>
-        <p class="faq-a">Come to a meeting, then join and pay online from our <a href="join.html">join page</a> whenever you're ready — it takes a couple of minutes. No paper form, no interview, no audition.</p>
+        <p class="faq-a">Come to a meeting, then join and pay online from our <a href="join.html">join page</a> whenever you're ready; it takes a couple of minutes. No paper form, no interview, no audition.</p>
       </div>
       <div class="faq-item fade-up">
         <p class="faq-q">When do I give my first speech?</p>
-        <p class="faq-a">Usually within your first few meetings as a member — you'll typically be scheduled about four meetings ahead. Need more time? Just say so. Your VP Education will work with you, not against you.</p>
+        <p class="faq-a">Whenever you are ready and feel comfortable to do so. We find that most members end up giving their first speech within their first few meetings, and you'll typically be scheduled about four meetings ahead.</p>
       </div>
       <div class="faq-item fade-up">
         <p class="faq-q">What if I'm terrified of my first speech?</p>
-        <p class="faq-a">You will be. So was everyone else. Your mentor will help you prepare it, your club will root for you while you're up there, and your evaluator will tell you what was great about it before anything else. First speeches at Woking Speakers are remembered fondly, not cringed at.</p>
+        <p class="faq-a">That's normal — and that's what Toastmasters will help you overcome. Your mentor will help you prepare it, your club will root for you while you're up there, and your evaluator will tell you what was great about it before anything else. First speeches at Woking Speakers are remembered fondly, not cringed at.</p>
       </div>
     </div>
   </div>
@@ -645,7 +764,10 @@
 
     <div class="contact-grid">
       <div class="contact-form-card fade-up">
-        <form id="contactForm" name="contact" data-netlify="true" data-netlify-honeypot="bot-field">
+        <!-- novalidate: constraint validation still runs via checkValidity() in
+             wsc-site.js, but we render our own inline messages rather than the
+             browser's native bubbles, which vary by browser and vanish on click. -->
+        <form id="contactForm" name="contact" data-netlify="true" data-netlify-honeypot="bot-field" novalidate>
           <input type="hidden" name="form-name" value="contact">
           <p hidden aria-hidden="true">
             <label>Don't fill this out if you're human: <input name="bot-field"></label>
@@ -682,18 +804,18 @@
           </div>
           <div class="form-group">
             <label for="message">Message</label>
-            <textarea id="message" name="message" placeholder="Anything else you'd like us to know? No pressure — even just &ldquo;I'd like to come along&rdquo; is enough."></textarea>
+            <textarea id="message" name="message" placeholder="Anything else you'd like us to know? No pressure, even just &ldquo;I'd like to come along&rdquo; is enough."></textarea>
           </div>
           <button type="submit" class="btn-submit">Send →</button>
         </form>
         <div class="form-success" id="formSuccess" aria-live="polite">
           <h4>Message sent!</h4>
-          <p>Thanks for getting in touch. We'll reply within a day or two — and hopefully see you at a meeting soon.</p>
+          <p>Thanks for getting in touch. We'll reply within a day or two, and hopefully see you at a meeting soon.</p>
         </div>
       </div>
 
       <div class="fade-up">
-        <p style="font-size:1rem; color:rgba(255,255,255,0.65); line-height:1.7; margin-bottom:1.5rem;">Whether you're preparing for a best man speech, trying to get promoted, or simply tired of your voice shaking in meetings — there's a place for you here. Drop us a message and we'll make sure your first visit is as easy as possible.</p>
+        <p style="font-size:1rem; color:rgba(255,255,255,0.65); line-height:1.7; margin-bottom:1.5rem;">Whether you're preparing for a best man speech, trying to get promoted, or simply tired of your voice shaking in meetings, there's a place for you here. Drop us a message and we'll make sure your first visit is as easy as possible.</p>
         <div class="contact-links">
           <a href="https://www.facebook.com/WokingSpeakers/" data-cfg-href="facebookUrl" target="_blank" rel="noopener" class="contact-link">
             <div class="contact-link-icon">
@@ -701,7 +823,7 @@
             </div>
             <div>
               <strong>Facebook</strong>
-              <span>@WokingSpeakers — updates and event photos</span>
+              <span>@WokingSpeakers · updates and event photos</span>
             </div>
           </a>
           <a href="https://www.linkedin.com/company/woking-speakers-club/" data-cfg-href="linkedinUrl" target="_blank" rel="noopener" class="contact-link" aria-label="Woking Speakers Club on LinkedIn (opens in new tab)">
@@ -710,10 +832,10 @@
             </div>
             <div>
               <strong>LinkedIn</strong>
-              <span>Follow the club — @woking-speakers-club</span>
+              <span>Follow the club · @woking-speakers-club</span>
             </div>
           </a>
-          <a href="mailto:info@wokingspeakers.org.uk" class="contact-link">
+          <a href="mailto:info@wokingspeakers.org.uk?subject=WSC%20Website%20Query" class="contact-link">
             <div class="contact-link-icon">
               <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
             </div>
@@ -741,16 +863,14 @@
 <footer>
   <div style="display:flex; align-items:center; gap:1rem; flex-wrap:wrap;">
     <img src="images/logo.png" alt="" aria-hidden="true" class="footer-logo-img">
-    <p class="footer-copy">© 2026 Woking Speakers Club · Part of Toastmasters International</p>
+    <p class="footer-copy">© <span class="js-year">2026</span> Woking Speakers Club · Part of Toastmasters International</p>
   </div>
   <ul class="footer-links">
     <li><a href="#about">About</a></li>
     <li><a href="#meetings">Meetings</a></li>
-    <li><a href="join.html">Join</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="members.html">Members area</a></li>
     <li><a href="privacy.html">Privacy</a></li>
-    <li><a href="https://www.linkedin.com/company/woking-speakers-club/" data-cfg-href="linkedinUrl" target="_blank" rel="noopener" aria-label="Woking Speakers Club on LinkedIn (opens in new tab)">LinkedIn ↗</a></li>
+    <li><a href="join.html">Become a member</a></li>
   </ul>
 </footer>
 
@@ -759,482 +879,18 @@
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
 </button>
 
-<script>
-  // ═══════════════════════════════════════════════════════════════
-  // 1. CONFIG & SHARED DATE HELPERS
-  //    Everything below reads from wsc-config.js (loaded at the top of
-  //    this file) and provides date/time utilities used by the sections
-  //    further down — the banner, the upcoming meetings list, the guest
-  //    date picker, and the calendar (.ics / Google Calendar) links.
-  // ═══════════════════════════════════════════════════════════════
-  const CFG = window.WSC_CONFIG;
+<script src="wsc-site.js"></script>
 
-  // Fees are plain numbers in the config; the six-month total is derived
-  // here so it can never drift out of step with the monthly fee.
-  CFG.sixMonthFee = CFG.monthlyFee * 6;
-
-  // Populate any element marked <span data-cfg="key"> with the matching
-  // value from wsc-config.js, so prices, venue and times only ever need
-  // editing in one place. Fee values are numbers, so prefix them with £.
-  // The HTML keeps a sensible fallback for no-JS.
-  const CURRENCY_KEYS = new Set(['joiningFee', 'monthlyFee', 'sixMonthFee']);
-  document.querySelectorAll('[data-cfg]').forEach(el => {
-    const key = el.getAttribute('data-cfg');
-    let val = CFG[key];
-    if (val == null || val === '') return;
-    if (CURRENCY_KEYS.has(key)) val = '£' + val;
-    el.textContent = val;
-  });
-
-  // Same idea, but for link destinations: <a data-cfg-href="key" href="...">
-  // The href in the HTML is the no-JS fallback; config overrides it when
-  // present, so the Maps/Facebook/LinkedIn URLs only need editing in one place.
-  document.querySelectorAll('[data-cfg-href]').forEach(el => {
-    const val = CFG[el.getAttribute('data-cfg-href')];
-    if (val) el.href = val;
-  });
-
-  const DAYS_LONG    = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-  const MONTHS_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  const MONTHS_LONG  = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-
-  // ── Shared date & calendar helpers (wsc-dates.js) ─────────────
-  // The meeting-schedule maths, UK BST handling and .ics / Google Calendar
-  // builders live in wsc-dates.js, shared with the thank-you page. These thin
-  // wrappers bake in the homepage's guest-facing calendar description so the
-  // call sites below can stay tidy.
-  const D = window.WSC_DATES;
-  const MEETING_CAL_DESC = 'Free for guests - no booking needed. Come along and see what we are about.';
-  const getMeetingDates  = (count) => D.getMeetingDates(count);
-  const makeICSString    = (date)  => D.makeICSString(date, MEETING_CAL_DESC);
-  const makeGoogleCalUrl = (date)  => D.makeGoogleCalUrl(date, MEETING_CAL_DESC);
-
-  // Formats a meeting date as "Thursday 9 Jul 2026", plus a relative label
-  // ("Today" / "Next week" / "In N days") when it's coming up soon.
-  function formatDate(d) {
-    const today = new Date();
-    today.setHours(0,0,0,0);
-    const target = new Date(d); target.setHours(0,0,0,0);
-    const diff = Math.round((target - today) / 86400000);
-    const label = diff === 0 ? 'Today' : diff === 7 ? 'Next week' : diff <= 14 ? 'In ' + diff + ' days' : null;
-    const str = DAYS_LONG[d.getDay()] + ' ' + d.getDate() + ' ' + MONTHS_SHORT[d.getMonth()] + ' ' + d.getFullYear();
-    return { str, label, diff };
-  }
-
-  function formatGalleryDate(iso) {
-    if (!iso) return '';                       // date is optional — no date, no label
-    const [y, m] = iso.split('-').map(Number);
-    if (!y || !m) return '';                   // ignore a malformed date rather than showing "undefined"
-    return `${MONTHS_SHORT[m - 1]} ${y}`;
-  }
-
-  function calIconSVG() {
-    return '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>';
-  }
-
-  const meetings = getMeetingDates(6);
-
-  // ═══════════════════════════════════════════════════════════════
-  // 2. NEXT-MEETING BANNER
-  //    Content (date/countdown) and the show/hide/dismiss behaviour
-  //    that repositions the nav bar and hero underneath it.
-  // ═══════════════════════════════════════════════════════════════
-  if (!CFG.showBanner) {
-    document.getElementById('nextBanner').style.display = 'none';
-  }
-
-  const { str: nextStr, diff } = formatDate(meetings[0]);
-  document.getElementById('nextMeetingDate').textContent = nextStr;
-  const meetingTimeEl = document.getElementById('meetingTime');
-  if (meetingTimeEl) meetingTimeEl.textContent = CFG.meetingTime || '7:15 pm';
-  const countdown = diff === 0 ? 'Tonight!' : diff === 1 ? 'Tomorrow' : 'In ' + diff + ' days';
-  document.getElementById('bannerCountdown').textContent = countdown;
-
-  const banner = document.getElementById('nextBanner');
-  const bannerDismissBtn = document.getElementById('bannerDismiss');
-  const siteNav = document.querySelector('nav');
-  const hero = document.getElementById('home');
-  const NAV_H = 64;
-
-  function getBannerHeight() {
-    return banner.classList.contains('dismissed') ? 0 : banner.offsetHeight;
-  }
-
-  function applyLayout(animate) {
-    const bh = getBannerHeight();
-    if (!animate) siteNav.style.transition = 'none';
-    siteNav.style.top = bh + 'px';
-    hero.style.paddingTop = (bh + NAV_H + 40) + 'px';
-    // Update CSS var so mobile nav dropdown sits in the right place
-    document.documentElement.style.setProperty('--nav-bottom', (bh + NAV_H) + 'px');
-    if (!animate) requestAnimationFrame(() => { siteNav.style.transition = ''; });
-  }
-
-  function dismissBanner() {
-    banner.classList.add('dismissed');
-    applyLayout(true);
-    sessionStorage.setItem('bannerDismissed', '1');
-  }
-
-  // On load: restore dismissed state, then measure & position (no animation)
-  if (sessionStorage.getItem('bannerDismissed') === '1') {
-    banner.classList.add('dismissed');
-  }
-  applyLayout(false);
-  window.addEventListener('resize', () => applyLayout(false)); // banner may reflow on mobile
-  bannerDismissBtn.addEventListener('click', dismissBanner);
-
-  // ═══════════════════════════════════════════════════════════════
-  // 3. UPCOMING MEETINGS LIST (in the Meetings section aside)
-  // ═══════════════════════════════════════════════════════════════
-  const upcomingContainer = document.getElementById('upcomingMeetings');
-  meetings.slice(0, 5).forEach((d, i) => {
-    const isNext = i === 0;
-    const { str, label } = formatDate(d);
-    const calUrl    = 'data:text/calendar;charset=utf8,' + encodeURIComponent(makeICSString(d));
-    const googleUrl = makeGoogleCalUrl(d);
-    const labelHtml = label
-      ? `<span style="font-size:0.7rem; font-weight:600; background:rgba(200,145,58,0.25); color:#f0d49a; border-radius:4px; padding:2px 7px; white-space:nowrap;">${label}</span>`
-      : '';
-
-    const el = document.createElement('div');
-    el.style.cssText = `display:flex; align-items:center; justify-content:space-between; gap:10px; padding:0.6rem 0.85rem; background:rgba(255,255,255,0.06); border-radius:8px; border:1px solid rgba(255,255,255,${isNext ? '0.2' : '0.08'});`;
-    el.innerHTML = `
-      <span style="font-size:0.875rem; color:${isNext ? '#fff' : 'rgba(255,255,255,0.7)'}; font-weight:${isNext ? '600' : '400'};">${str}</span>
-      <span style="display:flex;align-items:center;gap:6px;flex-shrink:0;">
-        ${labelHtml}
-        <div class="cal-wrap">
-          <button type="button" class="cal-btn" title="Add to calendar" onclick="this.nextElementSibling.classList.toggle('open')">${calIconSVG()} +Cal</button>
-          <div class="cal-dropdown">
-            <a href="${googleUrl}" target="_blank" rel="noopener">${calIconSVG()} Google Calendar</a>
-            <a href="${calUrl}" target="_blank" rel="noopener">${calIconSVG()} Apple / Outlook (.ics)</a>
-          </div>
-        </div>
-      </span>`;
-    upcomingContainer.appendChild(el);
-  });
-
-  document.addEventListener('click', e => {
-    if (!e.target.closest('.cal-wrap')) {
-      document.querySelectorAll('.cal-dropdown.open').forEach(dd => dd.classList.remove('open'));
-    }
-  });
-
-  // ═══════════════════════════════════════════════════════════════
-  // 4. GUEST DATE PICKER (contact form)
-  //    Shown only when "Attend a meeting as a guest" is selected.
-  // ═══════════════════════════════════════════════════════════════
-  const subjectEl    = document.getElementById('subject');
-  const dateGroupEl  = document.getElementById('meeting-date-group');
-  const dateSelectEl = document.getElementById('preferred-date');
-
-  function syncGuestDatePicker() {
-    const isGuest = subjectEl.value === 'Attend a meeting as a guest';
-    dateGroupEl.style.display = isGuest ? '' : 'none';
-    dateSelectEl.disabled = !isGuest;
-  }
-  subjectEl.addEventListener('change', syncGuestDatePicker);
-
-  // Arriving at the contact form via a "visit" CTA pre-selects the guest
-  // option so the meeting-date picker is already showing when they land.
-  document.querySelectorAll('[data-visit-cta]').forEach(cta => {
-    cta.addEventListener('click', () => {
-      subjectEl.value = 'Attend a meeting as a guest';
-      syncGuestDatePicker();
-    });
-  });
-
-  getMeetingDates(3).forEach(d => {
-    const opt = document.createElement('option');
-    opt.value = `${DAYS_LONG[d.getDay()]} ${d.getDate()} ${MONTHS_LONG[d.getMonth()]} ${d.getFullYear()}`;
-    opt.textContent = opt.value;
-    dateSelectEl.appendChild(opt);
-  });
-
-  // ═══════════════════════════════════════════════════════════════
-  // 5. "CLUB IN ACTION" PHOTO CAROUSEL
-  //    Photo content (filenames/dates/descriptions) lives in
-  //    wsc-config.js as CFG.galleryPhotos — see that file to add,
-  //    update, or remove a photo. This section just renders it.
-  // ═══════════════════════════════════════════════════════════════
-  const galleryTrack = document.getElementById('galleryTrack');
-  if (galleryTrack) {
-    const galleryPrevBtn = document.getElementById('galleryPrev');
-    const galleryNextBtn = document.getElementById('galleryNext');
-
-    // Hide an arrow once scrolling that direction would do nothing —
-    // called on load, on scroll, and on resize (which can change whether
-    // the photos overflow the track at all).
-    function updateGalleryNav() {
-      const EPSILON = 10; // allows for the track's own padding/margin, not a real scroll position
-      const maxScroll = galleryTrack.scrollWidth - galleryTrack.clientWidth;
-      const atStart = galleryTrack.scrollLeft <= EPSILON;
-      const atEnd = galleryTrack.scrollLeft >= maxScroll - EPSILON;
-      if (galleryPrevBtn) galleryPrevBtn.classList.toggle('is-hidden', atStart);
-      if (galleryNextBtn) galleryNextBtn.classList.toggle('is-hidden', atEnd);
-    }
-
-    // Referenced from the onerror= attribute below — hides a slide whose
-    // image file is missing, then re-checks whether the arrows are still needed.
-    function galleryImageError(img) {
-      img.parentElement.style.display = 'none';
-      updateGalleryNav();
-    }
-
-    // ── Lightbox: click (or keyboard-activate) a photo to enlarge it ──
-    // One overlay is created and reused for every photo.
-    const lightbox = document.createElement('div');
-    lightbox.className = 'lightbox';
-    lightbox.setAttribute('role', 'dialog');
-    lightbox.setAttribute('aria-modal', 'true');
-    lightbox.setAttribute('aria-label', 'Enlarged photo');
-    lightbox.innerHTML =
-      '<button class="lightbox-close" type="button" aria-label="Close">' +
-        '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>' +
-      '</button>' +
-      '<figure class="lightbox-figure">' +
-        '<img class="lightbox-img" alt="">' +
-        '<figcaption class="lightbox-caption"></figcaption>' +
-      '</figure>';
-    document.body.appendChild(lightbox);
-    const lbImg     = lightbox.querySelector('.lightbox-img');
-    const lbCaption = lightbox.querySelector('.lightbox-caption');
-    const lbClose   = lightbox.querySelector('.lightbox-close');
-    let lbLastFocus = null;
-
-    function openLightbox(src, descText, dateText) {
-      lbImg.src = src;
-      lbImg.alt = descText || 'Woking Speakers Club';
-      lbCaption.textContent = '';                 // rebuild caption from scratch
-      if (descText) {
-        const d = document.createElement('span');
-        d.className = 'lightbox-caption-text';
-        d.textContent = descText;                 // textContent keeps < and " safe
-        lbCaption.appendChild(d);
-      }
-      if (dateText) {
-        const dt = document.createElement('span');
-        dt.className = 'lightbox-caption-date';
-        dt.textContent = dateText;
-        lbCaption.appendChild(dt);
-      }
-      lbCaption.style.display = (descText || dateText) ? '' : 'none';
-      lbLastFocus = document.activeElement;
-      lightbox.classList.add('open');
-      document.body.style.overflow = 'hidden';    // stop the page scrolling behind
-      // Defer focus to after the click fully resolves — otherwise the browser
-      // re-focuses the just-clicked image and steals it back.
-      setTimeout(() => lbClose.focus(), 0);
-    }
-
-    function closeLightbox() {
-      lightbox.classList.remove('open');
-      document.body.style.overflow = '';
-      lbImg.removeAttribute('src');               // release the large image
-      if (lbLastFocus && lbLastFocus.focus) lbLastFocus.focus();
-    }
-
-    lbClose.addEventListener('click', closeLightbox);
-    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
-    document.addEventListener('keydown', e => {
-      if (!lightbox.classList.contains('open')) return;
-      if (e.key === 'Escape') closeLightbox();
-      else if (e.key === 'Tab') { e.preventDefault(); lbClose.focus(); } // trap focus in the dialog
-    });
-
-    (CFG.galleryPhotos || []).forEach(photo => {
-      const item = document.createElement('div');
-      item.className = 'gallery-item';
-
-      // If the image file doesn't exist yet, hide this slide rather than
-      // showing a broken image — lets you add list entries ahead of the upload.
-      const img = document.createElement('img');
-      img.loading = 'lazy';
-      img.onerror = () => galleryImageError(img);
-      img.src = `images/${photo.file}`;
-
-      // Caption strip along the bottom of the photo — the description and date
-      // are BOTH optional. Leave "desc" and/or "date" out of the config entry
-      // (or blank) and that line is skipped; leave out both and no caption strip
-      // is added at all, so the photo shows clean with no gradient overlay.
-      const descText = (photo.desc || '').trim();
-      const dateText = formatGalleryDate(photo.date);
-
-      // With no caption to describe it, give the image a sensible alt rather
-      // than leaving it unlabelled for screen readers.
-      img.alt = descText ? '' : 'Woking Speakers Club';
-
-      if (descText || dateText) {
-        const caption = document.createElement('div');
-        caption.className = 'gallery-caption';
-        if (descText) {
-          const desc = document.createElement('span');
-          desc.className = 'gallery-caption-text';
-          desc.textContent = descText;   // textContent keeps < and " safe
-          caption.appendChild(desc);
-        }
-        if (dateText) {
-          const date = document.createElement('span');
-          date.className = 'gallery-caption-date';
-          date.textContent = dateText;
-          caption.appendChild(date);
-        }
-        item.append(img, caption);
-      } else {
-        item.append(img);              // clean photo, no overlay
-      }
-
-      // Make the photo open the lightbox (mouse + keyboard).
-      img.setAttribute('role', 'button');
-      img.setAttribute('tabindex', '0');
-      img.setAttribute('aria-label', (descText ? descText + ' — ' : '') + 'view larger');
-      const openThis = () => openLightbox(img.currentSrc || img.src, descText, dateText);
-      img.addEventListener('click', openThis);
-      img.addEventListener('keydown', e => {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openThis(); }
-      });
-
-      galleryTrack.appendChild(item);
-    });
-
-    function scrollGallery(direction) {
-      const firstItem = galleryTrack.querySelector('.gallery-item');
-      const step = firstItem ? firstItem.getBoundingClientRect().width + 16 : 276;
-      galleryTrack.scrollBy({ left: direction * step, behavior: 'smooth' });
-    }
-    galleryPrevBtn.addEventListener('click', () => scrollGallery(-1));
-    galleryNextBtn.addEventListener('click', () => scrollGallery(1));
-    galleryTrack.addEventListener('scroll', updateGalleryNav);
-    window.addEventListener('resize', updateGalleryNav);
-    updateGalleryNav();
-  }
-
-  // ═══════════════════════════════════════════════════════════════
-  // 5b. JOIN-COST BY MONTH (price-box month picker)
-  //    Shows the up-front cost for any joining month, using exactly the
-  //    same numbers as the join page — all derived from wsc-config.js.
-  // ═══════════════════════════════════════════════════════════════
-  const joinMonthSelect = document.getElementById('joinMonthSelect');
-  if (joinMonthSelect) {
-    const joinMonthResult = document.getElementById('joinMonthResult');
-    const nowMonth = new Date().getMonth(); // 0–11
-
-    // 12 options, ordered from the current month so the most likely choice
-    // is first and selected by default.
-    for (let i = 0; i < 12; i++) {
-      const m = (nowMonth + i) % 12;         // 0–11
-      const opt = document.createElement('option');
-      opt.value = String(m + 1);             // 1–12 to match feeData keys
-      opt.textContent = MONTHS_LONG[m];
-      joinMonthSelect.appendChild(opt);
-    }
-
-    function updateJoinCost() {
-      const m = parseInt(joinMonthSelect.value, 10);   // 1–12
-      const info = (CFG.feeData || {})[m];
-      if (!info) { joinMonthResult.textContent = ''; return; }
-      const months     = info.months;
-      const membership = CFG.monthlyFee * months;
-      const total      = CFG.joiningFee + membership;
-      joinMonthResult.innerHTML =
-        `<strong>£${total}</strong> to join in ${MONTHS_LONG[m - 1]} — ` +
-        `£${CFG.joiningFee} joining fee + ${months} months' membership (£${membership}).`;
-    }
-    joinMonthSelect.addEventListener('change', updateJoinCost);
-    updateJoinCost();
-  }
-
-  // ═══════════════════════════════════════════════════════════════
-  // 6. MOBILE NAV TOGGLE
-  // ═══════════════════════════════════════════════════════════════
-  const navToggleBtn = document.getElementById('navToggle');
-  const navLinks = document.getElementById('navLinks');
-  navToggleBtn.addEventListener('click', () => navLinks.classList.toggle('open'));
-  navLinks.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => navLinks.classList.remove('open'));
-  });
-
-  // ═══════════════════════════════════════════════════════════════
-  // 6b. BACK-TO-TOP BUTTON
-  //    Fades in once the visitor has scrolled roughly a screen down;
-  //    scrolls smoothly back to the top (respecting reduced-motion).
-  // ═══════════════════════════════════════════════════════════════
-  const backToTop = document.getElementById('backToTop');
-  if (backToTop) {
-    const toggleBackToTop = () => {
-      backToTop.classList.toggle('visible', window.scrollY > 600);
-    };
-    toggleBackToTop();
-    window.addEventListener('scroll', toggleBackToTop, { passive: true });
-    backToTop.addEventListener('click', () => {
-      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
-    });
-  }
-
-  // ═══════════════════════════════════════════════════════════════
-  // 7. SCROLL-IN ANIMATIONS (.fade-up elements)
-  // ═══════════════════════════════════════════════════════════════
-  const fadeObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        fadeObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-  document.querySelectorAll('.fade-up').forEach(el => fadeObserver.observe(el));
-
-  // ═══════════════════════════════════════════════════════════════
-  // 8. CONTACT FORM (Netlify Forms submission + validation)
-  // ═══════════════════════════════════════════════════════════════
-  const contactForm = document.getElementById('contactForm');
-  const formSuccessEl = document.getElementById('formSuccess');
-  const formSubmitBtn = contactForm.querySelector('.btn-submit');
-
-  contactForm.addEventListener('submit', async e => {
-    e.preventDefault();
-    const requiredFields = contactForm.querySelectorAll('[required]');
-    let valid = true;
-    requiredFields.forEach(field => {
-      if (!field.value.trim()) {
-        field.setAttribute('aria-invalid', 'true');
-        valid = false;
-      } else {
-        field.removeAttribute('aria-invalid');
-      }
-    });
-    if (!valid) return;
-
-    formSubmitBtn.disabled = true;
-    formSubmitBtn.textContent = 'Sending…';
-
-    try {
-      const res = await fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(new FormData(contactForm)).toString()
-      });
-      if (res.ok) {
-        contactForm.style.display = 'none';
-        formSuccessEl.style.display = 'block';
-      } else {
-        throw new Error('Network response was not ok');
-      }
-    } catch {
-      formSubmitBtn.disabled = false;
-      formSubmitBtn.textContent = 'Send →';
-      // Clear any error from a previous failed attempt so they don't stack up.
-      contactForm.querySelectorAll('.form-send-error').forEach(el => el.remove());
-      formSubmitBtn.insertAdjacentHTML('afterend', '<p class="form-send-error" role="alert">Something went wrong — please try again or email <a href="mailto:info@wokingspeakers.org.uk">info@wokingspeakers.org.uk</a> directly.</p>');
-    }
-  });
-
-  contactForm.querySelectorAll('[required]').forEach(field => {
-    field.addEventListener('input', () => {
-      if (field.value.trim()) field.removeAttribute('aria-invalid');
-    });
-  });
+<!-- Default Statcounter code for Woking Speakers Club
+http://www.wokingspeakers.org.uk/ -->
+<script type="text/javascript">
+var sc_project=12837333;
+var sc_invisible=1;
+var sc_security="3ab256ce";
 </script>
+<script type="text/javascript"
+src="https://www.statcounter.com/counter/counter.js"
+async></script>
+<!-- End of Statcounter Code -->
 </body>
 </html>

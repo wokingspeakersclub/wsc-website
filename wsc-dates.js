@@ -81,7 +81,7 @@ window.WSC_DATES = (function () {
     [CFG.venueName, CFG.venueAddress].filter(Boolean).join(', ') ||
     'Woking United Reformed Church, White Rose Lane, Woking, Surrey GU22 7HA';
   const DEFAULT_DESCRIPTION =
-    'Woking Speakers Club — Toastmasters International. 2nd and 4th Thursday of the month.';
+    'Woking Speakers Club, Toastmasters International. 2nd and 4th Thursday of the month.';
 
   const pad = n => String(n).padStart(2, '0');
   const fmtLocal = d =>
@@ -109,8 +109,10 @@ window.WSC_DATES = (function () {
     'END:VTIMEZONE'
   ].join('\r\n');
 
-  // Raw .ics text for the meeting on `date`. `description` is optional.
-  function makeICSString(date, description) {
+  // Raw .ics text for the meeting on `date`. `description` and `title` are
+  // optional — pass a title to label a one-off event (e.g. an open house)
+  // rather than the usual club meeting.
+  function makeICSString(date, description, title) {
     const { startLocal, endLocal } = eventTimes(date);
     const uid = 'wsc-' + fmtLocal(startLocal) + '@wokingspeakers.org.uk';
     return [
@@ -120,7 +122,7 @@ window.WSC_DATES = (function () {
       'UID:' + uid,
       'DTSTART;TZID=Europe/London:' + fmtLocal(startLocal),
       'DTEND;TZID=Europe/London:'   + fmtLocal(endLocal),
-      'SUMMARY:'     + icsEscape(EVENT_TITLE),
+      'SUMMARY:'     + icsEscape(title || EVENT_TITLE),
       'LOCATION:'    + icsEscape(EVENT_LOCATION),
       'DESCRIPTION:' + icsEscape(description || DEFAULT_DESCRIPTION),
       'END:VEVENT', 'END:VCALENDAR'
@@ -128,12 +130,12 @@ window.WSC_DATES = (function () {
   }
 
   // A ready-to-use data: URI that downloads the .ics (for Apple / Outlook).
-  function makeICSDataUri(date, description) {
-    return 'data:text/calendar;charset=utf8,' + encodeURIComponent(makeICSString(date, description));
+  function makeICSDataUri(date, description, title) {
+    return 'data:text/calendar;charset=utf8,' + encodeURIComponent(makeICSString(date, description, title));
   }
 
   // A Google Calendar "add event" URL for the meeting on `date`.
-  function makeGoogleCalUrl(date, description) {
+  function makeGoogleCalUrl(date, description, title) {
     const { startLocal, endLocal } = eventTimes(date);
     const offset = isUKBST(startLocal) ? 1 : 0;      // Google wants UTC times
     const fmtUTC = d => {
@@ -142,7 +144,7 @@ window.WSC_DATES = (function () {
              'T' + pad(u.getHours()) + pad(u.getMinutes()) + '00Z';
     };
     return 'https://calendar.google.com/calendar/render?action=TEMPLATE'
-      + '&text='     + encodeURIComponent(EVENT_TITLE)
+      + '&text='     + encodeURIComponent(title || EVENT_TITLE)
       + '&dates='    + fmtUTC(startLocal) + '/' + fmtUTC(endLocal)
       + '&location=' + encodeURIComponent(EVENT_LOCATION)
       + '&details='  + encodeURIComponent(description || DEFAULT_DESCRIPTION);

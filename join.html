@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Join Woking Speakers Club</title>
-  <meta name="description" content="Join Woking Speakers Club — a Toastmasters club meeting on the 2nd and 4th Thursday of the month in Woking, Surrey. Pay your membership fee securely online.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <meta name="description" content="Join Woking Speakers Club, a Toastmasters club meeting on the 2nd and 4th Thursday of the month in Woking, Surrey. Pay your membership fee securely online.">
+  <link rel="canonical" href="https://www.wokingspeakers.org.uk/join.html">
+  <link rel="stylesheet" href="fonts.css">
   <link rel="stylesheet" href="wsc-shared.css">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
@@ -23,7 +23,7 @@
   <noscript>
     <p style="text-align:center; padding:1.5rem 0; color:var(--text); font-size:0.95rem; line-height:1.6;">
       JavaScript is required to show membership pricing.<br>
-      Please <a href="mailto:info@wokingspeakers.org.uk" style="color:var(--navy); font-weight:600;">email us</a> and we'll get you set up.
+      Please <a href="mailto:info@wokingspeakers.org.uk?subject=WSC%20Website%20Query" style="color:var(--navy); font-weight:600;">email us</a> and we'll get you set up.
     </p>
   </noscript>
 
@@ -36,16 +36,16 @@
 
   <!-- Ready to pay -->
   <div id="state-ready">
-    <h1>Welcome aboard — let's make it official.</h1>
-    <p class="join-intro">Not visited us yet? <a href="/#meetings">Come to a meeting free first</a> — there's no need to pay anything today.</p>
+    <h1>Welcome aboard, let's make it official.</h1>
+    <p class="join-intro">Not visited us yet? <a href="/#meetings">Come to a meeting free first</a>, there's no need to pay anything today.</p>
     <div class="month-toggle" id="month-toggle">
       <button class="month-btn active" id="btn-this" onclick="selectMonth(0)">This month</button>
       <button class="month-btn" id="btn-next" onclick="selectMonth(1)">Next month</button>
     </div>
     <div class="fee-pill" id="fee-label"><!-- e.g. £150 to join in June --></div>
     <div class="fee-breakdown" id="fee-breakdown"><!-- breakdown text --></div>
-    <a id="pay-link" class="btn-pay" href="mailto:info@wokingspeakers.org.uk" aria-label="Pay membership fee via Stripe (opens in new tab)">Pay now &rarr;</a>
-    <p class="no-stripe-note" id="no-stripe-note" style="display:none;">Online payment isn&rsquo;t set up for that month yet — <a href="mailto:info@wokingspeakers.org.uk">get in touch</a> and we&rsquo;ll sort it.</p>
+    <a id="pay-link" class="btn-pay" href="mailto:info@wokingspeakers.org.uk?subject=WSC%20Website%20Query" aria-label="Pay membership fee via Stripe (opens in new tab)">Pay now &rarr;</a>
+    <p class="no-stripe-note" id="no-stripe-note" style="display:none;">Online payment isn&rsquo;t set up for that month yet, <a href="mailto:info@wokingspeakers.org.uk?subject=WSC%20Website%20Query">get in touch</a> and we&rsquo;ll sort it.</p>
     <div class="payment-methods">
       Accepted: <span>Card</span> <span>Apple Pay</span> <span>Google Pay</span>
     </div>
@@ -53,10 +53,10 @@
       <p class="perks-heading">Your membership includes</p>
       <ul>
         <li>Tailored support to help you meet your specific goals</li>
-        <li>A speech slot within your first few meetings — your Ice Breaker, whenever you're ready</li>
+        <li>A speech slot within your first few meetings, your Ice Breaker, whenever you're ready</li>
         <li>Two meetings a month with real speaking practice, prepared and off-the-cuff</li>
         <li>Warm, honest feedback from people who remember their own first speech</li>
-        <li>The Toastmasters Pathways programme — a self-paced curriculum used by 300,000 members worldwide</li>
+        <li>The Toastmasters Pathways programme, a self-paced curriculum used by 300,000 members worldwide</li>
       </ul>
     </div>
   </div>
@@ -66,7 +66,7 @@
     <h1>Ready to Join?</h1>
     <p>
       Please get in touch and we&rsquo;ll get you set up.<br><br>
-      <a href="mailto:info@wokingspeakers.org.uk">info@wokingspeakers.org.uk</a>
+      <a href="mailto:info@wokingspeakers.org.uk?subject=WSC%20Website%20Query">info@wokingspeakers.org.uk</a>
     </p>
   </div>
 </div>
@@ -140,7 +140,7 @@
       `£${total} to join in ${MONTH_NAMES[month]}`;
     document.getElementById('fee-breakdown').innerHTML =
       `<strong>£${CFG.joiningFee}</strong> one-off joining fee + <strong>£${membership}</strong> membership = <strong>£${total}</strong>` +
-      `<br><span class="coverage-line">${fee.months} month${fee.months !== 1 ? 's' : ''}: ${coverage} — that's £${CFG.monthlyFee} a month</span>`;
+      `<br><span class="coverage-line">${fee.months} month${fee.months !== 1 ? 's' : ''}: ${coverage}, that's £${CFG.monthlyFee} a month</span>`;
 
     if (link) {
       payLink.href = link;
@@ -178,6 +178,18 @@
 
   init();
 </script>
+
+<!-- Default Statcounter code for Woking Speakers Club
+http://www.wokingspeakers.org.uk/ -->
+<script type="text/javascript">
+var sc_project=12837333;
+var sc_invisible=1;
+var sc_security="3ab256ce";
+</script>
+<script type="text/javascript"
+src="https://www.statcounter.com/counter/counter.js"
+async></script>
+<!-- End of Statcounter Code -->
 
 </body>
 </html>

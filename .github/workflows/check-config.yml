@@ -1,0 +1,126 @@
+# =============================================================
+#  CONFIG SAFETY CHECK
+#  -------------------------------------------------------------
+#  Runs automatically whenever wsc-config.js (or the site's other
+#  JavaScript) is changed. It catches the kind of small slip that
+#  would otherwise break the live site — a missing comma, a stray
+#  quote, a price typed as text instead of a number.
+#
+#  If something is wrong, the commit gets a red X on GitHub and the
+#  message below tells you exactly what to fix. Netlify still
+#  publishes, so this is an early warning rather than a gate — but
+#  a red X means "check the site now".
+# =============================================================
+name: Check config
+
+on:
+  push:
+    paths: ['wsc-config.js', 'wsc-dates.js', 'wsc-site.js']
+  pull_request:
+    paths: ['wsc-config.js', 'wsc-dates.js', 'wsc-site.js']
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Check JavaScript files can be read by a browser
+        run: |
+          for f in wsc-config.js wsc-dates.js wsc-site.js; do
+            [ -f "$f" ] || continue
+            if node --check "$f"; then
+              echo "OK: $f"
+            else
+              echo ""
+              echo "PROBLEM: $f has a typo that stops the whole site working."
+              echo "Most often this is a missing comma at the end of a line,"
+              echo "or a quote mark that was opened but never closed."
+              echo "The line number above points at where the browser gave up."
+              exit 1
+            fi
+          done
+
+      - name: Check the club settings make sense
+        run: |
+          node - <<'JS'
+          const fs = require('fs');
+          const problems = [];
+
+          // Load wsc-config.js the same way a browser would.
+          const window = {};
+          new Function('window', fs.readFileSync('wsc-config.js', 'utf8'))(window);
+          const c = window.WSC_CONFIG;
+
+          if (!c) {
+            console.error('PROBLEM: wsc-config.js no longer sets window.WSC_CONFIG.');
+            process.exit(1);
+          }
+
+          const isNum = v => typeof v === 'number' && isFinite(v);
+
+          // --- prices ---
+          for (const key of ['joiningFee', 'monthlyFee']) {
+            if (!isNum(c[key])) {
+              problems.push(`${key} must be a plain number with no £ sign or quotes — found: ${JSON.stringify(c[key])}`);
+            }
+          }
+
+          // --- meeting schedule ---
+          if (!isNum(c.meetingDay) || c.meetingDay < 0 || c.meetingDay > 6) {
+            problems.push(`meetingDay must be a number from 0 (Sunday) to 6 (Saturday) — found: ${JSON.stringify(c.meetingDay)}`);
+          }
+          if (!Array.isArray(c.meetingWeeks) || !c.meetingWeeks.length) {
+            problems.push(`meetingWeeks must be a list like [2, 4] — found: ${JSON.stringify(c.meetingWeeks)}`);
+          }
+          for (const key of ['meetingTime', 'meetingEndTime']) {
+            if (!/^\d{1,2}:\d{2}\s*(am|pm)$/i.test(String(c[key] || ''))) {
+              problems.push(`${key} should look like '7:15 pm' — found: ${JSON.stringify(c[key])}`);
+            }
+          }
+
+          // --- dates (cancelled meetings + optional special event) ---
+          const dateOk = d => /^\d{4}-\d{2}-\d{2}$/.test(d) && !isNaN(new Date(d).getTime());
+          for (const d of (c.cancelledDates || [])) {
+            if (!dateOk(d)) problems.push(`cancelledDates has an entry that isn't a real YYYY-MM-DD date: ${JSON.stringify(d)}`);
+          }
+          const ev = c.specialEvent;
+          if (ev && ev.date && !dateOk(ev.date)) {
+            problems.push(`specialEvent.date must be a real date like '2026-09-10' — found: ${JSON.stringify(ev.date)}`);
+          }
+          if (ev && ev.date && !String(ev.title || '').trim()) {
+            problems.push(`specialEvent has a date but no title, so the banner would look empty.`);
+          }
+
+          // --- gallery photos ---
+          for (const p of (c.galleryPhotos || [])) {
+            if (!p.file) {
+              problems.push(`A galleryPhotos entry is missing its "file" name: ${JSON.stringify(p)}`);
+            } else if (!fs.existsSync('images/' + p.file)) {
+              // Not fatal — the site skips missing photos — so just note it.
+              console.log(`Note: images/${p.file} isn't uploaded yet, so it will be skipped on the site.`);
+            }
+            if (p.date && p.date !== '' && !dateOk(p.date)) {
+              problems.push(`galleryPhotos "${p.file}" has an invalid date: ${JSON.stringify(p.date)} (use YYYY-MM-DD, or leave it blank)`);
+            }
+          }
+
+          // --- payment links ---
+          for (const [month, link] of Object.entries(c.stripeLinks || {})) {
+            if (link && !/^https:\/\/buy\.stripe\.com\//.test(link)) {
+              problems.push(`stripeLinks month ${month} doesn't look like a Stripe payment link: ${JSON.stringify(link)}`);
+            }
+          }
+
+          if (problems.length) {
+            console.error('\nThe club settings need a fix:\n');
+            problems.forEach(p => console.error('  * ' + p));
+            console.error('\nEdit wsc-config.js to correct these, then commit again.\n');
+            process.exit(1);
+          }
+          console.log('All club settings look good.');
+          JS
