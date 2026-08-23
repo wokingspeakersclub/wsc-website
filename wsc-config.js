@@ -20,7 +20,7 @@ window.WSC_CONFIG = {
   // Day of week: 0=Sun, 1=Mon, 2=Tue, 3=Wed, 4=Thu, 5=Fri, 6=Sat
   meetingDay:   4,        // Thursday
   meetingWeeks: [2, 4],   // 2nd and 4th week of each month
-  meetingTime:  '7:15 pm',
+  meetingTime:  '7:30 pm',
   meetingEndTime: '9:45 pm',
 
   // ----- CANCELLED MEETINGS ----------------------------------
@@ -114,10 +114,10 @@ window.WSC_CONFIG = {
   // You do NOT need to remove it after the event — it disappears by
   // itself the day after, so nothing stale is ever left showing.
   specialEvent: {
-    date:    '2026-08-13',                  // 'YYYY-MM-DD' — leave blank for no event
-    title:   'Open House',        // shown big on the panel and in the banner
+    date:    '',                  // 'YYYY-MM-DD' — leave blank for no event
+    title:   'open house',        // shown big on the panel and in the banner
     time:    '',                  // e.g. '7:15 pm' — blank uses the usual meeting time
-    blurb:   'An open evening for anyone curious about the club, come and watch, ask questions, and meet members over a drink afterwards. No need to speak, and no charge.',
+    blurb:   'Woking Speakers Club Members compete for the best title of best humorous speech and best table topics speaker',
     ctaText: 'Tell us you’re coming',
     ctaLink: '#contact',          // '#contact' opens the enquiry form
   },

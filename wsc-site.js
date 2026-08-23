@@ -112,7 +112,7 @@
       dateStr: str,
       countdown: diff === 0 ? 'Today!' : diff === 1 ? 'Tomorrow' : 'In ' + diff + ' days',
       title: (ev.title || 'Special event').trim(),
-      time: (ev.time || CFG.meetingTime || '7:15 pm').trim(),
+      time: (ev.time || CFG.meetingTime || '7:30 pm').trim(),
       blurb: (ev.blurb || '').trim(),
       ctaText: (ev.ctaText || 'Find out more').trim(),
       ctaLink: (ev.ctaLink || '#contact').trim()
@@ -174,7 +174,7 @@
   const factsNextEl = document.getElementById('factsNextDate');
   if (factsNextEl) factsNextEl.textContent = nextStr;
   const meetingTimeEl = document.getElementById('meetingTime');
-  if (meetingTimeEl) meetingTimeEl.textContent = CFG.meetingTime || '7:15 pm';
+  if (meetingTimeEl) meetingTimeEl.textContent = CFG.meetingTime || '7:30 pm';
   const countdown = diff === 0 ? 'Tonight!' : diff === 1 ? 'Tomorrow' : 'In ' + diff + ' days';
   document.getElementById('bannerCountdown').textContent = countdown;
 

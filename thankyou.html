@@ -35,7 +35,7 @@
   <div class="next-meeting">
     <div class="next-meeting-label">Your first meeting</div>
     <div class="next-meeting-date" id="next-meeting-date">Calculating…</div>
-    <div class="next-meeting-detail"><span id="meeting-time">7:15 pm</span> · Woking United Reformed Church, White Rose Lane, Woking GU22 7HA</div>
+    <div class="next-meeting-detail"><span id="meeting-time">7:30 pm</span> · Woking United Reformed Church, White Rose Lane, Woking GU22 7HA</div>
     <div id="cal-container"></div>
   </div>
 
@@ -123,7 +123,7 @@
   const next = D.getNextMeeting();
   document.getElementById('next-meeting-date').textContent = next ? formatDate(next) : 'See wokingspeakers.org.uk for dates';
   const timeEl = document.getElementById('meeting-time');
-  if (timeEl) timeEl.textContent = CFG.meetingTime || '7:15 pm';
+  if (timeEl) timeEl.textContent = CFG.meetingTime || '7:30 pm';
 
   // ── Add to calendar (dates/.ics/Google links come from wsc-dates.js) ──
   if (next) {
