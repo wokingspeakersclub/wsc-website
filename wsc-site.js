@@ -222,7 +222,15 @@
     banner.classList.add('dismissed');
   }
   applyLayout(false);
-  window.addEventListener('resize', () => applyLayout(false)); // banner may reflow on mobile
+  // The banner's height can change after load without a window resize: on
+  // phones the web font often arrives late and wraps the text onto another
+  // line. Re-measure whenever the banner itself changes size.
+  if ('ResizeObserver' in window) {
+    new ResizeObserver(() => applyLayout(false)).observe(banner);
+  } else {
+    window.addEventListener('resize', () => applyLayout(false));
+    if (document.fonts) document.fonts.ready.then(() => applyLayout(false));
+  }
   bannerDismissBtn.addEventListener('click', dismissBanner);
 
   // ═══════════════════════════════════════════════════════════════
